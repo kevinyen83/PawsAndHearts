@@ -1,0 +1,212 @@
+:root {
+  --background-color-1: rgb(237, 237, 237);
+  --background-color-2: rgb(231, 231, 231);
+}
+
+.background-color-1 {
+  background-color: var(--background-color-1);
+}
+
+.background-color-2 {
+  background-color: var(--background-color-2);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Inter;
+}
+
+@layer utilities {
+  .fixed-size-popup {
+    width: 50%;
+    height: 60%;
+    position: relative;
+  }
+
+  .orange-block::before {
+    content: '';
+    position: absolute;
+    background-color: orange;
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    top: 35%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  .blue-block::before {
+    content: '';
+    position: absolute;
+    background-color: rgb(160, 200, 224);
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    top: 35%;
+    right: 1%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  .pink-block::before {
+    content: '';
+    position: absolute;
+    background-color: rgb(252, 82, 108);
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    top: 50%;
+    left: 80%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+  }
+
+  .btn_white {
+    @apply border-gray-10 bg-white px-8 py-3 text-gray-50 hover:text-white hover:bg-gray-90;
+  }
+
+  .btn_white_text {
+    @apply border-white bg-white px-8 py-3 text-gray-90;
+  }
+
+  .btn_brown {
+    background-color: rgb(252, 82, 108);
+    @apply w-[180px] border-brown-500 px-8 py-5 text-white;
+  }
+
+  .btn_pink {
+    background-color: rgb(252, 82, 108);
+    @apply w-[180px] border-pink-500 px-8 py-5 text-white;
+  }
+
+  .btn_dark_green_outline {
+    @apply border-gray-20 bg-green-90 px-8 py-5 text-white;
+  }
+
+  .max-container {
+    @apply mx-auto max-w-[1440px];
+  }
+
+  .padding-container {
+    @apply px-6 lg:px-20 3xl:px-0;
+  }
+
+  .flexCenter {
+    @apply flex items-center justify-center;
+  }
+
+  .flexBetween {
+    @apply flex items-center justify-between;
+  }
+
+  .flexStart {
+    @apply flex items-center justify-start;
+  }
+
+  .flexEnd {
+    @apply flex items-center justify-end;
+  }
+
+  /* FONTS */
+  .regular-64 {
+    @apply text-[64px] font-[400] leading-[120%];
+  }
+
+  .regular-40 {
+    @apply text-[40px] font-[400] leading-[120%];
+  }
+
+  .regular-32 {
+    @apply text-[32px] font-[400];
+  }
+
+  .regular-24 {
+    @apply text-[24px] font-[400];
+  }
+
+  .regular-20 {
+    @apply text-[20px] font-[400];
+  }
+
+  .regular-18 {
+    @apply text-[18px] font-[400];
+  }
+
+  .regular-16 {
+    @apply text-[16px] font-[400];
+  }
+
+  .regular-14 {
+    @apply text-[14px] font-[400];
+  }
+
+  .medium-14 {
+    @apply text-[14px] font-[600];
+  }
+
+  .bold-88 {
+    @apply text-[88px] font-[700] leading-[120%];
+  }
+
+  .bold-64 {
+    @apply text-[64px] font-[700] leading-[120%];
+  }
+
+  .bold-52 {
+    @apply text-[52px] font-[700] leading-[120%];
+  }
+
+  .bold-40 {
+    @apply text-[40px] font-[700] leading-[120%];
+  }
+
+  .bold-32 {
+    @apply text-[32px] font-[700] leading-[120%];
+  }
+
+  .bold-20 {
+    @apply text-[20px] font-[700];
+  }
+
+  .bold-18 {
+    @apply text-[18px] font-[700];
+  }
+
+  .bold-16 {
+    @apply text-[16px] font-[700];
+  }
+
+  /* Feature */
+  .feature-phone {
+    @apply absolute top-[13%] z-10 hidden max-w-[1500px] rotate-[15deg] md:-left-16 lg:flex  3xl:left-20;
+  }
+
+  /* Get App */
+  .get-app {
+    @apply max-container relative flex w-full  flex-col justify-between gap-32 overflow-hidden bg-green-90 bg-pattern bg-cover bg-center bg-no-repeat px-6 py-12 text-white sm:flex-row sm:gap-12 sm:py-24 lg:px-20 xl:max-h-[598px] 2xl:rounded-5xl;
+    background-repeat: no-repeat;
+  }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
