@@ -4,8 +4,10 @@ import React, { useState, useEffect } from 'react';
 import Favorites from '../../components/Favorites';
 import FormPopup from '../../components/FormPopup';
 import PetDetailPopup from '../../components/PetDetailPopup';
+import '../../styles.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { fetchPets } from '../../utils/api/api'; 
 
 export interface Pet {
     petId: string;
@@ -31,12 +33,11 @@ export default function AdoptAPaw() {
 
     const [pets, setPets] = useState<Pet[]>([]);
     const [isLoading, setLoading] = useState(true)
-    const [error, setError] = useState<string | null>(null);
     const [selectedCategory, setSelectedCategory] = useState<string>('All');
 
   // Pet detail state
   const [showPetDetail, setShowPetDetail] = useState<boolean>(false);
-  const [selectedPet, setSelectedPet] = useState<Pet[]>([]);
+  const [selectedPet, setSelectedPet] = useState<Pet | null>(null);
 
   // Favorites state
   const [favoritesItems, setFavoritesItems] = useState<Pet[]>([]);
@@ -60,24 +61,33 @@ export default function AdoptAPaw() {
   const [visiblePets, setVisiblePets] = useState<number>(12);
 
 
-    useEffect(() => {
-        fetchPets();
-    }, []);
-
-    const fetchPets = async () => {
+  useEffect(() => {
+    const fetchData = async () => {
         try {
-            const response = await fetch('https://8lpzuux0q6.execute-api.ap-southeast-2.amazonaws.com/prod/pets', {
-                });
-            if (!response.ok) {
-                throw new Error('Failed to fetch pets');
-            }
-            const data = await response.json();
-            setLoading(false);
-            setPets(data.pets)
+            setLoading(true); 
+            const data = await fetchPets();
+            setPets(data);
         } catch (error) {
             console.error('Error fetching pets:', error);
+        } finally {
+            setLoading(false);
         }
     };
+
+    fetchData();
+}, []);
+
+useEffect(() => {
+    const storedFavoritesItems = sessionStorage.getItem('favoritesItems');
+    if (storedFavoritesItems) {
+        setFavoritesItems(JSON.parse(storedFavoritesItems));
+    }
+}, []);
+
+useEffect(() => {
+    sessionStorage.setItem('favoritesItems', JSON.stringify(favoritesItems));
+}, [favoritesItems]); 
+
 
   const handleCategoryChange = (category: string): void => {
     setSelectedCategory(category);
@@ -109,6 +119,7 @@ export default function AdoptAPaw() {
       setFavoritesItems([...favoritesItems, newFavoritesItems]);
       setIsFavoritesEmpty(false);
       setLastId(lastId + 1);
+      sessionStorage.setItem('favoritesItems', JSON.stringify([...favoritesItems, newFavoritesItems])); 
       alert('Added to Favorites!');
     } else {
       alert('You already added this pet to Favorites.');
@@ -125,11 +136,15 @@ export default function AdoptAPaw() {
     setIsFavoritesEmpty(updatedItems.length === 0);
   };
 
-  
+
   const toggleFormPopup = (pet: Pet): void => {
     if (pet.availability === 'No') {
         alert('This pet is not available!');
-    } else {
+      } else {
+        if (pets.length === 0) {
+          alert('Pets data is still loading. Please try again later.');
+          return;
+        }
         const selectedPetFromPets = pets.find((p) => p.petId === pet.petId);
         setShowForm(!showForm);
     
@@ -142,20 +157,16 @@ export default function AdoptAPaw() {
 };
 
   const toggleCardDetailPopup = (pet: Pet): void => {
-    setFormSelectedPet(pet);
+    setSelectedPet(pet);
     setShowPetDetail(true);
+    setFormSelectedPet(pet);
   };
 
   const categories = ['All', 'Cats', 'Dogs', 'Birds', 'Others'];
 
   return (
     <>
-    <div className='relative flex flex-col items-center justify-center'>
-         {/* Display loading message while fetching */}
-         {isLoading && <p>Loading pet data...</p>}
-        
-        {/* Display error message if fetch fails */}
-        {error && <p>Error: {error}</p>}
+    <div className='relative flex flex-col items-center justify-center bg-slate-50'>
 
         {/* filter */}
             <div className='p-20'></div>
@@ -176,49 +187,56 @@ export default function AdoptAPaw() {
 
         {/* main-area */}
             <div className='flex flex-wrap gap-4 pt-6 justify-center'>
+                {isLoading && (
+                    <div className='loading-container'>
+                        <div className='loading-animation'></div>
+                        <p>Loading pet data...</p>
+                    </div>
+                )}
+
                 {pets &&filterPetsByCategory().slice(0, visiblePets).map((pet) => (
-                <div key={pet.petId} className='relative flex flex-col m-2 text-gray-700 bg-white shadow-md rounded-xl sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/5 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl'>
+                <div key={pet.petId} className='relative flex flex-col m-2 text-gray-700 bg-white shadow-md rounded-xl sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/5 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl'  data-testid='item-container'>
                     <div className='w-full p-3'>
                         <div className='relative h-44 overflow-hidden text-white rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40'>
-                            <img className='rounded-lg' src={pet.image} alt={pet.name} data-testid='favorites-item-image' />
+                            <img className='rounded-lg' src={pet.image} alt={pet.name} data-testid='item-image' />
                         </div>
 
                         <div className='p-3 ' onClick={() => toggleCardDetailPopup(pet)}>
-                            <h5 className='block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900' data-testid='favorites-item-name'>{pet.name}</h5>
+                            <h5 className='block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900' data-testid='item-name'>{pet.name}</h5>
                             <div className='block font-sans text-base antialiased font-light leading-relaxed text-inherit overflow-hidden h-20'>
-                                <p className='mainArea-title' data-testid='favorites-item-category'>
+                                <p data-testid='item-category'>
                                 <b>Category: </b>
                                 {pet.category}
                                 </p>
-                                <p className='mainArea-title' data-testid='favorites-item-name'>
+                                <p data-testid='item-name'>
                                 <b>Name: </b>
                                 {pet.name}
                                 </p>
-                                <p className='mainArea-title' data-testid='favorites-item-age'>
+                                <p data-testid='item-age'>
                                 <b>Age: </b>
                                 {pet.age} 
                                 </p>
-                                <p className='mainArea-title' data-testid='favorites-item-gender'>
+                                <p data-testid='item-gender'>
                                 <b>Gender: </b>
                                 {pet.gender}
                                 </p>
-                                <p className='mainArea-title' data-testid='favorites-item-color'>
+                                <p data-testid='item-color'>
                                 <b>Color: </b>
                                 {pet.color}
                                 </p>
-                                <p className='mainArea-title' data-testid='favorites-item-size'>
+                                <p data-testid='item-size'>
                                 <b>Size: </b>
                                 {pet.size}
                                 </p>
-                                <p className='mainArea-title' data-testid='favorites-item-location'>
+                                <p data-testid='item-location'>
                                 <b>Location: </b>
                                 {pet.location}
                                 </p>
-                                <p className='mainArea-title' data-testid='favorites-item-vaccination'>
+                                <p data-testid='item-vaccination'>
                                 <b>Vaccination: </b>
                                 {pet.vaccination}
                                 </p>
-                                <p className='mainArea-title' data-testid='favorites-item-availability'>
+                                <p data-testid='favorites-item-availability'>
                                 <b>Availability: </b>
                                 {pet.availability}
                                 </p>
@@ -255,7 +273,7 @@ export default function AdoptAPaw() {
 
             {/* show more */}
             {pets &&visiblePets < filterPetsByCategory().length && (
-                <div className='flex justify-center mt-14'>
+                <div className='flex justify-center m-14'>
                 <button
                     className='p-t align-middle font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none'
                     onClick={handleShowMoreClick}
@@ -267,7 +285,7 @@ export default function AdoptAPaw() {
 
             {/* pet-detail-popup */}
             {showPetDetail && selectedPet && (
-                <PetDetailPopup formSelectedPet={formSelectedPet} onReserve={() => addToFavorites(selectedPet)} onClose={() => setShowPetDetail(false)} />
+                <PetDetailPopup toggleFormPopup={toggleFormPopup} formSelectedPet={formSelectedPet} selectedPet={selectedPet} onReserve={() => addToFavorites(selectedPet)} onClose={() => setShowPetDetail(false)} />
             )}
 
             {/* Favorites */}
@@ -280,16 +298,13 @@ export default function AdoptAPaw() {
             </div>
             {showFavorites && (
                 <Favorites   
-                toggleFavoritesPopup={toggleFavoritesPopup}
                 favoritesItems={favoritesItems}
-                 showFavorites={showFavorites}
-                setFavoritesItems={setFavoritesItems}
-                isFavoritesEmpty={isFavoritesEmpty}
+                showFavorites={showFavorites}
                 selectedPet={selectedPet}
                 setIsFavoritesEmpty={setIsFavoritesEmpty}
                 removeItem={removeItem} 
-                setShowForm={setShowForm} 
                 setShowFavorites={setShowFavorites}
+                toggleCardDetailPopup={toggleCardDetailPopup}
             />
             )}
 
@@ -297,7 +312,6 @@ export default function AdoptAPaw() {
             {showForm && (
             <FormPopup
                 pets={pets}
-                toggleFormPopup={toggleFormPopup}
                 showForm={showForm}
                 setShowForm={setShowForm}
                 formSelectedPet={formSelectedPet}

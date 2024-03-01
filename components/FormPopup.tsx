@@ -8,6 +8,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Button from './Button';
 import Link from 'next/link';
+import { submitApplication, updatePetAvailability } from '../utils/api/api';
 
 
 const validationSchema = Yup.object().shape({
@@ -29,7 +30,6 @@ interface FormPopupProps {
     showForm: boolean;
     setShowForm: (show: boolean) => void;
     formSelectedPet: Pet | null;
-    toggleFormPopup: (pet: Pet) => void;
 }
 
 
@@ -37,13 +37,13 @@ export default function FormPopup ({
     pets,
     showForm,
     setShowForm,
-    toggleFormPopup,
     formSelectedPet,
 }: FormPopupProps) {
 
     const { data: session } = useSession();
-    const [inputUserEmail, setInputUserEmail] = useState(session?.user?.email);
-    const [inputUserName, setInputUserName] = useState(session?.user?.name);
+    const [inputUserEmail, setInputUserEmail] = useState<string | undefined>(session?.user?.email !== null ? session?.user?.email : undefined);
+    const [inputUserName, setInputUserName] = useState<string | undefined>(session?.user?.name !== null ? session?.user?.name : undefined);
+
 
 
   const formik = useFormik({
@@ -61,63 +61,22 @@ export default function FormPopup ({
     onSubmit: (values) => {
     }
   });
-
-  
-  const updatePetAvailability = (petId: Pet) => {
-    if (!petId) {
-        console.error('No petId provided');
-        return;
-      }
-        
-      fetch('https://8lpzuux0q6.execute-api.ap-southeast-2.amazonaws.com/prod/updateAvailability', {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ petId: petId }),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Failed to update pet availability.');
-          }
-          console.log('Pet availability updated successfully.');
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data); 
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-  };
   
 
-  const onSubmit = () => {
-    if (
-      formik.errors.fullName ||
-      formik.errors.email ||
-      formik.errors.age ||
-      formik.errors.phone ||
-      formik.errors.address ||
-      formik.errors.city ||
-      formik.errors.state ||
-      formik.errors.postCode
-    ) {
-      alert('Please fill in all required fields and validate your Email.');
-    } else {
+  const onSubmit = async () => {
+    try {
+      await formik.validateForm();
+
+      if (formik.isValid) {
+        const applicationId = uuidv4();
         const pet = formSelectedPet;
-        const applicationId = uuidv4(); 
+
         if (!pet) {
-            console.error('No pet selected');
-            return;
+          console.error('No pet selected');
+          return;
         }
-        
-        fetch('https://owqzy4n6cj.execute-api.ap-southeast-2.amazonaws.com/prod/application', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+
+        const formData = {
           fullName: formik.values.fullName,
           email: formik.values.email,
           age: formik.values.age,
@@ -126,33 +85,31 @@ export default function FormPopup ({
           city: formik.values.city,
           state: formik.values.state,
           postCode: formik.values.postCode,
-          applicationId: applicationId,
+          applicationId,
           petId: pet.petId,
           petName: pet.name,
-        }),
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error('Failed to submit application.');
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setShowForm(false);
-          formik.resetForm();
-          updatePetAvailability(pet.petId);
-          alert('Application placed successfully!');
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+        };
+
+        await submitApplication(formData);
+        await updatePetAvailability(pet.petId);
+
+        setShowForm(false);
+        formik.resetForm();
+
+        alert('Application placed successfully!');
+        window.location.reload();
+      } else {
+        alert('Please fill in all required fields and validate your Email.');
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
   return (
 
     <Transition.Root show={showForm} as={Fragment}>
-    <Dialog as='div' className='fixed inset-0 overflow-hidden z-50' onClose={toggleFormPopup}>
+    <Dialog as='div' className='fixed inset-0 overflow-hidden z-50' onClose={() => setShowForm(false)}>
       <Transition.Child
         as={Fragment}
         enter='ease-in-out duration-500'
@@ -179,8 +136,8 @@ export default function FormPopup ({
             <div className='w-screen max-w-md'>
               <div className='flex flex-col h-full bg-white shadow-xl'>
                 <div className='flex items-center justify-between px-4 py-6 border-b border-gray-200'>
-                  <Dialog.Title className='text-lg font-medium text-gray-900'>Inspection Application</Dialog.Title>
-                  <button type='button' className='text-gray-400 hover:text-gray-500' onClick={toggleFormPopup}>
+                  <Dialog.Title className='text-lg font-medium text-gray-900'>Adopt Application</Dialog.Title>
+                  <button type='button' className='text-gray-400 hover:text-gray-500' onClick={() => setShowForm(false)}>
                     <span className='sr-only'>Close panel</span>
                     <XMarkIcon className='h-6 w-6' aria-hidden='true' />
                   </button>
@@ -243,7 +200,7 @@ export default function FormPopup ({
                                     </div>
 
                                     <div className='mb-4'>
-                                        <label htmlFor='lastName'>Phone: </label>
+                                        <label htmlFor='phone'>Phone: </label>
                                         <input
                                         type='string'
                                         name='phone'
@@ -352,10 +309,10 @@ export default function FormPopup ({
                 {session ? (
                 <div className='border-t border-gray-200 px-4 py-6 sm:px-6'>
                     <p className='mt-0.5 text-sm text-gray-500'>When the form was submitted, the staff will contact you in 5 workdays.</p>
-                    <div className='mt-6'>
-                        <a className='flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700'  onClick={onSubmit}>
+                    <div className='mt-6' data-testid='form-submit-btn'>
+                        <button className='flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700'  onClick={onSubmit}>
                         Submit
-                        </a>
+                        </button>
                     </div>
                 </div>
                 ):

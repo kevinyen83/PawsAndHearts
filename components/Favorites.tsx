@@ -1,28 +1,21 @@
 import React, { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
+import { Pet } from '../app/adopt_a_paw/page';
 
 interface FavoritesProps {
     showFavorites: boolean;
     setShowFavorites: React.Dispatch<React.SetStateAction<boolean>>;
     favoritesItems: any[]; 
-    setFavoritesItems: React.Dispatch<React.SetStateAction<any[]>>; 
+    selectedPet: Pet | null;
     setIsFavoritesEmpty: React.Dispatch<React.SetStateAction<boolean>>;
     removeItem: (pet: any) => void; 
+    toggleCardDetailPopup: (pet: any) => void; 
   }
 
 
-export default function Favorites({ showFavorites, setShowFavorites, favoritesItems, setFavoritesItems, setIsFavoritesEmpty, removeItem }: FavoritesProps) {
+export default function Favorites({ showFavorites, setShowFavorites, favoritesItems, selectedPet, setIsFavoritesEmpty, removeItem, toggleCardDetailPopup }: FavoritesProps) {
 
-  const handleChange = (e: { target: { value: string; }; }, selectedPet: { id: number; }) => {
-    const updatedFavorites = favoritesItems.map((favoritesItem) => {
-      if (favoritesItem.id === selectedPet.id) {
-        return { ...favoritesItem, reservationDays: parseInt(e.target.value) || 1 };
-      }
-      return favoritesItem;
-    });
-    setFavoritesItems(updatedFavorites);
-  };
 
   const favoritesList = favoritesItems.map((selectedPet) => (
     <div key={selectedPet.id} className='flex items-center justify-between border-b border-gray-200 py-4'>
@@ -36,8 +29,8 @@ export default function Favorites({ showFavorites, setShowFavorites, favoritesIt
           <p className='text-left' data-testid='favorites-side-item-availability'>Availability: {selectedPet.availability}</p>                
         </div>
       </div>
-      <div className='flex flex-col items-end'>
-        <button onClick={() => removeItem(selectedPet)} className='text-blue-500 hover:text-blue-700 mr-2' data-testid='favorites-side-item-review-btn'>Review</button>
+      <div className='flex flex-col items-center'>
+        <button onClick={() => {setShowFavorites(false); toggleCardDetailPopup(selectedPet);}} className='text-blue-500 hover:text-blue-700' data-testid='favorites-side-item-review-btn'>Review</button>
         <button onClick={() => removeItem(selectedPet)} className='text-red-500 hover:text-red-700' data-testid='favorites-side-item-remove-btn'>Remove</button>
       </div>
     </div>
@@ -93,9 +86,9 @@ export default function Favorites({ showFavorites, setShowFavorites, favoritesIt
                   <div className='border-t border-gray-200 px-4 py-6 sm:px-6'>
                     <p className='mt-0.5 text-sm text-gray-500'>Please note check availability before completing the adoption application form.</p>
                     <div className='mt-6'>
-                      <a href='#' className='flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700' data-testid='side-item-btn'>
+                      <button className='flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700' data-testid='side-item-btn' onClick={() => setShowFavorites(false)}>
                         Confirm
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>
