@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, Fragment } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Pet } from '../app/adopt_a_paw/page';
 import { useSession } from 'next-auth/react';
@@ -34,7 +34,6 @@ interface FormPopupProps {
 
 
 export default function FormPopup ({
-    pets,
     showForm,
     setShowForm,
     formSelectedPet,
@@ -48,7 +47,7 @@ export default function FormPopup ({
 
   const formik = useFormik({
     initialValues: {
-      fullName: inputUserName || '',
+      fullName: '',
       age: '',
       email: inputUserEmail || '',
       phone: '',
@@ -156,10 +155,9 @@ export default function FormPopup ({
                                         name='fullName'
                                         id='fullName'
                                         className=' border rounded-md px-2 py-1'
-                                        value={inputUserName}
+                                        value={formik.values.fullName}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
-                                        disabled={session ? true : false}
                                         />
                                         {formik.touched.fullName && formik.errors.fullName && (
                                         <div className='text-red-500'>{formik.errors.fullName}</div>

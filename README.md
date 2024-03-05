@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## About The Project
+
+![Alt text](https://github.com/kevinyen83/OnlineCarRentalSystem/blob/main/client/screenshots/homepage.png)
+
+Paws and Hearts is an exciting new side project that combines my passion for animals with my skills in full-stack development. Having volunteered at a Sydney animal shelter, I understand the importance of creating a seamless and user-friendly experience for both potential adopters and shelter staff.
+
+With Paws and Hearts, I aim to leverage the latest programming tools and JavaScript frameworks to revolutionize the animal adoption process. From streamlining application procedures to securely managing user data, this project is all about making the adoption journey as smooth and enjoyable as possible.
+
+I'm committed to continuously optimizing the website and welcome any feedback or collaboration opportunities. Together, we can make a real difference in the lives of animals in need!
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+### Core Features
+1. Authentication
+    1-1. SignIn
+    1-2. SignUp
+2. Landing page
+    2-1. Showcase Pets with a Carousel
+    2-2. Provide Donation Information
+3. Adoption Page
+    3-1. Display Pet Cards and detailed information 
+    3-2. Ability to Add Pets to Favorites
+    3-3. Adoption Application Process
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+### Built With
+
+* [![Next][Next.js]][Next-url]
+* [![React][React.js]][React-url]
+* [![Vue][Vue.js]][Vue-url]
+* [![Angular][Angular.io]][Angular-url]
+* [![Svelte][Svelte.dev]][Svelte-url]
+* [![Laravel][Laravel.com]][Laravel-url]
+* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+* [![JQuery][JQuery.com]][JQuery-url]
+
+1. UI Design: Figma
+2. Front-end web development: React.JS, TypeScript, Tailwind CSS, CSS Animations, Formik & Yup(Form validation)
+3. Server side rendering: Next.JS
+4. AWS Serverless: AWS Lambda, AWS API Gateway, Node.JS, DynamoDB
+5. Auth: AWS Cognito, NextAuth.JS, uuid
+6. Integration testing: Jest, React Testing Library
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
 
 ## Getting Started
 
-First, run the development server:
+To install and run the project on your local, please follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Prerequisites
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* npm
+  ```sh
+  npm install npm@latest -g
+  ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Installation
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+1. Clone the repo
+   ```sh
+   git clone https://github.com/your_username_/Project-Name.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
 
-## Learn More
+### SignIn
+Please utilize the following test account details:
+   ```sh
+   Email: test123@gmail.com
+   Password: Test123*
+   ```
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Roadmap
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [x] Setup AWS serverless infrastructure
+- [x] Develop Lambda API
+- [x] Authentication
+- [x] Implement Authentication
+- [x] Design & develop Landing Page
+- [x] Design & develop Adoption Page
+- [x] Integrate Jest for testing
+- [ ] Add Integrated tests by Cypress
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+## Contact
+Currently looking for Front End Developer position in Sydney.
+If you have any feedback or job opportunities, please feel free to contact me via LinkedIn / Email!
+
+Kevin Yen - [@Kevin_linkedIn](https://www.linkedin.com/in/kerwinyen83/) - kevinyenhaha@gmail.com
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>

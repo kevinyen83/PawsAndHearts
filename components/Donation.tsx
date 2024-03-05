@@ -15,7 +15,7 @@ const Donation = () => {
       </div>
 
       {/* Right col */}
-      <div className='md:w-1/2 md:pl-10'>
+      <div className='md:w-1/2 md:pl-10 bg-slate-50'>
         <h2 className='text-2xl font-semibold mb-4'>
           In addition, you can make a donation
         </h2>

@@ -26,19 +26,17 @@ type CategoryLink = {
 
 export default function Navbar () {
     const { data: session } = useSession();
-    const [userEmail, setUserEmail] = useState(null);
-    const [userName, setUserName] = useState(null);
+    const [userEmail, setUserEmail] = useState<string | null>(null);
 
 
     useEffect(() => {
         if (session) {
-          setUserEmail(session.user.email);
-          setUserName(session.user.name);
+            setUserEmail(session.user?.email || null);
         } else {
-          setUserEmail(null);
+            setUserEmail(null);
         }
-      }, [session]);
-      
+    }, [session]);
+
 
   return (
     <nav className='fixed top-0 left-0 right-0 bg-white border-gray-500 flexBetween padding-container z-30 py-4'>
@@ -63,8 +61,8 @@ export default function Navbar () {
                     <div className='flex items-center space-x-2'>
                         <Button 
                         type='button'
-                        title={userName}
-                        icon= {AvatarIcon}
+                        title={userEmail!}
+                        icon= {AvatarIcon.src}
                         variant='btn_white'
                         />
                     </div>

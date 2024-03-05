@@ -7,6 +7,15 @@ export const options: NextAuthOptions = {
             clientId: process.env.COGNITO_CLIENT_ID as string,
             clientSecret: process.env.COGNITO_CLIENT_SECRET as string,
             issuer: process.env.COGNITO_ISSUER,
+            profile(profile) {
+                return {
+                    id: profile.sub,
+                    name: profile.name,
+                    email: profile.email,
+                    givenName: profile.given_name,
+                    familyName: profile.family_name,
+                };
+            },
         }),
     ],
     theme: {
