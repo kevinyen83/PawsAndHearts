@@ -25,13 +25,13 @@ I'm committed to continuously optimizing the website and welcome any feedback or
 
 ### Built With
 
-- [![Next][next.js]][https://cdn.worldvectorlogo.com/logos/next-js.svg]
-- [![React][react.js]][https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/react_logo_svg.svg/1200px-react_logo_svg.svg.png]
-- [![Node][node]][https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/node.js_logo.svg/590px-node.js_logo.svg.png]
-- [![Tailwind CSS][tailwindcss]][https://miro.medium.com/v2/resize:fit:512/1*jehlmwo6_srphpip4aimiw.png]
-- [![TypeScript][typescript]][https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/typescript_logo_2020.svg/1200px-typescript_logo_2020.svg.png]
-- [![Lambda][lambda]][https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/amazon_lambda_architecture_logo.svg/1200px-amazon_lambda_architecture_logo.svg.png]
-- [![Jest][jest]][https://avatars.githubusercontent.com/u/103283236?s=280&v=4]
+- [![Next.js](https://cdn.worldvectorlogo.com/logos/next-js.svg)](https://nextjs.org/)
+- [![React.js](https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/react_logo_svg.svg/1200px-react_logo_svg.svg.png)](https://reactjs.org/)
+- [![Node.js](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/node.js_logo.svg/590px-node.js_logo.svg.png)](https://nodejs.org/)
+- [![Tailwind CSS](https://miro.medium.com/v2/resize:fit:512/1*jehlmwo6_srphpip4aimiw.png)](https://tailwindcss.com/)
+- [![TypeScript](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/typescript_logo_2020.svg/1200px-typescript_logo_2020.svg.png)](https://www.typescriptlang.org/)
+- [![Lambda](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/amazon_lambda_architecture_logo.svg/1200px-amazon_lambda_architecture_logo.svg.png)](https://aws.amazon.com/lambda/)
+- [![Jest](https://avatars.githubusercontent.com/u/103283236?s=280&v=4)](https://jestjs.io/)
 
 1.  UI Design: Figma
 2.  Front-end web development: React.JS, TypeScript, Tailwind CSS, CSS Animations, Formik & Yup(Form validation)
