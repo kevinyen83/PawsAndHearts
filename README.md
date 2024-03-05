@@ -64,9 +64,12 @@ To install and run the project on your local, please follow these steps:
     ```
 
 ### Start react app
-1.     ```sh
-    npm run dev
-    ```
+
+Please execute the following command:
+
+```sh
+npm run dev
+```
 
 ### SignIn
 
@@ -78,11 +81,13 @@ Password: Test123*
 ```
 
 ### Testing
-1.  To conduct local testing, please open your web browser and navigate to http://localhost:3000/.
-2.     ```sh
-    npm test
-    ```
 
+1.  To conduct local testing, please open your web browser and navigate to http://localhost:3000/.
+2.  Please execute the following command:
+
+```sh
+npm test
+```
 
 ## Roadmap
 
