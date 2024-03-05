@@ -8,27 +8,30 @@ With Paws and Hearts, I aim to leverage the latest programming tools and JavaScr
 
 I'm committed to continuously optimizing the website and welcome any feedback or collaboration opportunities. Together, we can make a real difference in the lives of animals in need!
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ### Core Features
 
-1.  Authentication
-    1-1. SignIn
+1.  Authentication  
+    1-1. SignIn  
     1-2. SignUp
-2.  Landing page
-    2-1. Showcase Pets with a Carousel
-    2-2. Provide Donation Information
-3.  Adoption Page
-    3-1. Display Pet Cards and detailed information
-    3-2. Ability to Add Pets to Favorites
-    3-3. Adoption Application Process
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+2.  Landing page  
+    2-1. Showcase Pets with a Carousel  
+    2-2. Provide Donation Information
+
+3.  Adoption Page  
+    3-1. Display Pet Cards and detailed information  
+    3-2. Ability to Add Pets to Favorites  
+    3-3. Adoption Application Process
 
 ### Built With
 
-- [![Next][next.js]][next-url]
-- [![React][react.js]][react-url]
+- [![Next][next.js]][https://cdn.worldvectorlogo.com/logos/next-js.svg]
+- [![React][react.js]][https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/react_logo_svg.svg/1200px-react_logo_svg.svg.png]
+- [![Node][node]][https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/node.js_logo.svg/590px-node.js_logo.svg.png]
+- [![Tailwind CSS][tailwindcss]][https://miro.medium.com/v2/resize:fit:512/1*jehlmwo6_srphpip4aimiw.png]
+- [![TypeScript][typescript]][https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/typescript_logo_2020.svg/1200px-typescript_logo_2020.svg.png]
+- [![Lambda][lambda]][https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/amazon_lambda_architecture_logo.svg/1200px-amazon_lambda_architecture_logo.svg.png]
+- [![Jest][jest]][https://avatars.githubusercontent.com/u/103283236?s=280&v=4]
 
 1.  UI Design: Figma
 2.  Front-end web development: React.JS, TypeScript, Tailwind CSS, CSS Animations, Formik & Yup(Form validation)
@@ -36,8 +39,6 @@ I'm committed to continuously optimizing the website and welcome any feedback or
 4.  AWS Serverless: AWS Lambda, AWS API Gateway, Node.JS, DynamoDB
 5.  Auth: AWS Cognito, NextAuth.JS, uuid
 6.  Integration testing: Jest, React Testing Library
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Getting Started
 
@@ -54,7 +55,7 @@ To install and run the project on your local, please follow these steps:
 
 1.  Clone the repo
     ```sh
-    git clone https://github.com/kevinyen83/PawsAndHearts
+    git clone https://github.com/kevinyen83/PawsAndHearts.git
     ```
 2.  Install NPM packages
     ```sh
@@ -70,8 +71,6 @@ Email: test123@gmail.com
 Password: Test123*
 ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ## Roadmap
 
 - [x] Setup AWS serverless infrastructure
@@ -83,13 +82,9 @@ Password: Test123*
 - [x] Integrate Jest for testing
 - [ ] Add Integrated tests by Cypress
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ## Contact
 
 Currently looking for Front End Developer position in Sydney.
 If you have any feedback or job opportunities, please feel free to contact me via LinkedIn / Email!
 
 Kevin Yen - [@Kevin_linkedIn](https://www.linkedin.com/in/kerwinyen83/) - kevinyenhaha@gmail.com
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
