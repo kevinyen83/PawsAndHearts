@@ -63,6 +63,11 @@ To install and run the project on your local, please follow these steps:
     npm install
     ```
 
+### Start react app
+1.     ```sh
+    npm run dev
+    ```
+
 ### SignIn
 
 Please utilize the following test account details:
@@ -71,6 +76,13 @@ Please utilize the following test account details:
 Email: test123@gmail.com
 Password: Test123*
 ```
+
+### Testing
+1.  To conduct local testing, please open your web browser and navigate to http://localhost:3000/.
+2.     ```sh
+    npm test
+    ```
+
 
 ## Roadmap
 
