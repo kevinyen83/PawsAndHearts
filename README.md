@@ -25,13 +25,14 @@ I'm committed to continuously optimizing the website and welcome any feedback or
 
 ### Built With
 
-- [![Next.js](https://cdn.worldvectorlogo.com/logos/next-js.svg)](https://nextjs.org/)
-- [![React.js](https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/react_logo_svg.svg/1200px-react_logo_svg.svg.png)](https://reactjs.org/)
-- [![Node.js](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/node.js_logo.svg/590px-node.js_logo.svg.png)](https://nodejs.org/)
-- [![Tailwind CSS](https://miro.medium.com/v2/resize:fit:512/1*jehlmwo6_srphpip4aimiw.png)](https://tailwindcss.com/)
-- [![TypeScript](https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/typescript_logo_2020.svg/1200px-typescript_logo_2020.svg.png)](https://www.typescriptlang.org/)
-- [![Lambda](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/amazon_lambda_architecture_logo.svg/1200px-amazon_lambda_architecture_logo.svg.png)](https://aws.amazon.com/lambda/)
-- [![Jest](https://avatars.githubusercontent.com/u/103283236?s=280&v=4)](https://jestjs.io/)
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+![jest](https://jestjs.io/img/jest-badge.svg)
+![AmazonDynamoDB](https://img.shields.io/badge/Amazon%20DynamoDB-4053D6?style=for-the-badge&logo=Amazon%20DynamoDB&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 
 1.  UI Design: Figma
 2.  Front-end web development: React.JS, TypeScript, Tailwind CSS, CSS Animations, Formik & Yup(Form validation)
