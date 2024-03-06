@@ -1,7 +1,8 @@
+import React from 'react';
 import { faHeart, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
 import { Pet } from '../app/adopt_a_paw/page';
+import Image from 'next/image';
 
 interface PetDetailPopupProps {
     formSelectedPet: Pet | null;
@@ -25,7 +26,7 @@ const PetDetailPopup = ({ formSelectedPet, selectedPet, onClose, onReserve, togg
                     </button>
                 </div>
                 <div className='relative h-56 text-white bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40 overflow-hidden'>
-                    <img className='rounded-t-lg w-full h-full object-cover' src={selectedPet.image} alt={selectedPet.name} data-testid='cart-item-image' />
+                    <Image className='rounded-t-lg w-full h-full object-cover' src={selectedPet.image} alt={selectedPet.name} data-testid='cart-item-image' />
                 </div>
                 <h2 className='text-xl font-semibold pt-4 mb-4'>{selectedPet.name}</h2>
                 <div className='block font-sans text-base antialiased font-light leading-relaxed text-inherit'>
