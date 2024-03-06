@@ -199,7 +199,7 @@ useEffect(() => {
                 <div key={pet.petId} className='relative flex flex-col m-2 text-gray-700 bg-white shadow-md rounded-xl sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/5 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl'  data-testid='item-container'>
                     <div className='w-full p-3'>
                         <div className='relative h-44 overflow-hidden text-white rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40'>
-                            <Image className='rounded-lg' src={pet.image} alt={pet.name} data-testid='item-image'/>
+                            <Image className='rounded-lg' src={pet.image} alt={pet.name} width={600} height={400} data-testid='item-image'/>
                         </div>
 
                         <div className='p-3 ' onClick={() => toggleCardDetailPopup(pet)}>

@@ -22,7 +22,7 @@ export default function Favorites({ showFavorites, setShowFavorites, favoritesIt
     <div key={selectedPet.id} className='flex items-center justify-between border-b border-gray-200 py-4'>
       <div className='flex items-center'>
         <div className='rounded-full overflow-hidden w-12 h-12 mr-4'>
-          <Image src={selectedPet.image} alt={selectedPet.name} className='w-full h-full object-cover' data-testid='favorites-side-item-img'/>
+          <Image className='w-full h-full object-cover' src={selectedPet.image} alt={selectedPet.name} width={600} height={400} data-testid='favorites-side-item-img'/>
         </div>
         <div className='flex flex-col item-left'>
           <p className='text-left' data-testid='favorites-side-item-name'>Name: {selectedPet.name}</p>

@@ -53,7 +53,7 @@ export default function PetCarousel() {
                         <div key={pet.id} className='relative flex flex-col m-2 text-gray-700 bg-white shadow-md rounded-xl w-full sm:w-72 md:w-72 lg:w-72 xl:w-72'>
                             <div className='w-full p-6'>
                                 <div className='relative h-56 overflow-hidden rounded-t-xl'>
-                                    <Image className='object-cover w-full h-full rounded-t-xl' src={pet.image} alt={pet.name} data-testid='cart-item-image' />
+                                    <Image className='object-cover w-full h-full rounded-t-xl' src={pet.image} alt={pet.name} width={600} height={400} data-testid='cart-item-image' />
                                 </div>
                                 <div className='p-6'>
                                     <h5 className='block mb-2 font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900' data-testid='cart-item-name'>{pet.name}</h5>
