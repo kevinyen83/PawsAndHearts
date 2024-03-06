@@ -47,29 +47,36 @@ To install and run the project on your local, please follow these steps:
 
 ### Prerequisites
 
-- npm
+Install npm:
+
   ```sh
-  npm install npm@latest -g
+  npm install npm@latest
   ```
 
 ### Installation
 
-1.  Clone the repo
+1.  Clone the repo in your root file
     ```sh
     git clone https://github.com/kevinyen83/PawsAndHearts.git
     ```
-2.  Install NPM packages
+2.  Navigate to the project file
+    ```sh
+    cd PawsAndHearts
+    ```
+3.  Install NPM packages
     ```sh
     npm install
     ```
 
 ### Start react app
 
-Please execute the following command:
+1. Please execute the following command:
 
 ```sh
 npm run dev
 ```
+2. Please open http://localhost:3000 with your browser.
+
 
 ### SignIn
 
@@ -99,6 +106,7 @@ npm test
 - [x] Design & develop Adoption Page
 - [x] Integrate Jest for testing
 - [ ] Add Integrated tests by Cypress
+- [ ] Improved image rendering performance using <Image>
 
 ## Contact
 
