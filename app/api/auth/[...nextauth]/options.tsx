@@ -1,7 +1,11 @@
 import type {NextAuthOptions} from 'next-auth'
 import CognitoProvider from 'next-auth/providers/cognito';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export const options: NextAuthOptions = {
+    secret: process.env.NEXTAUTH_SECRET as string,
     providers: [
         CognitoProvider({
             clientId: process.env.COGNITO_CLIENT_ID as string,

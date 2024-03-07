@@ -43,14 +43,16 @@ I'm committed to continuously optimizing the website and welcome any feedback or
 
 ## Getting Started
 
-To install and run the project on your local, please follow these steps:
+To install and run the project on your local, you will need node and npm installed globally on your machine.
+
+Please follow these steps:
 
 ### Prerequisites
 
 Install npm:
 
   ```sh
-  npm install npm@latest
+  npm install -g npm
   ```
 
 ### Installation
@@ -106,7 +108,7 @@ npm test
 - [x] Design & develop Adoption Page
 - [x] Integrate Jest for testing
 - [ ] Add Integrated tests by Cypress
-- [ ] Improved image rendering performance using <Image>
+- [ ] Improve image rendering performance using <Image>
 
 ## Contact
 
