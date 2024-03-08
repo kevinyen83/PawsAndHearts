@@ -9,21 +9,6 @@ import { CATEGORY_LINKS } from '../constants'
 import AvatarIcon from '../assets/images/avatar.png';
 
 
-
-type Subcategory = {
-    key: string;
-    href: string;
-    label: string;
-    description: string;
-};
-
-type CategoryLink = {
-    href: string;
-    key: string;
-    label: string;
-    subcategories?: Subcategory[];
-};
-
 export default function Navbar () {
     const { data: session } = useSession();
     const [userEmail, setUserEmail] = useState<string | null>(null);

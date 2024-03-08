@@ -32,33 +32,25 @@ interface Props {
 export default function AdoptAPaw() {
 
     const [pets, setPets] = useState<Pet[]>([]);
-    const [isLoading, setLoading] = useState(true)
-    const [selectedCategory, setSelectedCategory] = useState<string>('All');
+    const [isLoading, setLoading] = useState<boolean>(true)
+    const [selectedCategory, setSelectedCategory] = useState<string>('All')
 
   // Pet detail state
-  const [showPetDetail, setShowPetDetail] = useState<boolean>(false);
-  const [selectedPet, setSelectedPet] = useState<Pet | null>(null);
+  const [showPetDetail, setShowPetDetail] = useState<boolean>(false)
+  const [selectedPet, setSelectedPet] = useState<Pet | null>(null)
 
   // Favorites state
-  const [favoritesItems, setFavoritesItems] = useState<Pet[]>([]);
-  const [isFavoritesEmpty, setIsFavoritesEmpty] = useState<boolean>(true);
-  const [lastId, setLastId] = useState<number>(0);
-  const [showFavorites, setShowFavorites]= useState(false);
+  const [favoritesItems, setFavoritesItems] = useState<Pet[]>([])
+  const [isFavoritesEmpty, setIsFavoritesEmpty] = useState<boolean>(true)
+  const [lastId, setLastId] = useState<number>(0)
+  const [showFavorites, setShowFavorites]= useState<boolean>(false)
 
   // Form state
-  const [formSelectedPet, setFormSelectedPet] = useState<Pet | null>(null);
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [postCode, setPostCode] = useState('');
-  const [paymentType, setPaymentType] = useState(''); 
-  const [showForm, setShowForm]= useState(false);
+  const [formSelectedPet, setFormSelectedPet] = useState<Pet | null>(null)
+  const [showForm, setShowForm]= useState<boolean>(false)
 
   // Show more state
-  const [visiblePets, setVisiblePets] = useState<number>(12);
+  const [visiblePets, setVisiblePets] = useState<number>(12)
 
 
   useEffect(() => {
@@ -172,15 +164,7 @@ useEffect(() => {
             <div className='p-20'></div>
                 <div className='flex flex-wrap justify-center sm:justify-start space-x-4'>
                     {categories.map((category) => (
-                    <button
-                        key={category}
-                        onClick={() => handleCategoryChange(category)}
-                        className={`p-10 align-middle font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-indigo-600 text-white shadow-md  hover:shadow-lg focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none hover:bg-indigo-700  ${
-                        selectedCategory === category ? 'bg-indigo-600' : ''
-                        }`}
-                    >
-                        {category}
-                    </button>
+                        <button key={category} onClick={() => handleCategoryChange(category)} type='button' className='text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>{category}</button>
                     ))}
                 </div>
             
