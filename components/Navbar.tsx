@@ -87,7 +87,7 @@ export default function Navbar () {
             {/* Dropdown list */}
             {showDropdown && (
                 <div className='lg:hidden absolute right-6 top-16 bg-white border border-gray-200 rounded-md shadow-md my-2'>
-                    <ul className='flex flex-col gap-0.5'>
+                    <ul className='flex flex-col justify-start gap-0.5'>
                         {CATEGORY_LINKS.map((link) => (
                             <div key={link.key}>
                                 <Link href={link.href} passHref>
@@ -98,15 +98,23 @@ export default function Navbar () {
                         <hr className='border-gray-200' />
                         {session ? (
                             <li>
-                                <Link href='/api/auth/signout' passHref>
-                                    <div className='block py-2 px-4 hover:bg-gray-100 transition duration-200'>Sign Out</div>
-                                </Link>
+                                <a href='/api/auth/signout' className='text-gray-700 block px-4 py-2 text-sm'>
+                                    <Button 
+                                    type='button'
+                                    title='Sign Out'
+                                    variant='btn_white'
+                                    />
+                                </a>
                             </li>
                         ) : (
                             <li>
-                                <Link href='/api/auth/signin' passHref>
-                                    <div className='block py-2 px-4 hover:bg-gray-100 transition duration-200'>Login</div>
-                                </Link>
+                                <a href='/api/auth/signin'className='text-gray-700 block px-4 py-2 text-sm'>
+                                    <Button 
+                                    type='button'
+                                    title='Log In'
+                                    variant='btn_white'
+                                    />
+                                </a>
                             </li>
                         )}
                     </ul>
