@@ -35,7 +35,7 @@ export default function PetCarousel() {
     const visiblePets = petHighlight.slice(startIndex, startIndex + 3);
 
     return (
-        <div className='h-full relative text-center py-10 pink-block orange-block-b'>
+        <div className='h-full relative text-center py-10 pink-block orange-block-b min-w-screen-sm'>
             {/* Title */}
             <h2 className='text-2xl font-semibold mb-4'>Our friends who are looking for a house</h2>
 

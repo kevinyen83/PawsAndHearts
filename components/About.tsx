@@ -4,7 +4,7 @@ import catAndDog_img from '../assets/images/img_catAndDog.png';
 
 export default function About() {
     return (
-        <div className='flex h-screen orange-block bg-gray-100'>
+        <div className='flex h-screen orange-block bg-gray-100 min-w-screen-sm'>
             {/* Left Section */}
             <div className='hidden md:flex md:w-1/2 items-center justify-center'>
                 <div className='w-full flex items-center justify-center'>
@@ -19,8 +19,8 @@ export default function About() {
             </div>
 
             {/* Right Section */}
-            <div className='flex items-center justify-center z-20'>
-                <div className='p-20'>
+            <div className='flex items-center justify-center z-20 sm:w-full'>
+                <div className='lg:p-20 sm:p-0'>
                     <div className='bg-white rounded-lg shadow-xl p-8'>
                     <div className='max-w-lg mx-auto'>
                         <h2 className='text-2xl font-bold mb-4'>About Paws and Hearts</h2>

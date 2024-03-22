@@ -4,7 +4,7 @@ import dog_img from '../assets/images/img_dog.png';
 
 const Donation = () => {
   return (
-    <div className='flex flex-col md:flex-row h-screen items-center p-10 w-full max-w-full mx-auto bg-slate-50'>
+    <div className='flex flex-col md:flex-row h-screen items-center p-10 w-full max-w-full mx-auto bg-slate-50 min-w-screen-sm'>
       {/* Left col */}
       <div className='md:w-1/2'>
         <Image

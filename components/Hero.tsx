@@ -5,12 +5,10 @@ import '../styles.css'
 
 export default function Hero () {
     return (
-        <section className='relative h-screen min-screen-sm'>
-            <div className='absolute inset-0 w-full h-full bg-hero-background bg-right bg-contain bg-no-repeat blue-block'>
-                <div className='flex flex-wrap gap-20 py-32 pt-[50px] md:gap-28 lg:py-20 xl:flex-row'>
+        <section className='relative flex h-screen min-screen-sm xl:w-screen bg-hero-background bg-right bg-contain bg-no-repeat blue-block'>
+                <div className='flex items-center gap-20 py-32 lg:pl-44 md:gap-28 lg:py-20 sm-justify-center xl:flex-row'>
                     {/* Left Section */}
-                    <div className='absolute inset-0 flex items-center justify-left left-[5%] sm-justify-center'>
-                        <div className='flex flex-col justify-left p-20 md:w-[500px] md:pl-0 sm:w-full sm:justify-center sm:mx-auto lg:mx-0 xl:mx-0 xl:flex-col xl:justify-end xl:items-center'>
+                        <div className='md:w-[500px] sm:w-full sm:mx-auto lg:mx-0 xl:mx-0 xl:flex-col xl:justify-end xl:items-center'>
                             <div className='bg-white rounded-lg shadow-xl p-8 mb-8'>
                                 <div className='bold-52 mb-4'>
                                     Not only people need a house.
@@ -25,10 +23,8 @@ export default function Hero () {
                                         </button>
                                     </Link>
                                 </div> 
-                            </div>          
-                        </div>
+                            </div>
                     </div>
-                </div>
 
                     {/* Call to action btn */}
                     <div className='absolute bottom-4 left-1/2 transform -translate-x-1/2 flex justify-center items-center'>
