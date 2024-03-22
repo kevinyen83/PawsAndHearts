@@ -99,7 +99,7 @@ export default function Navbar () {
                                 {CATEGORY_LINKS.map((link) => (
                                     <div key={link.key}>
                                         <Link href={link.href} passHref>
-                                            <div className='block py-2 px-4 hover:bg-gray-100 transition duration-200 text-center text-lg'>{link.label}</div>
+                                            <div className='block py-2 px-4 hover:bg-gray-100 transition duration-200 text-center text-lg' onClick={toggleDropdown}>{link.label}</div>
                                         </Link>
                                     </div>
                                 ))}

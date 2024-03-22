@@ -6,7 +6,7 @@ import '../styles.css'
 export default function Hero () {
     return (
         <section className='relative flex h-screen min-screen-sm xl:w-screen bg-hero-background bg-right bg-contain bg-no-repeat blue-block'>
-                <div className='flex items-center gap-20 py-32 lg:pl-44 md:gap-28 lg:py-20 sm-justify-center xl:flex-row'>
+                <div className='flex items-center gap-20 py-32 md:pl-44 md:gap-28 lg:py-20 sm-justify-center xl:flex-row'>
                     {/* Left Section */}
                         <div className='md:w-[500px] sm:w-full sm:mx-auto lg:mx-0 xl:mx-0 xl:flex-col xl:justify-end xl:items-center'>
                             <div className='bg-white rounded-lg shadow-xl p-8 mb-8'>
