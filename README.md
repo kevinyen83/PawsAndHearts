@@ -10,6 +10,9 @@ With Paws and Hearts, I aim to leverage the latest programming tools and JavaScr
 
 I'm committed to continuously optimizing the website and welcome any feedback or collaboration opportunities. Together, we can make a real difference in the lives of animals in need!
 
+## Challenges to Address
+Observing the challenges small animal shelters face in managing adoption applications and pet data through outdated tools like Excel and Google Sheets, I aim to streamline the process. My solution involves crafting a user-friendly, well-maintained webpage facilitating the adoption process. Additionally, it will offer shelters a dependable backend and database management system for enhanced efficiency. Leveraging Amazon cloud services and modern web technologies like React and Next.js, I'm poised to develop this solution effectively.
+
 ## Live Demo
 
 live demo [here](https://paws-and-hearts.vercel.app/)
