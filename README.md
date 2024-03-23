@@ -115,6 +115,7 @@ npm test
 - [x] Integrate Jest for testing
 - [ ] Add Integrated tests by Cypress
 - [ ] Improve image rendering performance using <Image>
+- [ ] Develop a management platform that allows shelters to upload and manage their animals
 
 ## Contact
 
