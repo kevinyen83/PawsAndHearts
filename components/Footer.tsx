@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
 const Footer = () => {
     return (
-        <footer className='flexCenter mb-24 pt-20'>
+        <footer className='flexCenter pt-20 pb-24'>
             <div className='flex flex-col justify-between max-container'>
                 <div className='text-center py-10'>
                     <h2 className='text-2xl font-semibold mb-4'>Contact Us</h2>
@@ -33,7 +33,7 @@ const Footer = () => {
                 <p className='regular-14 text-center text-gray-30'>2023 Paws and Hearts | All rights reserved</p>
             </div>
         </footer>
-    )
-}
+    );
+};
 
-export default Footer
+export default Footer;
