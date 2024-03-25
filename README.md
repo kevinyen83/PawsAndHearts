@@ -42,7 +42,7 @@ live demo [here](https://paws-and-hearts.vercel.app/)
 
 1.  UI Design: Figma
 2.  Front-end web development: React.JS, TypeScript, Tailwind CSS, CSS Animations, Formik & Yup(Form validation)
-3.  Server side rendering: Next.JS
+3.  Server-side rendering: Next.JS
 4.  AWS Serverless: AWS Lambda, AWS API Gateway, Node.JS, DynamoDB
 5.  Auth: AWS Cognito, NextAuth.JS, uuid
 6.  Integration testing: Jest, React Testing Library
@@ -58,11 +58,11 @@ https://www.docker.com/get-started/
 
 1.  Pull the Docker Image
     ```sh
-    docker pull kevinyen83/pet-and-paws:latest
+    docker pull kevinyen83/paws-and-hearts:latest
     ```
 2.  Run the Docker Container
     ```sh
-    docker run -p 3000:3000 kevinyen83/pet-and-paws:latest
+    docker run -p 3000:3000 kevinyen83/paws-and-hearts:latest
     ```
 3.  Access the Application
 After running the Docker container, you can access the application in your web browser by navigating to http://localhost:3000.
