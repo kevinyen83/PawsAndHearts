@@ -47,7 +47,28 @@ live demo [here](https://paws-and-hearts.vercel.app/)
 5.  Auth: AWS Cognito, NextAuth.JS, uuid
 6.  Integration testing: Jest, React Testing Library
 
-## Getting Started
+## Getting Started with Docker
+
+### Prerequisites
+
+Install Docker:
+https://www.docker.com/get-started/
+
+### Installation
+
+1.  Pull the Docker Image
+    ```sh
+   docker pull kevinyen83/pet-and-paws:latest
+    ```
+2.  Run the Docker Container
+    ```sh
+   docker run -p 3000:3000 kevinyen83/pet-and-paws:latest
+    ```
+3.  Access the Application
+After running the Docker container, you can access the application in your web browser by navigating to http://localhost:3000.
+
+
+## Getting Started with GitHub
 
 To install and run the project on your local, you will need node and npm installed globally on your machine.
 
@@ -113,6 +134,7 @@ npm test
 - [x] Design & develop Landing Page
 - [x] Design & develop Adoption Page
 - [x] Integrate Jest for testing
+- [x] Creat Docker image
 - [ ] Add Integrated tests by Cypress
 - [ ] Improve image rendering performance using <Image>
 
