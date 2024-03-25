@@ -58,11 +58,11 @@ https://www.docker.com/get-started/
 
 1.  Pull the Docker Image
     ```sh
-   docker pull kevinyen83/pet-and-paws:latest
+    docker pull kevinyen83/pet-and-paws:latest
     ```
 2.  Run the Docker Container
     ```sh
-   docker run -p 3000:3000 kevinyen83/pet-and-paws:latest
+    docker run -p 3000:3000 kevinyen83/pet-and-paws:latest
     ```
 3.  Access the Application
 After running the Docker container, you can access the application in your web browser by navigating to http://localhost:3000.
