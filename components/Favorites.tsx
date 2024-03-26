@@ -15,8 +15,6 @@ interface FavoritesProps {
 
 
 export default function Favorites({ showFavorites, setShowFavorites, favoritesItems, selectedPet, setIsFavoritesEmpty, removeItem, toggleCardDetailPopup }: FavoritesProps) {
-
-
   const favoritesList = favoritesItems.map((selectedPet) => (
     <div key={selectedPet.id} className='flex items-center justify-between border-b border-gray-200 py-4'>
       <div className='flex items-center'>

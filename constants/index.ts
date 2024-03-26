@@ -11,6 +11,11 @@ export const CATEGORY_LINKS = [
         key: 'adopt_a_paw', 
         label: 'Make a friend',
     }, 
+    { 
+        href: '/create_a_paw_profile', 
+        key: 'create_a_paw_profile', 
+        label: 'Create a paw profile',
+    }, 
   ];
   
 

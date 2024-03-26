@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/adopt_a_paw/route.js", "__tests__/Favorites.test.tsx", "__tests__/FormPopup.test.tsx", "babel.config.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/adopt_a_paw/route.js", "__tests__/Favorites.test.tsx", "__tests__/FormPopup.test.tsx", "babel.config.js", "app/api/payment"],
   "exclude": ["node_modules"]
 }

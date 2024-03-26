@@ -9,7 +9,6 @@ import { CATEGORY_LINKS } from '../constants'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
 import AvatarIcon from '../assets/images/avatar.png';
-import { icon } from '@fortawesome/fontawesome-svg-core';
 
 
 export default function Navbar () {
@@ -49,9 +48,17 @@ export default function Navbar () {
 
     {/* Desktop navigation */}
     <div className='flex justify-between'>
+        <Link href='/donate'>
+            <Button 
+            type='button'
+            title={'Donate Now'}
+            variant='bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 text-white font-bold py-2 px-4'
+            />
+        </Link>
+        <div className='ml-4'>
         {session ? (
                 <div className='lg:flexCenter hidden'>
-                    <div className='flex items-center space-x-2'>
+                    <div className='flex items-center space-x-2 '>
                         <Button 
                         type='button'
                         title={userEmail!}
@@ -76,6 +83,7 @@ export default function Navbar () {
                     </Link>
                 </div>
             )}
+        </div>
         </div>
 
         {/* Mobile navigation */}
