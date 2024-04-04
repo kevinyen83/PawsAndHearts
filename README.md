@@ -50,6 +50,7 @@ live demo [here](https://paws-and-hearts.vercel.app/)
 4.  AWS Serverless: AWS Lambda, AWS API Gateway, Node.JS, DynamoDB
 5.  Auth: AWS Cognito, NextAuth.JS, uuid
 6.  Integration testing: Jest, React Testing Library
+7.  Payment: Stripe
 
 ## Getting Started with Docker
 
