@@ -29,7 +29,7 @@ interface Props {
   removeItem: () => void;
 }
 
-export default function AdoptAPaw() {
+const AdoptAPaw = () => {
 
     const [pets, setPets] = useState<Pet[]>([]);
     const [isLoading, setLoading] = useState<boolean>(true)
@@ -305,3 +305,5 @@ useEffect(() => {
     </>
   )
 }
+
+export default AdoptAPaw

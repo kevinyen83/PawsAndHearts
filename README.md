@@ -20,14 +20,18 @@ live demo [here](https://paws-and-hearts.vercel.app/)
     1-1. SignIn  
     1-2. SignUp
 
-2.  Landing page  
-    2-1. Showcase Pets with a Carousel  
-    2-2. Provide Donation Information
+2.  Payment (Donation)  
+    2-1. Select Donation Plans  
+    2-2. Support Credit Cards, such as Visa, Master and so on
 
-3.  Adoption Page  
-    3-1. Display Pet Cards and detailed information  
-    3-2. Ability to Add Pets to Favorites  
-    3-3. Adoption Application Process
+3.  Landing page  
+    3-1. Showcase Pets with a Carousel  
+    3-2. Provide Donation Information
+
+4.  Adoption Page  
+    4-1. Display Pet Cards and detailed information  
+    4-2. Ability to Add Pets to Favorites  
+    4-3. Adoption Application Process
 
 ### Built With
 
@@ -116,6 +120,19 @@ Email: test123@gmail.com
 Password: Test123*
 ```
 
+### Payment (Donation)
+
+Please utilize the following test payment account details:
+
+```sh
+Email: test123@gmail.com
+Account: 4242 4242 4242 4242
+MM/YY: 12/34
+CVC: 567
+CardholderName: tes123
+CountryOrRegion: Australia
+```
+
 ### Testing
 
 1.  To conduct local testing, please open your web browser and navigate to http://localhost:3000/.
@@ -135,6 +152,10 @@ npm test
 - [x] Design & develop Adoption Page
 - [x] Integrate Jest for testing
 - [x] Creat Docker image
+- [x] Build payment (Donation) process
+- [x] Complete RWD
+- [x] Create Docker
+- [ ] Developing a content management page that allow shelters to upload and manage their animals
 - [ ] Add Integrated tests by Cypress
 - [ ] Improve image rendering performance using <Image>
 

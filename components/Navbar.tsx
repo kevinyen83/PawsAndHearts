@@ -52,7 +52,7 @@ export default function Navbar () {
             <Button 
             type='button'
             title={'Donate Now'}
-            variant='bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 text-white font-bold py-2 px-4'
+            variant='bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 text-white font-bold py-2 px-4 h-12'
             />
         </Link>
         <div className='ml-4'>

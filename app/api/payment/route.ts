@@ -1,8 +1,13 @@
-import Stripe from "stripe";
-import { NextResponse, NextRequest } from "next/server";
+import Stripe from 'stripe';
+import { NextResponse } from 'next/server';
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+if (!stripe) {
+    throw new Error('Stripe secret key is not defined');
+  }
 
 export async function POST(request) {
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
     let data = await request.json();
     let priceId = data.priceId;
     const session = await stripe.checkout.sessions.create({
@@ -13,7 +18,7 @@ export async function POST(request) {
             }
         ],
         mode: 'payment',
-        success_url: 'http://localhost:3000',
+        success_url: 'https://paws-and-hearts.vercel.app/adopt_a_paw',
         cancel_url: 'http://localhost:3000'
     });
 
