@@ -18,8 +18,8 @@ export async function POST(request) {
             }
         ],
         mode: 'payment',
-        success_url: 'https://paws-and-hearts.vercel.app/adopt_a_paw',
-        cancel_url: 'http://localhost:3000'
+        success_url: 'https://paws-and-hearts.vercel.app/donate/donate_success',
+        cancel_url: 'https://paws-and-hearts.vercel.app/donate/donate_cancel'
     });
 
     return NextResponse.json(session.url);
