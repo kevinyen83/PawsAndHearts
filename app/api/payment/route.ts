@@ -1,13 +1,15 @@
 import Stripe from 'stripe';
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 
-if (!stripe) {
+if (!stripeSecretKey) {
     throw new Error('Stripe secret key is not defined');
-  }
+}
 
-export async function POST(request) {
+const stripe = new Stripe(stripeSecretKey);
+
+export async function POST(request: NextRequest, response: NextResponse) {
     let data = await request.json();
     let priceId = data.priceId;
     const session = await stripe.checkout.sessions.create({
