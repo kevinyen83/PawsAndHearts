@@ -1,16 +1,4 @@
-export async function fetchPets() {
-    try {
-        const response = await fetch('https://8lpzuux0q6.execute-api.ap-southeast-2.amazonaws.com/prod/pets');
-        if (!response.ok) {
-            throw new Error('Failed to fetch pets');
-        }
-        const data = await response.json();
-        return data.pets;
-    } catch (error) {
-        console.error('Error fetching pets:', error);
-        throw error;
-    }
-}
+import { PetProfileData } from '../../app/create_a_paw_profile/page'
 
 interface FormData {
     fullName: string;
@@ -26,8 +14,46 @@ interface FormData {
     petName: string;
   }
 
+export async function fetchPets() {
+    try {
+        const response = await fetch('https://8lpzuux0q6.execute-api.ap-southeast-2.amazonaws.com/prod/pets');
+        if (!response.ok) {
+            throw new Error('Failed to fetch pets')
+        }
+        const data = await response.json()
+        return data.pets
+    } catch (error) {
+        console.error('Error fetching pets:', error)
+        throw error
+    }
+}
+
+export async function uploadPet(petProfileData: PetProfileData){
+    const url = 'https://8lpzuux0q6.execute-api.ap-southeast-2.amazonaws.com/prod/pet'
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(petProfileData)
+        })
+
+        if (!response.ok) {
+            throw new Error('Failed to upload pet data')
+        }
+    
+        const data = await response.json()
+        return data;
+    } catch (error) {
+        console.error('Error uploading pet data:', error)
+        throw error;
+    }
+}
+
 export async function submitApplication(formData: FormData) {
-    const url = 'https://owqzy4n6cj.execute-api.ap-southeast-2.amazonaws.com/prod/application';
+    const url = 'https://owqzy4n6cj.execute-api.ap-southeast-2.amazonaws.com/prod/application'
   
     try {
       const response = await fetch(url, {
@@ -36,16 +62,16 @@ export async function submitApplication(formData: FormData) {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
-      });
+      })
   
       if (!response.ok) {
-        throw new Error('Failed to submit application');
+        throw new Error('Failed to submit application')
       }
   
-      const data = await response.json();
+      const data = await response.json()
       return data;
     } catch (error) {
-      console.error('Error submitting application:', error);
+      console.error('Error submitting application:', error)
       throw error;
     }
   }

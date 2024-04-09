@@ -1,14 +1,14 @@
-import React, { useState, Fragment } from 'react';
-import { v4 as uuidv4 } from 'uuid';
-import { Pet } from '../app/adopt_a_paw/page';
-import { useSession } from 'next-auth/react';
-import { Dialog, Transition } from '@headlessui/react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import Button from './Button';
-import Link from 'next/link';
-import { submitApplication, updatePetAvailability } from '../utils/api/api';
+import React, { useState, Fragment } from 'react'
+import { v4 as uuidv4 } from 'uuid'
+import { Pet } from '../app/adopt_a_paw/page'
+import { useSession } from 'next-auth/react'
+import { Dialog, Transition } from '@headlessui/react'
+import { XMarkIcon } from '@heroicons/react/24/outline'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import Button from './Button'
+import Link from 'next/link'
+import { submitApplication, updatePetAvailability } from '../utils/api/api'
 
 
 const validationSchema = Yup.object().shape({
@@ -22,14 +22,14 @@ const validationSchema = Yup.object().shape({
   city: Yup.string().required('City is required'),
   state: Yup.string().required('State is required'),
   postCode: Yup.string().required('Post Code is required'),
-});
+})
 
 
 interface FormPopupProps {
-    pets: Pet[];
-    showForm: boolean;
-    setShowForm: (show: boolean) => void;
-    formSelectedPet: Pet | null;
+    pets: Pet[]
+    showForm: boolean
+    setShowForm: (show: boolean) => void
+    formSelectedPet: Pet | null
 }
 
 
@@ -39,11 +39,8 @@ export default function FormPopup ({
     formSelectedPet,
 }: FormPopupProps) {
 
-    const { data: session } = useSession();
-    const [inputUserEmail, setInputUserEmail] = useState<string | undefined>(session?.user?.email !== null ? session?.user?.email : undefined);
-    const [inputUserName, setInputUserName] = useState<string | undefined>(session?.user?.name !== null ? session?.user?.name : undefined);
-
-
+    const { data: session } = useSession()
+    const [inputUserEmail, setInputUserEmail] = useState<string | undefined>(session?.user?.email !== null ? session?.user?.email : undefined)
 
   const formik = useFormik({
     initialValues: {
@@ -59,20 +56,20 @@ export default function FormPopup ({
     validationSchema,
     onSubmit: (values) => {
     }
-  });
+  })
   
 
   const onSubmit = async () => {
     try {
-      await formik.validateForm();
+      await formik.validateForm()
 
       if (formik.isValid) {
-        const applicationId = uuidv4();
-        const pet = formSelectedPet;
+        const applicationId = uuidv4()
+        const pet = formSelectedPet
 
         if (!pet) {
-          console.error('No pet selected');
-          return;
+          console.error('No pet selected')
+          return
         }
 
         const formData = {
@@ -87,23 +84,23 @@ export default function FormPopup ({
           applicationId,
           petId: pet.petId,
           petName: pet.name,
-        };
+        }
 
-        await submitApplication(formData);
-        await updatePetAvailability(pet.petId);
+        await submitApplication(formData)
+        await updatePetAvailability(pet.petId)
 
-        setShowForm(false);
-        formik.resetForm();
+        setShowForm(false)
+        formik.resetForm()
 
-        alert('Application placed successfully!');
-        window.location.reload();
+        alert('Application placed successfully!')
+        window.location.reload()
       } else {
-        alert('Please fill in all required fields and validate your Email.');
+        alert('Please fill in all required fields and validate your Email.')
       }
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   return (
 
@@ -323,5 +320,5 @@ export default function FormPopup ({
       </div>
     </Dialog>
   </Transition.Root>
-  );
-};
+  )
+}

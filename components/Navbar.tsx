@@ -29,6 +29,7 @@ export default function Navbar () {
         setShowDropdown(!showDropdown);
     }
 
+
   return (
     <nav className='fixed top-0 left-0 right-0 bg-white border-b border-gray-150 flexBetween padding-container z-30 py-4'>
         <div className='flex flex-row h-full justify-start gap-12 lg:flex items-center'>
