@@ -33,6 +33,9 @@ live demo [here](https://paws-and-hearts.vercel.app/)
     4-2. Ability to Add Pets to Favorites  
     4-3. Adoption Application Process
 
+5.  Paw Profile Page (9 April 2024 New release!)
+    5-1. Create new pet profile after logging into a user account  
+
 ### Built With
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
@@ -156,7 +159,7 @@ npm test
 - [x] Build payment (Donation) process
 - [x] Complete RWD
 - [x] Create Docker
-- [ ] Developing a content management page that allow shelters to upload and manage their animals
+- [x] Developing a content management page that allow shelters to upload and manage their animals
 - [ ] Add Integrated tests by Cypress
 - [ ] Improve image rendering performance using <Image>
 

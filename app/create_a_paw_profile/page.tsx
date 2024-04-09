@@ -79,7 +79,6 @@ const PawProfileForm: React.FC = () => {
                         image: values.image,
                         description: values.description,
                     };
-                    console.log(petProfileData)
                     await uploadPet(petProfileData);
                     formik.resetForm()
                     alert('Pet profile created successfully!');
