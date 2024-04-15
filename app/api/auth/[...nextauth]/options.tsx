@@ -1,6 +1,6 @@
-import type {NextAuthOptions} from 'next-auth'
-import CognitoProvider from 'next-auth/providers/cognito';
-import dotenv from 'dotenv';
+import type {NextAuthOptions} from "next-auth"
+import CognitoProvider from "next-auth/providers/cognito";
+import dotenv from "dotenv";
 
 dotenv.config();
 
@@ -23,10 +23,10 @@ export const options: NextAuthOptions = {
         }),
     ],
     theme: {
-        colorScheme: 'dark',
-        brandColor: '#000',
-        // logo: ''
-        buttonText: '#fff'
+        colorScheme: "dark",
+        brandColor: "#000",
+        // logo: ""
+        buttonText: "#fff"
     }
 }
 
