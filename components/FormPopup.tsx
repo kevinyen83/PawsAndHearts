@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react"
 import { v4 as uuidv4 } from "uuid"
-import { Pet } from "../app/adopt_a_paw/page"
+import { FormPopupProps } from '../types/pet-types';
 import { useSession } from "next-auth/react"
 import { Dialog, Transition } from "@headlessui/react"
 import { XMarkIcon } from "@heroicons/react/24/outline"
@@ -23,15 +23,6 @@ const validationSchema = Yup.object().shape({
   state: Yup.string().required("State is required"),
   postCode: Yup.string().required("Post Code is required"),
 })
-
-
-interface FormPopupProps {
-    pets: Pet[]
-    showForm: boolean
-    setShowForm: (show: boolean) => void
-    formSelectedPet: Pet | null
-}
-
 
 export default function FormPopup ({
     showForm,

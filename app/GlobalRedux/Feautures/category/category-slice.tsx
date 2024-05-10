@@ -1,15 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
-export interface CategoryState {
-  categoryState: string;
-}
+import { createSlice } from '@reduxjs/toolkit';
+import { CategoryState } from './category-types';
+import { PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: CategoryState = {
-    categoryState: 'All',
+  categoryState: 'All',
 };
 
 export const categorySlice = createSlice({
-  name: "category",
+  name: 'category',
   initialState,
   reducers: {
     setCategoryState: (state, action: PayloadAction<string>) => {

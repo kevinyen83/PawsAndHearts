@@ -2,7 +2,7 @@
 
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
-import { categoryReducer } from './Feautures/category/categorySlice';
+import { categoryReducer } from './Feautures/category/category-slice';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
