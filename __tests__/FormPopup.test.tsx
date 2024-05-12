@@ -20,7 +20,6 @@ const mockedUpdatePetAvailability = updatePetAvailability as jest.MockedFunction
 describe('FormPopup component', () => {
   test('Form submission', async () => {
     const toggleFormPopup = jest.fn();
-    const onSubmit = jest.fn();
 
     // Mock session data
     const mockSession = {

@@ -11,15 +11,16 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { fetchPets } from '../../utils/api/api';
 import { useAppDispatch, useAppSelector } from '../GlobalRedux/store';
 import { setCategoryState } from '../GlobalRedux/Feautures/category/category-slice';
+import { setPetsState } from '../GlobalRedux/Feautures/pets/pets-slice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const AdoptAPaw = () => {
+  const dispatch = useAppDispatch();
   // Pets state
-  const [pets, setPets] = useState<Pet[]>([]);
+  const pets = useAppSelector((state) => state.pets.pets);
   const [isLoading, setLoading] = useState<boolean>(true);
 
   // Category
-  const dispatch = useAppDispatch();
   const categoryState = useAppSelector((state) => state.category.categoryState);
 
   // Pet detail state
@@ -44,7 +45,7 @@ const AdoptAPaw = () => {
       try {
         setLoading(true);
         const data = await fetchPets();
-        setPets(data);
+        dispatch(setPetsState(data));
       } catch (error) {
         console.error('Error fetching pets:', error);
       } finally {

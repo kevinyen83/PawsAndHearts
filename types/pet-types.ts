@@ -36,3 +36,7 @@ export interface FormPopupProps {
   formSelectedPet: Pet | null;
   toggleFormPopup: (pet: Pet) => void;
 }
+
+export interface PetsState {
+  pets: Pet[] | [];
+}
