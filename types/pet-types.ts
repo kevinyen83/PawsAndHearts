@@ -34,4 +34,5 @@ export interface FormPopupProps {
   showForm: boolean;
   setShowForm: (show: boolean) => void;
   formSelectedPet: Pet | null;
+  toggleFormPopup: (pet: Pet) => void;
 }

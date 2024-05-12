@@ -3,11 +3,18 @@ import '@testing-library/jest-dom';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import AdoptAPaw from '../app/adopt-a-paw/page';
 import { fetchPets } from '../utils/api/api';
+import ReduxProvider from '../app/GlobalRedux/redux-provider';
 
 jest.mock('../utils/api/api');
 const mockedFetchPet = fetchPets as jest.MockedFunction<typeof fetchPets>;
 
 describe('AdoptAPaw component', () => {
+  const renderWithReduxProvider = (component: React.ReactNode) => {
+    return {
+      ...render(<ReduxProvider>{component}</ReduxProvider>),
+    };
+  };
+
   test('render pets data successfully', async () => {
     mockedFetchPet.mockResolvedValue([
       {
@@ -42,7 +49,7 @@ describe('AdoptAPaw component', () => {
       },
     ]);
 
-    render(<AdoptAPaw />);
+    renderWithReduxProvider(<AdoptAPaw />);
 
     await waitFor(() => {
       const itemContainers = screen.getAllByTestId('item-container');
@@ -75,7 +82,9 @@ describe('AdoptAPaw component', () => {
   });
 
   test('Add pet to favorites and check if it appears in Favorites popup', async () => {
-    const { getByTestId, getAllByTestId } = render(<AdoptAPaw />);
+    const { getByTestId, getAllByTestId } = renderWithReduxProvider(
+      <AdoptAPaw />
+    );
 
     // Find the first card
     await waitFor(() => {

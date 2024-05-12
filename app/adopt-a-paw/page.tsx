@@ -231,6 +231,7 @@ const AdoptAPaw = () => {
           showForm={showForm}
           setShowForm={setShowForm}
           formSelectedPet={formSelectedPet}
+          toggleFormPopup={toggleFormPopup}
         />
       )}
     </div>

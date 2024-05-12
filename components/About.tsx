@@ -1,6 +1,6 @@
-import React from "react";
-import Image from "next/image";
-import catAndDog_img from "../assets/images/img-catAndDog.png";
+import React from 'react';
+import Image from 'next/image';
+import catAndDog_img from '../assets/images/img-catAndDog.png';
 
 export default function About() {
   return (
