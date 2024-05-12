@@ -1,6 +1,6 @@
-import React from "react";
-import Image from "next/image";
-import dog_img from "../assets/images/img_dog.png";
+import React from 'react';
+import Image from 'next/image';
+import dog_img from '../assets/images/img-dog.png';
 
 const Donation = () => {
   return (

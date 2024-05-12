@@ -13,11 +13,6 @@ import { useAppDispatch, useAppSelector } from '../GlobalRedux/store';
 import { setCategoryState } from '../GlobalRedux/Feautures/category/category-slice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-interface Props {
-  checkout: () => void;
-  removeItem: () => void;
-}
-
 const AdoptAPaw = () => {
   // Pets state
   const [pets, setPets] = useState<Pet[]>([]);
