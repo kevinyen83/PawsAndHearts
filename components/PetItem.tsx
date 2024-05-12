@@ -11,7 +11,6 @@ const PetItem = ({
 }: PetItemProps) => {
   return (
     <div
-      key={pet.petId}
       className="relative flex flex-col m-2 text-gray-700 bg-white shadow-md rounded-xl sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/5 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl"
       data-testid="item-container"
     >

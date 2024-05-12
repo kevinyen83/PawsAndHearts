@@ -24,7 +24,6 @@ const AdoptAPaw = () => {
   const [isLoading, setLoading] = useState<boolean>(true);
 
   // Category
-  //   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const dispatch = useAppDispatch();
   const categoryState = useAppSelector((state) => state.category.categoryState);
 
@@ -173,6 +172,7 @@ const AdoptAPaw = () => {
             .slice(0, visiblePets)
             .map((pet) => (
               <PetItem
+                key={pet.petId}
                 pet={pet}
                 toggleCardDetailPopup={toggleCardDetailPopup}
                 addToFavorites={addToFavorites}

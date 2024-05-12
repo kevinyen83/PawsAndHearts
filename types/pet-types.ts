@@ -19,7 +19,7 @@ export interface PetItemProps {
   toggleFormPopup: (pet: Pet) => void;
 }
 
-interface FavoritesProps {
+export interface FavoritesProps {
   showFavorites: boolean;
   setShowFavorites: React.Dispatch<React.SetStateAction<boolean>>;
   favoritesItems: any[];
