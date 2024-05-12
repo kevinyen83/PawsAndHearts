@@ -1,17 +1,7 @@
-import React, { Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import { Pet } from "../app/adopt_a_paw/page";
-
-interface FavoritesProps {
-  showFavorites: boolean;
-  setShowFavorites: React.Dispatch<React.SetStateAction<boolean>>;
-  favoritesItems: any[];
-  selectedPet: Pet | null;
-  setIsFavoritesEmpty: React.Dispatch<React.SetStateAction<boolean>>;
-  removeItem: (pet: any) => void;
-  toggleCardDetailPopup: (pet: any) => void;
-}
+import React, { Fragment } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
+import { XMarkIcon } from '@heroicons/react/24/outline';
+import { FavoritesProps } from '../types/pet-types';
 
 export default function Favorites({
   showFavorites,

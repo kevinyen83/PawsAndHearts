@@ -1,7 +1,7 @@
-import React from "react";
-import { faHeart, faTimes } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Pet } from "../app/adopt_a_paw/page";
+import React from 'react';
+import { faHeart, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Pet } from '../types/pet-types';
 
 interface PetDetailPopupProps {
   formSelectedPet: Pet | null;

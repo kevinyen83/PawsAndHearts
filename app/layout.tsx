@@ -1,32 +1,35 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import './globals.css'
-import Navbar from '../components/Navbar'
-import Footer from '../components/Footer'
-import AuthProvider from '../components/AuthProvider'
+import { Inter } from 'next/font/google';
+import { Metadata } from 'next';
+import './globals.css';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import AuthProvider from '../components/AuthProvider';
+import ReduxProvider from '../app/GlobalRedux/redux-provider';
 
-
-
-
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Paws and Hearts',
-  description: 'A animal shielter aims to match street dogs and cats with suitable keeper.',
-}
+  description:
+    'A animal shielter aims to match street dogs and cats with suitable keeper.',
+};
 
-export default function RootLayout({ children }: { children: React.ReactNode}) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang='en' className={inter.className}>
-      <body>
+    <ReduxProvider>
       <AuthProvider>
-        <Navbar/>
-            <main className='relative overflow-hidden mx-auto'>
-                {children}
-            </main>
-        <Footer/>
-        </AuthProvider>
-        </body>
-    </html>
-  )
+        <html lang="en" className={inter.className}>
+          <body>
+            <Navbar />
+            <main className="relative overflow-hidden mx-auto">{children}</main>
+            <Footer />
+          </body>
+        </html>
+      </AuthProvider>
+    </ReduxProvider>
+  );
 }
