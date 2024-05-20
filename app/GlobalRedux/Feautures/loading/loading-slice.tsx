@@ -7,7 +7,7 @@ const initialState: LoadingState = {
 };
 
 export const loadingSlice = createSlice({
-  name: 'loading',
+  name: 'isLoading',
   initialState,
   reducers: {
     setIsLoading: (state, action: PayloadAction<boolean>) => {
@@ -17,4 +17,4 @@ export const loadingSlice = createSlice({
 });
 
 export const { setIsLoading } = loadingSlice.actions;
-export const loadingReducer = loadingSlice.reducer;
+export const isLoadingReducer = loadingSlice.reducer;

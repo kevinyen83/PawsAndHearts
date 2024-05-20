@@ -4,7 +4,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
 import { categoryReducer } from './Feautures/category/category-slice';
 import { petsReducer } from './Feautures/pets/pets-slice';
-import { loadingReducer } from './Feautures/loading/loading-slice';
+import { isLoadingReducer } from './Feautures/loading/loading-slice';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { showFavoritesReducer } from './Feautures/popup/showFavorites-slice';
@@ -16,6 +16,7 @@ import { favoritesItemsReducer } from './Feautures/favorites/favoritesItems-slic
 import { isFavoritesEmptyReducer } from './Feautures/favorites/isFavoritesEmpty-slice';
 import { lastIdReducer } from './Feautures/favorites/lastId-slice';
 import { visiblePetsReducer } from './Feautures/pets/visiblePets-slice';
+import { pricesReducer } from './Feautures/prices/prices-slice';
 
 const categoryPersistConfig = {
   key: 'category',
@@ -29,7 +30,7 @@ const petsPersistConfig = {
   whitelist: ['petsState'],
 };
 
-const loadingPersistConfig = {
+const isLoadingPersistConfig = {
   key: 'isLoading',
   storage: storage,
   whitelist: ['loadingState'],
@@ -88,11 +89,16 @@ const formSelectedPetPersistConfig = {
   storage: storage,
   whitelist: ['formSelectedPetState'],
 };
+const pricesPersistConfig = {
+  key: 'prices',
+  storage: storage,
+  whitelist: ['prices'],
+};
 
 const rootReducer = combineReducers({
   category: persistReducer(categoryPersistConfig, categoryReducer),
   pets: persistReducer(petsPersistConfig, petsReducer),
-  isLoading: persistReducer(loadingPersistConfig, loadingReducer),
+  isLoading: persistReducer(isLoadingPersistConfig, isLoadingReducer),
   showFavorites: persistReducer(
     showFavoritesPersistConfig,
     showFavoritesReducer
@@ -117,6 +123,7 @@ const rootReducer = combineReducers({
   ),
   lastId: persistReducer(lastIdPersistConfig, lastIdReducer),
   visiblePets: persistReducer(visiblePetsPersistConfig, visiblePetsReducer),
+  prices: persistReducer(pricesPersistConfig, pricesReducer),
 });
 
 export const store = configureStore({

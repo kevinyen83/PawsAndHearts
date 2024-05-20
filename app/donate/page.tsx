@@ -1,14 +1,18 @@
 'use client';
 
 import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import DonateCard from '../../components/DonateCard';
 import '../../styles.css';
-import { Price } from '../../types/price-types';
+import { useAppDispatch, useAppSelector } from '../GlobalRedux/store';
+import { setPrices } from '../GlobalRedux/Feautures/prices/prices-slice';
+import { setIsLoading } from '../GlobalRedux/Feautures/loading/loading-slice';
 
 const DonatePage: React.FC = () => {
-  const [prices, setPrices] = useState<Price[]>([]);
-  const [isLoading, setLoading] = useState<boolean>(true);
+  const dispatch = useAppDispatch();
+
+  const prices = useAppSelector((state) => state.prices.prices);
+  const isLoading = useAppSelector((state) => state.isLoading.isLoading);
 
   useEffect(() => {
     fetchPrices();
@@ -17,13 +21,13 @@ const DonatePage: React.FC = () => {
   const fetchPrices = async () => {
     try {
       const { data } = await axios.get('/api/getItems');
-      setPrices(data);
-      setLoading(true);
+      dispatch(setPrices(data));
+      dispatch(setIsLoading(true));
       console.log(data);
     } catch (error) {
       console.error('Error fetching prices:', error);
     } finally {
-      setLoading(false);
+      dispatch(setIsLoading(false));
     }
   };
 
