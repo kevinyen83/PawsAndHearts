@@ -4,11 +4,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import DonateCard from '../../components/DonateCard';
 import '../../styles.css';
-
-interface Price {
-  id: string;
-  unit_amount: number;
-}
+import { Price } from '../../types/price-types';
 
 const DonatePage: React.FC = () => {
   const [prices, setPrices] = useState<Price[]>([]);
