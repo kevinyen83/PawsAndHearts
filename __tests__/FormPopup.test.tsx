@@ -2,6 +2,7 @@ import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import FormPopup from '../components/FormPopup';
 import { submitApplication, updatePetAvailability } from '../utils/api/api';
+import { useDispatch, useSelector } from 'react-redux';
 
 // Mock useSession hook
 jest.mock('next-auth/react', () => ({
@@ -16,6 +17,11 @@ const mockedSubmitApplication = submitApplication as jest.MockedFunction<
 const mockedUpdatePetAvailability = updatePetAvailability as jest.MockedFunction<
   typeof updatePetAvailability
 >;
+
+jest.mock('react-redux', () => ({
+  useDispatch: jest.fn(),
+  useSelector: jest.fn(),
+}));
 
 describe('FormPopup component', () => {
   test('Form submission', async () => {
@@ -33,6 +39,15 @@ describe('FormPopup component', () => {
 
     // Mock useSession hook to return the mock session data
     require('next-auth/react').useSession.mockReturnValue(mockSession);
+    const dispatch = jest.fn();
+    require('react-redux').useDispatch.mockReturnValue(dispatch);
+
+    require('react-redux').useSelector.mockImplementation(
+      (selector: (arg0: { showForm: { showForm: boolean } }) => any) =>
+        selector({
+          showForm: { showForm: true },
+        })
+    );
 
     const { getByLabelText, getByText } = render(
       <FormPopup
@@ -52,8 +67,6 @@ describe('FormPopup component', () => {
             image: 'test.jpg',
           },
         ]}
-        showForm={true}
-        setShowForm={toggleFormPopup}
         formSelectedPet={{
           petId: '1',
           name: 'Test Pet',

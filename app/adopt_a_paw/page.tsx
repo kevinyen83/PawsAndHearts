@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Favorites from '../../components/Favorites';
 import FormPopup from '../../components/FormPopup';
 import PetDetailPopup from '../../components/PetDetailPopup';
@@ -12,44 +12,54 @@ import { fetchPets } from '../../utils/api/api';
 import { useAppDispatch, useAppSelector } from '../GlobalRedux/store';
 import { setCategoryState } from '../GlobalRedux/Feautures/category/category-slice';
 import { setPetsState } from '../GlobalRedux/Feautures/pets/pets-slice';
+import { setIsLoading } from '../GlobalRedux/Feautures/loading/loading-slice';
+import { setShowFavorites } from '../GlobalRedux/Feautures/popup/showFavorites-slice';
+import { setShowForm } from '../GlobalRedux/Feautures/popup/showForm-slice';
+import { setShowPetDetail } from '../GlobalRedux/Feautures/popup/showPetDetail-slice';
+import { setSelectedPet } from '../GlobalRedux/Feautures/pets/selectedPet-slice';
+import { setFormSelectedPet } from '../GlobalRedux/Feautures/pets/formSelectedPet-slice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { setFavoritesItems } from '../GlobalRedux/Feautures/favorites/favoritesItems-slice';
+import { setVisiblePets } from '../GlobalRedux/Feautures/pets/visiblePets-slice';
+import { setIsFavoritesEmpty } from '../GlobalRedux/Feautures/favorites/isFavoritesEmpty-slice';
+import { setLastId } from '../GlobalRedux/Feautures/favorites/lastId-slice';
 
 const AdoptAPaw = () => {
   const dispatch = useAppDispatch();
-  // Pets state
+
   const pets = useAppSelector((state) => state.pets.pets);
-  const [isLoading, setLoading] = useState<boolean>(true);
-
-  // Category
-  const categoryState = useAppSelector((state) => state.category.categoryState);
-
-  // Pet detail state
-  const [showPetDetail, setShowPetDetail] = useState<boolean>(false);
-  const [selectedPet, setSelectedPet] = useState<Pet | null>(null);
-
-  // Favorites state
-  const [favoritesItems, setFavoritesItems] = useState<Pet[]>([]);
-  const [isFavoritesEmpty, setIsFavoritesEmpty] = useState<boolean>(true);
-  const [lastId, setLastId] = useState<number>(0);
-  const [showFavorites, setShowFavorites] = useState<boolean>(false);
-
-  // Form state
-  const [formSelectedPet, setFormSelectedPet] = useState<Pet | null>(null);
-  const [showForm, setShowForm] = useState<boolean>(false);
-
-  // Show more state
-  const [visiblePets, setVisiblePets] = useState<number>(12);
+  const selectedPet = useAppSelector((state) => state.selectedPet.selectedPet);
+  const formSelectedPet = useAppSelector(
+    (state) => state.formSelectedPet.formSelectedPet
+  );
+  const category = useAppSelector((state) => state.category.category);
+  const isLoading = useAppSelector((state) => state.isLoading.isLoading);
+  const showFavorites = useAppSelector(
+    (state) => state.showFavorites.showFavorites
+  );
+  const showForm = useAppSelector((state) => state.showForm.showForm);
+  const showPetDetail = useAppSelector(
+    (state) => state.showPetDetail.showPetDetail
+  );
+  const favoritesItems = useAppSelector(
+    (state) => state.favoritesItems.favoritesItems
+  );
+  const isFavoritesEmpty = useAppSelector(
+    (state) => state.isFavoritesEmpty.isFavoritesEmpty
+  );
+  const lastId = useAppSelector((state) => state.lastId.lastId);
+  const visiblePets = useAppSelector((state) => state.visiblePets.visiblePets);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
+        dispatch(setIsLoading(true));
         const data = await fetchPets();
         dispatch(setPetsState(data));
       } catch (error) {
         console.error('Error fetching pets:', error);
       } finally {
-        setLoading(false);
+        dispatch(setIsLoading(false));
       }
     };
 
@@ -59,7 +69,7 @@ const AdoptAPaw = () => {
   useEffect(() => {
     const storedFavoritesItems = sessionStorage.getItem('favoritesItems');
     if (storedFavoritesItems) {
-      setFavoritesItems(JSON.parse(storedFavoritesItems));
+      dispatch(setFavoritesItems(JSON.parse(storedFavoritesItems)));
     }
   }, []);
 
@@ -71,7 +81,8 @@ const AdoptAPaw = () => {
   );
 
   const handleShowMoreClick = (): void => {
-    setVisiblePets((prevVisiblePets) => prevVisiblePets + 16);
+    const newVisiblePets = visiblePets + 16;
+    dispatch(setVisiblePets(newVisiblePets));
   };
 
   const addToFavorites = (pet: Pet): void => {
@@ -84,9 +95,9 @@ const AdoptAPaw = () => {
         ...pet,
         id: lastId + 1,
       };
-      setFavoritesItems([...favoritesItems, newFavoritesItems]);
-      setIsFavoritesEmpty(false);
-      setLastId(lastId + 1);
+      dispatch(setFavoritesItems([...favoritesItems, newFavoritesItems]));
+      dispatch(setIsFavoritesEmpty(false));
+      dispatch(setLastId(lastId + 1));
       sessionStorage.setItem(
         'favoritesItems',
         JSON.stringify([...favoritesItems, newFavoritesItems])
@@ -97,14 +108,12 @@ const AdoptAPaw = () => {
     }
   };
 
-  const toggleFavoritesPopup = (): void => {
-    setShowFavorites(!showFavorites);
-  };
-
   const removeItem = (pet: Pet) => {
-    const updatedItems = favoritesItems.filter((p) => p.petId !== pet.petId);
-    setFavoritesItems(updatedItems);
-    setIsFavoritesEmpty(updatedItems.length === 0);
+    const updatedItems = favoritesItems.filter(
+      (p: { petId: string }) => p.petId !== pet.petId
+    );
+    dispatch(setFavoritesItems(updatedItems));
+    dispatch(setIsFavoritesEmpty(updatedItems.length === 0));
   };
 
   const toggleFormPopup = (pet: Pet): void => {
@@ -116,10 +125,10 @@ const AdoptAPaw = () => {
         return;
       }
       const selectedPetFromPets = pets.find((p: Pet) => p.petId === pet.petId);
-      setShowForm(!showForm);
+      dispatch(setShowForm(true));
 
       if (selectedPetFromPets) {
-        setFormSelectedPet(selectedPetFromPets);
+        dispatch(setFormSelectedPet(selectedPetFromPets));
       } else {
         console.error('Selected pet not found in pets array');
       }
@@ -127,9 +136,9 @@ const AdoptAPaw = () => {
   };
 
   const toggleCardDetailPopup = (pet: Pet): void => {
-    setSelectedPet(pet);
-    setShowPetDetail(true);
-    setFormSelectedPet(pet);
+    dispatch(setSelectedPet(pet));
+    dispatch(setShowPetDetail(true));
+    dispatch(setFormSelectedPet(pet));
   };
 
   const categories = ['All', 'Cats', 'Dogs', 'Birds', 'Others'];
@@ -162,9 +171,7 @@ const AdoptAPaw = () => {
 
         {!isLoading &&
           pets
-            .filter(
-              (pet) => categoryState === 'All' || pet.category === categoryState
-            )
+            .filter((pet) => category === 'All' || pet.category === category)
             .slice(0, visiblePets)
             .map((pet) => (
               <PetItem
@@ -180,9 +187,8 @@ const AdoptAPaw = () => {
       {/* show more */}
       {pets &&
         visiblePets <
-          pets.filter(
-            (pet) => categoryState === 'All' || pet.category === categoryState
-          ).length && (
+          pets.filter((pet) => category === 'All' || pet.category === category)
+            .length && (
           <div className="flex justify-center m-14">
             <button
               className="p-t align-middle font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
@@ -201,14 +207,14 @@ const AdoptAPaw = () => {
             formSelectedPet={formSelectedPet}
             selectedPet={selectedPet}
             onReserve={() => addToFavorites(selectedPet)}
-            onClose={() => setShowPetDetail(false)}
+            onClose={() => dispatch(setShowPetDetail(false))}
           />
         )}
 
       {/* Favorites */}
       <div
         className="fixed right-6 bottom-6 bg-gray-900 text-red-500 rounded-full w-16 h-16 flex items-center justify-center cursor-pointer  hover:shadow-lgfocus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85]"
-        onClick={toggleFavoritesPopup}
+        onClick={() => dispatch(setShowFavorites(true))}
         data-testid="favorites-trigger-btn"
       >
         <FontAwesomeIcon icon={faHeart} size="lg" />
@@ -216,11 +222,8 @@ const AdoptAPaw = () => {
       {showFavorites && (
         <Favorites
           favoritesItems={favoritesItems}
-          showFavorites={showFavorites}
           selectedPet={selectedPet}
-          setIsFavoritesEmpty={setIsFavoritesEmpty}
           removeItem={removeItem}
-          setShowFavorites={setShowFavorites}
           toggleCardDetailPopup={toggleCardDetailPopup}
         />
       )}
@@ -229,8 +232,6 @@ const AdoptAPaw = () => {
       {showForm && (
         <FormPopup
           pets={pets}
-          showForm={showForm}
-          setShowForm={setShowForm}
           formSelectedPet={formSelectedPet}
           toggleFormPopup={toggleFormPopup}
         />
