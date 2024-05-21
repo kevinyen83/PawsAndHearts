@@ -9,14 +9,9 @@ import '../../styles.css';
 import { Pet } from '../../types/pet-types';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { fetchPets } from '../../utils/api/api';
-import { useAppDispatch, useAppSelector } from '../../app/GlobalRedux/store';
+import { useAppDispatch, useAppSelector } from '../GlobalRedux/store';
 import { setCategoryState } from '../GlobalRedux/Feautures/category/category-slice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-interface Props {
-  checkout: () => void;
-  removeItem: () => void;
-}
 
 const AdoptAPaw = () => {
   // Pets state
@@ -236,6 +231,7 @@ const AdoptAPaw = () => {
           showForm={showForm}
           setShowForm={setShowForm}
           formSelectedPet={formSelectedPet}
+          toggleFormPopup={toggleFormPopup}
         />
       )}
     </div>

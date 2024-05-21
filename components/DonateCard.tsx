@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 interface DonateCardProps {
   price: {
@@ -15,13 +15,13 @@ const DonateCard: React.FC<DonateCardProps> = ({ price, index }) => {
   ) => {
     e.preventDefault();
     const { data } = await axios.post(
-      "/api/payment",
+      '/api/payment',
       {
         priceId: price.id,
       },
       {
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       }
     );
@@ -37,9 +37,9 @@ const DonateCard: React.FC<DonateCardProps> = ({ price, index }) => {
         <div>
           <div className="flex flex-col items-center justify-center pt-4">
             <h1 className="text-5xl font-bold">
-              {(price.unit_amount / 100).toLocaleString("en-US", {
-                style: "currency",
-                currency: "USD",
+              {(price.unit_amount / 100).toLocaleString('en-US', {
+                style: 'currency',
+                currency: 'USD',
               })}
             </h1>
           </div>

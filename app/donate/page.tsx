@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import DonateCard from "../../components/DonateCard";
-import "../../styles.css";
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import DonateCard from '../../components/DonateCard';
+import '../../styles.css';
 
 interface Price {
   id: string;
@@ -20,12 +20,12 @@ const DonatePage: React.FC = () => {
 
   const fetchPrices = async () => {
     try {
-      const { data } = await axios.get("/api/getItems");
+      const { data } = await axios.get('/api/getItems');
       setPrices(data);
       setLoading(true);
       console.log(data);
     } catch (error) {
-      console.error("Error fetching prices:", error);
+      console.error('Error fetching prices:', error);
     } finally {
       setLoading(false);
     }

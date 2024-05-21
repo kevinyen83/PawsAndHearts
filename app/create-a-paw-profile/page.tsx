@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import React, { useEffect } from "react";
-import Button from "../../components/Button";
-import { useSession } from "next-auth/react";
-import { useFormik } from "formik";
-import { uploadPet } from "../../utils/api/api";
-import { v4 as uuidv4 } from "uuid";
+import Link from 'next/link';
+import React, { useEffect } from 'react';
+import Button from '../../components/Button';
+import { useSession } from 'next-auth/react';
+import { useFormik } from 'formik';
+import { uploadPet } from '../../utils/api/api';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface PetProfileData {
   petId: string;
@@ -33,7 +33,7 @@ const PawProfileForm: React.FC = () => {
   useEffect(
     () => {
       if (session) {
-        localStorage.setItem("session", JSON.stringify(session));
+        localStorage.setItem('session', JSON.stringify(session));
       }
     },
     [session]
@@ -41,22 +41,22 @@ const PawProfileForm: React.FC = () => {
 
   const formik = useFormik({
     initialValues: {
-      organizationName: "",
-      applicantName: "",
-      contactEmail: "",
-      contactPhone: "",
-      petId: "",
-      name: "",
-      category: "",
-      age: "",
-      color: "",
-      gender: "",
-      size: "",
-      location: "",
-      vaccination: "",
-      availability: "",
-      image: "",
-      description: "",
+      organizationName: '',
+      applicantName: '',
+      contactEmail: '',
+      contactPhone: '',
+      petId: '',
+      name: '',
+      category: '',
+      age: '',
+      color: '',
+      gender: '',
+      size: '',
+      location: '',
+      vaccination: '',
+      availability: '',
+      image: '',
+      description: '',
     },
     onSubmit: async (values) => {
       const petId = uuidv4();
@@ -82,10 +82,10 @@ const PawProfileForm: React.FC = () => {
           };
           await uploadPet(petProfileData);
           formik.resetForm();
-          alert("Pet profile created successfully!");
-          window.location.replace("/adopt_a_paw");
+          alert('Pet profile created successfully!');
+          window.location.replace('/adopt_a_paw');
         } else {
-          alert("Please fill in all required fields.");
+          alert('Please fill in all required fields.');
         }
       } catch (error) {
         console.error(error);

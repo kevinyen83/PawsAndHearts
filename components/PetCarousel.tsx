@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { Pets_Highlight } from "../constants";
+import React, { useState } from 'react';
+import { Pets_Highlight } from '../constants';
 
 interface PetHighlight {
   id: number;
