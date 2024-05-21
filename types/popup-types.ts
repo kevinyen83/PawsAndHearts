@@ -1,11 +1,5 @@
-export interface FavoritesPopupState {
+export interface PopupState {
   showFavorites: boolean;
-}
-
-export interface FormPopupState {
   showForm: boolean;
-}
-
-export interface PetDetailPopupState {
   showPetDetail: boolean;
 }

@@ -1,13 +1,14 @@
 import { Pet } from './pet-types';
 
-export interface FavoritesItemsState {
+export interface FavoritesState {
   favoritesItems: Pet[] | [];
-}
-
-export interface IsFavoritesEmptyState {
   isFavoritesEmpty: boolean;
+  lastId: number;
 }
 
-export interface LastIdState {
-  lastId: number;
+export interface FavoritesProps {
+  favoritesItems: any[];
+  selectedPet: Pet | null;
+  removeItem: (pet: any) => void;
+  toggleCardDetailPopup: (pet: any) => void;
 }

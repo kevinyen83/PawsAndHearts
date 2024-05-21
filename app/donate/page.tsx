@@ -5,8 +5,8 @@ import React, { useEffect } from 'react';
 import DonateCard from '../../components/DonateCard';
 import '../../styles.css';
 import { useAppDispatch, useAppSelector } from '../GlobalRedux/store';
-import { setPrices } from '../GlobalRedux/Feautures/prices/prices-slice';
-import { setIsLoading } from '../GlobalRedux/Feautures/loading/loading-slice';
+import { setPrices } from '../GlobalRedux/Feautures/prices-slice';
+import { setIsLoading } from '../GlobalRedux/Feautures/loading-slice';
 
 const DonatePage: React.FC = () => {
   const dispatch = useAppDispatch();

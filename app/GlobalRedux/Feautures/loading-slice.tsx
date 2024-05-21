@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { LoadingState } from '../../../../types/loading-types';
+import { LoadingState } from '../../../types/loading-types';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: LoadingState = {
@@ -17,4 +17,4 @@ export const loadingSlice = createSlice({
 });
 
 export const { setIsLoading } = loadingSlice.actions;
-export const isLoadingReducer = loadingSlice.reducer;
+export const loadingReducer = loadingSlice.reducer;

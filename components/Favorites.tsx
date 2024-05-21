@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { FavoritesProps } from '../types/pet-types';
-import { setShowFavorites } from '../app/GlobalRedux/Feautures/popup/showFavorites-slice';
+import { FavoritesProps } from '../types/favorites-types';
+import { setShowFavorites } from '../app/GlobalRedux/Feautures/popup-slice';
 import { useAppDispatch, useAppSelector } from '../app/GlobalRedux/store';
 
 export default function Favorites({

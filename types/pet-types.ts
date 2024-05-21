@@ -19,31 +19,9 @@ export interface PetItemProps {
   toggleFormPopup: (pet: Pet) => void;
 }
 
-export interface FavoritesProps {
-  favoritesItems: any[];
-  selectedPet: Pet | null;
-  removeItem: (pet: any) => void;
-  toggleCardDetailPopup: (pet: any) => void;
-}
-
-export interface FormPopupProps {
-  pets: Pet[];
-  formSelectedPet: Pet | null;
-  toggleFormPopup: (pet: Pet) => void;
-}
-
 export interface PetsState {
   pets: Pet[] | [];
-}
-
-export interface SelectedPetState {
-  selectedPet: Pet | null;
-}
-
-export interface FormSelectedPetState {
   formSelectedPet: Pet | null;
-}
-
-export interface VisiblePetsState {
+  selectedPet: Pet | null;
   visiblePets: number;
 }

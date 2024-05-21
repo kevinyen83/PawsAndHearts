@@ -10,19 +10,25 @@ import { Pet } from '../../types/pet-types';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { fetchPets } from '../../utils/api/api';
 import { useAppDispatch, useAppSelector } from '../GlobalRedux/store';
-import { setCategoryState } from '../GlobalRedux/Feautures/category/category-slice';
-import { setPetsState } from '../GlobalRedux/Feautures/pets/pets-slice';
-import { setIsLoading } from '../GlobalRedux/Feautures/loading/loading-slice';
-import { setShowFavorites } from '../GlobalRedux/Feautures/popup/showFavorites-slice';
-import { setShowForm } from '../GlobalRedux/Feautures/popup/showForm-slice';
-import { setShowPetDetail } from '../GlobalRedux/Feautures/popup/showPetDetail-slice';
-import { setSelectedPet } from '../GlobalRedux/Feautures/pets/selectedPet-slice';
-import { setFormSelectedPet } from '../GlobalRedux/Feautures/pets/formSelectedPet-slice';
+import { setCategoryState } from '../GlobalRedux/Feautures/category-slice';
+import {
+  setPetsState,
+  setSelectedPet,
+  setFormSelectedPet,
+  setVisiblePets,
+} from '../GlobalRedux/Feautures/pets-slice';
+import { setIsLoading } from '../GlobalRedux/Feautures/loading-slice';
+import {
+  setShowFavorites,
+  setShowForm,
+  setShowPetDetail,
+} from '../GlobalRedux/Feautures/popup-slice';
+import {
+  setFavoritesItems,
+  setLastId,
+  setIsFavoritesEmpty,
+} from '../GlobalRedux/Feautures/favorites-slice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { setFavoritesItems } from '../GlobalRedux/Feautures/favorites/favoritesItems-slice';
-import { setVisiblePets } from '../GlobalRedux/Feautures/pets/visiblePets-slice';
-import { setIsFavoritesEmpty } from '../GlobalRedux/Feautures/favorites/isFavoritesEmpty-slice';
-import { setLastId } from '../GlobalRedux/Feautures/favorites/lastId-slice';
 
 const AdoptAPaw = () => {
   const dispatch = useAppDispatch();

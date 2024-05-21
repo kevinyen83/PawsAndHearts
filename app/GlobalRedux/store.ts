@@ -2,21 +2,15 @@
 
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { useDispatch, TypedUseSelectorHook, useSelector } from 'react-redux';
-import { categoryReducer } from './Feautures/category/category-slice';
-import { petsReducer } from './Feautures/pets/pets-slice';
-import { isLoadingReducer } from './Feautures/loading/loading-slice';
 import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { showFavoritesReducer } from './Feautures/popup/showFavorites-slice';
-import { showFormReducer } from './Feautures/popup/showForm-slice';
-import { showPetDetailReducer } from './Feautures/popup/showPetDetail-slice';
-import { selectedPetReducer } from './Feautures/pets/selectedPet-slice';
-import { formSelectedPetReducer } from './Feautures/pets/formSelectedPet-slice';
-import { favoritesItemsReducer } from './Feautures/favorites/favoritesItems-slice';
-import { isFavoritesEmptyReducer } from './Feautures/favorites/isFavoritesEmpty-slice';
-import { lastIdReducer } from './Feautures/favorites/lastId-slice';
-import { visiblePetsReducer } from './Feautures/pets/visiblePets-slice';
-import { pricesReducer } from './Feautures/prices/prices-slice';
+
+import { categoryReducer } from './Feautures/category-slice';
+import { favoritesReducer } from './Feautures/favorites-slice';
+import { loadingReducer } from './Feautures/loading-slice';
+import { petsReducer } from './Feautures/pets-slice';
+import { popupReducer } from './Feautures/popup-slice';
+import { pricesReducer } from './Feautures/prices-slice';
 
 const categoryPersistConfig = {
   key: 'category',
@@ -30,7 +24,7 @@ const petsPersistConfig = {
   whitelist: ['petsState'],
 };
 
-const isLoadingPersistConfig = {
+const loadingPersistConfig = {
   key: 'isLoading',
   storage: storage,
   whitelist: ['loadingState'],
@@ -98,31 +92,19 @@ const pricesPersistConfig = {
 const rootReducer = combineReducers({
   category: persistReducer(categoryPersistConfig, categoryReducer),
   pets: persistReducer(petsPersistConfig, petsReducer),
-  isLoading: persistReducer(isLoadingPersistConfig, isLoadingReducer),
-  showFavorites: persistReducer(
-    showFavoritesPersistConfig,
-    showFavoritesReducer
-  ),
-  showForm: persistReducer(showFormPersistConfig, showFormReducer),
-  showPetDetail: persistReducer(
-    showPetDetailPersistConfig,
-    showPetDetailReducer
-  ),
-  selectedPet: persistReducer(selectedPetPersistConfig, selectedPetReducer),
-  formSelectedPet: persistReducer(
-    formSelectedPetPersistConfig,
-    formSelectedPetReducer
-  ),
-  favoritesItems: persistReducer(
-    favoritesItemsPersistConfig,
-    favoritesItemsReducer
-  ),
+  isLoading: persistReducer(loadingPersistConfig, loadingReducer),
+  showFavorites: persistReducer(showFavoritesPersistConfig, popupReducer),
+  showForm: persistReducer(showFormPersistConfig, popupReducer),
+  showPetDetail: persistReducer(showPetDetailPersistConfig, popupReducer),
+  selectedPet: persistReducer(selectedPetPersistConfig, petsReducer),
+  formSelectedPet: persistReducer(formSelectedPetPersistConfig, petsReducer),
+  favoritesItems: persistReducer(favoritesItemsPersistConfig, favoritesReducer),
   isFavoritesEmpty: persistReducer(
     isFavoritesEmptyPersistConfig,
-    isFavoritesEmptyReducer
+    favoritesReducer
   ),
-  lastId: persistReducer(lastIdPersistConfig, lastIdReducer),
-  visiblePets: persistReducer(visiblePetsPersistConfig, visiblePetsReducer),
+  lastId: persistReducer(lastIdPersistConfig, favoritesReducer),
+  visiblePets: persistReducer(visiblePetsPersistConfig, petsReducer),
   prices: persistReducer(pricesPersistConfig, pricesReducer),
 });
 

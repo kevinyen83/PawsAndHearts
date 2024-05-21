@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react"
 import { v4 as uuidv4 } from "uuid"
-import { FormPopupProps } from '../types/pet-types';
+import { FormPopupProps } from '../types/form-types';
 import { useSession } from "next-auth/react"
 import { Dialog, Transition } from "@headlessui/react"
 import { XMarkIcon } from "@heroicons/react/24/outline"
@@ -9,7 +9,7 @@ import * as Yup from "yup"
 import Button from "./Button"
 import Link from "next/link"
 import { submitApplication, updatePetAvailability } from "../utils/api/api"
-import { setShowForm } from '../app/GlobalRedux/Feautures/popup/showForm-slice';
+import { setShowForm } from '../app/GlobalRedux/Feautures/popup-slice';
 import { useAppDispatch, useAppSelector } from "../app/GlobalRedux/store";
 
 const validationSchema = Yup.object().shape({
