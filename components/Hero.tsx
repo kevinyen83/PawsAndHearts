@@ -17,7 +17,12 @@ export default function Hero() {
             </div>
             <div className="flex justify-center">
               <Link href="/adopt_a_paw">
-                <button className="btn_pink rounded">Make a friend</button>
+                <button
+                  data-cy="hero-makeAFriend-btn"
+                  className="btn_pink rounded"
+                >
+                  Make a friend
+                </button>
               </Link>
             </div>
           </div>
