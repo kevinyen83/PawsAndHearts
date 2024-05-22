@@ -1,4 +1,4 @@
-import { PetProfileData } from '../../app/create-a-paw-profile/page';
+import { PetProfileData } from '../../app/create_a_paw_profile/page';
 
 interface FormData {
   fullName: string;

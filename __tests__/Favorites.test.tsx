@@ -1,7 +1,7 @@
 import React from 'react';
 import '@testing-library/jest-dom';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
-import AdoptAPaw from '../app/adopt-a-paw/page';
+import AdoptAPaw from '../app/adopt_a_paw/page';
 import { fetchPets } from '../utils/api/api';
 import ReduxProvider from '../app/GlobalRedux/redux-provider';
 

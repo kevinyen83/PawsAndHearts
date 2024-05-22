@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react"
 import { v4 as uuidv4 } from "uuid"
-import { FormPopupProps } from '../types/pet-types';
+import { FormPopupProps } from '../types/form-types';
 import { useSession } from "next-auth/react"
 import { Dialog, Transition } from "@headlessui/react"
 import { XMarkIcon } from "@heroicons/react/24/outline"
@@ -9,7 +9,8 @@ import * as Yup from "yup"
 import Button from "./Button"
 import Link from "next/link"
 import { submitApplication, updatePetAvailability } from "../utils/api/api"
-
+import { setShowForm } from '../app/GlobalRedux/Feautures/popup-slice';
+import { useAppDispatch, useAppSelector } from "../app/GlobalRedux/store";
 
 const validationSchema = Yup.object().shape({
   fullName: Yup.string().required("Full Name is required"),
@@ -25,10 +26,12 @@ const validationSchema = Yup.object().shape({
 })
 
 export default function FormPopup ({
-    showForm,
-    setShowForm,
+    pets,
+    toggleFormPopup,
     formSelectedPet,
 }: FormPopupProps) {
+    const dispatch = useAppDispatch();
+    const showForm = useAppSelector((state) => state.showForm.showForm);
 
     const { data: session } = useSession()
     const [inputUserEmail, setInputUserEmail] = useState<string | undefined>(session?.user?.email !== null ? session?.user?.email : undefined)
@@ -80,7 +83,7 @@ export default function FormPopup ({
         await submitApplication(formData)
         await updatePetAvailability(pet.petId)
 
-        setShowForm(false)
+        dispatch(setShowForm(false))
         formik.resetForm()
 
         alert("Application placed successfully!")
@@ -96,7 +99,7 @@ export default function FormPopup ({
   return (
 
     <Transition.Root show={showForm} as={Fragment}>
-    <Dialog as="div" className="fixed inset-0 overflow-hidden z-50" onClose={() => setShowForm(false)}>
+    <Dialog as="div" className="fixed inset-0 overflow-hidden z-50" onClose={() => dispatch(setShowForm(false))}>
       <Transition.Child
         as={Fragment}
         enter="ease-in-out duration-500"
@@ -124,7 +127,7 @@ export default function FormPopup ({
               <div className="flex flex-col h-full bg-white shadow-xl">
                 <div className="flex items-center justify-between px-4 py-6 border-b border-gray-200">
                   <Dialog.Title className="text-lg font-medium text-gray-900">Adopt Application</Dialog.Title>
-                  <button type="button" className="text-gray-400 hover:text-gray-500" onClick={() => setShowForm(false)}>
+                  <button type="button" className="text-gray-400 hover:text-gray-500" onClick={() => dispatch(setShowForm(false))}>
                     <span className="sr-only">Close panel</span>
                     <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                   </button>

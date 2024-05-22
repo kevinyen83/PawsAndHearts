@@ -1,17 +1,21 @@
 import React, { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
-import { FavoritesProps } from '../types/pet-types';
+import { FavoritesProps } from '../types/favorites-types';
+import { setShowFavorites } from '../app/GlobalRedux/Feautures/popup-slice';
+import { useAppDispatch, useAppSelector } from '../app/GlobalRedux/store';
 
 export default function Favorites({
-  showFavorites,
-  setShowFavorites,
   favoritesItems,
   selectedPet,
-  setIsFavoritesEmpty,
   removeItem,
   toggleCardDetailPopup,
 }: FavoritesProps) {
+  const dispatch = useAppDispatch();
+  const showFavorites = useAppSelector(
+    (state) => state.showFavorites.showFavorites
+  );
+
   const favoritesList = favoritesItems.map((selectedPet) => (
     <div
       key={selectedPet.id}
@@ -44,7 +48,7 @@ export default function Favorites({
       <div className="flex flex-col items-center">
         <button
           onClick={() => {
-            setShowFavorites(false);
+            dispatch(setShowFavorites(false));
             toggleCardDetailPopup(selectedPet);
           }}
           className="text-blue-500 hover:text-blue-700"
@@ -68,7 +72,7 @@ export default function Favorites({
       <Dialog
         as="div"
         className="fixed inset-0 overflow-hidden z-50"
-        onClose={setShowFavorites}
+        onClose={() => dispatch(setShowFavorites(false))}
       >
         <Transition.Child
           as={Fragment}
@@ -105,7 +109,7 @@ export default function Favorites({
                     <button
                       type="button"
                       className="text-gray-400 hover:text-gray-500"
-                      onClick={() => setShowFavorites(false)}
+                      onClick={() => dispatch(setShowFavorites(false))}
                     >
                       <span className="sr-only">Close panel</span>
                       <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -129,7 +133,7 @@ export default function Favorites({
                       <button
                         className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                         data-testid="side-item-btn"
-                        onClick={() => setShowFavorites(false)}
+                        onClick={() => dispatch(setShowFavorites(false))}
                       >
                         Confirm
                       </button>

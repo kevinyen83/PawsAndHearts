@@ -19,20 +19,9 @@ export interface PetItemProps {
   toggleFormPopup: (pet: Pet) => void;
 }
 
-export interface FavoritesProps {
-  showFavorites: boolean;
-  setShowFavorites: React.Dispatch<React.SetStateAction<boolean>>;
-  favoritesItems: any[];
-  selectedPet: Pet | null;
-  setIsFavoritesEmpty: React.Dispatch<React.SetStateAction<boolean>>;
-  removeItem: (pet: any) => void;
-  toggleCardDetailPopup: (pet: any) => void;
-}
-
-export interface FormPopupProps {
-  pets: Pet[];
-  showForm: boolean;
-  setShowForm: (show: boolean) => void;
+export interface PetsState {
+  pets: Pet[] | [];
   formSelectedPet: Pet | null;
-  toggleFormPopup: (pet: Pet) => void;
+  selectedPet: Pet | null;
+  visiblePets: number;
 }
