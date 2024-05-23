@@ -12,6 +12,7 @@ import { petsReducer } from './Feautures/pets-slice';
 import { popupReducer } from './Feautures/popup-slice';
 import { pricesReducer } from './Feautures/prices-slice';
 import { formReducer } from './Feautures/form-slice';
+import { navbarReducer } from './Feautures/navbar-slice';
 
 const categoryPersistConfig = {
   key: 'category',
@@ -96,6 +97,18 @@ const inputUserEmailPersistConfig = {
   whitelist: ['formReducer'],
 };
 
+const userEmailPersistConfig = {
+  key: 'userEmail',
+  storage: storage,
+  whitelist: ['navbarReducer'],
+};
+
+const showDropdownPersistConfig = {
+  key: 'showDropdown',
+  storage: storage,
+  whitelist: ['navbarReducer'],
+};
+
 const rootReducer = combineReducers({
   category: persistReducer(categoryPersistConfig, categoryReducer),
   pets: persistReducer(petsPersistConfig, petsReducer),
@@ -114,6 +127,8 @@ const rootReducer = combineReducers({
   visiblePets: persistReducer(visiblePetsPersistConfig, petsReducer),
   prices: persistReducer(pricesPersistConfig, pricesReducer),
   inputUserEmail: persistReducer(inputUserEmailPersistConfig, formReducer),
+  userEmail: persistReducer(userEmailPersistConfig, navbarReducer),
+  showDropdown: persistReducer(showDropdownPersistConfig, navbarReducer),
 });
 
 export const store = configureStore({
