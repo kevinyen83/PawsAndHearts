@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useEffect, Fragment } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { FormPopupProps } from '../types/form-types';
@@ -45,8 +47,6 @@ export default function FormPopup({
       dispatch(setInputUserEmail(session.user.email));
     }
   }, [session, dispatch]);
-
-  // const [inputUserEmail, setInputUserEmail] = useState<string | undefined>(session?.user?.email !== null ? session?.user?.email : undefined)
 
   const formik = useFormik({
     initialValues: {

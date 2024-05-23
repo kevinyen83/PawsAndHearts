@@ -13,6 +13,7 @@ import { popupReducer } from './Feautures/popup-slice';
 import { pricesReducer } from './Feautures/prices-slice';
 import { formReducer } from './Feautures/form-slice';
 import { navbarReducer } from './Feautures/navbar-slice';
+import { carouselReducer } from './Feautures/carousel-slice';
 
 const categoryPersistConfig = {
   key: 'category',
@@ -109,6 +110,18 @@ const showDropdownPersistConfig = {
   whitelist: ['navbarReducer'],
 };
 
+const petHighlightPersistConfig = {
+  key: 'petHighlight',
+  storage: storage,
+  whitelist: ['carouselReducer'],
+};
+
+const startIndexPersistConfig = {
+  key: 'startIndex',
+  storage: storage,
+  whitelist: ['carouselReducer'],
+};
+
 const rootReducer = combineReducers({
   category: persistReducer(categoryPersistConfig, categoryReducer),
   pets: persistReducer(petsPersistConfig, petsReducer),
@@ -129,6 +142,8 @@ const rootReducer = combineReducers({
   inputUserEmail: persistReducer(inputUserEmailPersistConfig, formReducer),
   userEmail: persistReducer(userEmailPersistConfig, navbarReducer),
   showDropdown: persistReducer(showDropdownPersistConfig, navbarReducer),
+  petHighlight: persistReducer(petHighlightPersistConfig, carouselReducer),
+  startIndex: persistReducer(startIndexPersistConfig, carouselReducer),
 });
 
 export const store = configureStore({
