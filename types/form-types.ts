@@ -5,3 +5,7 @@ export interface FormPopupProps {
   formSelectedPet: Pet | null;
   toggleFormPopup: (pet: Pet) => void;
 }
+
+export interface FormState {
+  inputUserEmail: string;
+}

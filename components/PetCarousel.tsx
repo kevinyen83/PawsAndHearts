@@ -1,38 +1,36 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../app/GlobalRedux/store';
+import {
+  setPetHighlight,
+  setStartIndex,
+} from '../app/GlobalRedux/Feautures/carousel-slice';
 import { Pets_Highlight } from '../constants';
 
-interface PetHighlight {
-  id: number;
-  name: string;
-  category: string;
-  age: number;
-  gender: string;
-  color: string;
-  size: string;
-  location: string;
-  vaccination: string;
-  availability: string;
-  description: string;
-  image: string;
-}
-
 export default function PetCarousel() {
-  const [petHighlight, setPetHightlight] = useState<PetHighlight[]>(
-    Pets_Highlight
+  const dispatch = useAppDispatch();
+  const petHighlight = useAppSelector(
+    (state) => state.petHighlight.petHighlight
   );
-  const [startIndex, setStartIndex] = useState(0);
+  const startIndex = useAppSelector((state) => state.startIndex.startIndex);
+
+  useEffect(
+    () => {
+      dispatch(setPetHighlight(Pets_Highlight));
+    },
+    [dispatch]
+  );
 
   const handleClickLeft = () => {
     const newIndex =
       (startIndex - 3 + petHighlight.length) % petHighlight.length;
-    setStartIndex(newIndex);
+    dispatch(setStartIndex(newIndex));
   };
 
   const handleClickRight = () => {
     const newIndex = (startIndex + 3) % petHighlight.length;
-    setStartIndex(newIndex);
+    dispatch(setStartIndex(newIndex));
   };
 
   const visiblePets = petHighlight.slice(startIndex, startIndex + 3);

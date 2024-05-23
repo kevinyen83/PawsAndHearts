@@ -33,47 +33,29 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 const AdoptAPaw = () => {
   const dispatch = useAppDispatch();
 
-  const petsStateSelector = useAppSelector((state) => ({
-    pets: state.pets.pets,
-    selectedPet: state.selectedPet.selectedPet,
-    formSelectedPet: state.formSelectedPet.formSelectedPet,
-    visiblePets: state.visiblePets.visiblePets,
-  }));
+  const pets = useAppSelector((state) => state.pets.pets);
+  const selectedPet = useAppSelector((state) => state.pets.selectedPet);
+  const formSelectedPet = useAppSelector((state) => state.pets.formSelectedPet);
+  const visiblePets = useAppSelector((state) => state.pets.visiblePets);
 
-  const categoryStateSelector = useAppSelector((state) => ({
-    category: state.category.category,
-  }));
+  const category = useAppSelector((state) => state.category.category);
+  const isLoading = useAppSelector((state) => state.isLoading.isLoading);
 
-  const loadingStateSelector = useAppSelector((state) => ({
-    isLoading: state.isLoading.isLoading,
-  }));
+  const showFavorites = useAppSelector(
+    (state) => state.showFavorites.showFavorites
+  );
+  const showForm = useAppSelector((state) => state.showForm.showForm);
+  const showPetDetail = useAppSelector(
+    (state) => state.showPetDetail.showPetDetail
+  );
 
-  const popupStateSelector = useAppSelector((state) => ({
-    showFavorites: state.showFavorites.showFavorites,
-    showForm: state.showForm.showForm,
-    showPetDetail: state.showPetDetail.showPetDetail,
-  }));
-
-  const favoritesStateSelector = useAppSelector((state) => ({
-    favoritesItems: state.favoritesItems.favoritesItems,
-    isFavoritesEmpty: state.isFavoritesEmpty.isFavoritesEmpty,
-    lastId: state.lastId.lastId,
-  }));
-
-  const pets = petsStateSelector.pets;
-  const selectedPet = petsStateSelector.selectedPet;
-  const formSelectedPet = petsStateSelector.formSelectedPet;
-  const visiblePets = petsStateSelector.visiblePets;
-
-  const category = categoryStateSelector.category;
-  const showFavorites = popupStateSelector.showFavorites;
-  const showForm = popupStateSelector.showForm;
-  const showPetDetail = popupStateSelector.showPetDetail;
-  const isLoading = loadingStateSelector.isLoading;
-
-  const favoritesItems = favoritesStateSelector.favoritesItems;
-  const isFavoritesEmpty = favoritesStateSelector.isFavoritesEmpty;
-  const lastId = favoritesStateSelector.lastId;
+  const favoritesItems = useAppSelector(
+    (state) => state.favoritesItems.favoritesItems
+  );
+  const isFavoritesEmpty = useAppSelector(
+    (state) => state.isFavoritesEmpty.isFavoritesEmpty
+  );
+  const lastId = useAppSelector((state) => state.lastId.lastId);
 
   useEffect(() => {
     const fetchData = async () => {

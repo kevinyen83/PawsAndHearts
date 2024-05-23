@@ -19,11 +19,10 @@ const DonatePage: React.FC = () => {
   }, []);
 
   const fetchPrices = async () => {
+    dispatch(setIsLoading(true));
     try {
       const { data } = await axios.get('/api/getItems');
       dispatch(setPrices(data));
-      dispatch(setIsLoading(true));
-      console.log(data);
     } catch (error) {
       console.error('Error fetching prices:', error);
     } finally {
@@ -44,20 +43,21 @@ const DonatePage: React.FC = () => {
           Check out all the information below
         </p>
       </div>
-      <div className="flex flex-col justify-center">
-        {isLoading && (
+      {isLoading ? (
+        <div className="flex justify-center">
           <div className="loading-container">
             <div className="loading-animation" />
             <p>Loading plan data...</p>
           </div>
-        )}
-      </div>
-      <div className="flex flex-wrap justify-center gap-8 items-center mx-auto">
-        {prices &&
-          prices.map((price, index) => (
-            <DonateCard price={price} key={price.id} index={index} />
-          ))}
-      </div>
+        </div>
+      ) : (
+        <div className="flex flex-wrap justify-center gap-8 items-center mx-auto">
+          {prices &&
+            prices.map((price, index) => (
+              <DonateCard price={price} key={price.id} index={index} />
+            ))}
+        </div>
+      )}
     </section>
   );
 };

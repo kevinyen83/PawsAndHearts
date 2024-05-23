@@ -8,6 +8,10 @@ import ReduxProvider from '../app/GlobalRedux/redux-provider';
 jest.mock('../utils/api/api');
 const mockedFetchPet = fetchPets as jest.MockedFunction<typeof fetchPets>;
 
+beforeAll(() => {
+  global.alert = jest.fn();
+});
+
 describe('AdoptAPaw component', () => {
   const renderWithReduxProvider = (component: React.ReactNode) => {
     return {
