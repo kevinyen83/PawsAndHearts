@@ -11,6 +11,7 @@ import { loadingReducer } from './Feautures/loading-slice';
 import { petsReducer } from './Feautures/pets-slice';
 import { popupReducer } from './Feautures/popup-slice';
 import { pricesReducer } from './Feautures/prices-slice';
+import { formReducer } from './Feautures/form-slice';
 
 const categoryPersistConfig = {
   key: 'category',
@@ -21,72 +22,78 @@ const categoryPersistConfig = {
 const petsPersistConfig = {
   key: 'pets',
   storage: storage,
-  whitelist: ['petsState'],
+  whitelist: ['petsReducer'],
 };
 
 const loadingPersistConfig = {
   key: 'isLoading',
   storage: storage,
-  whitelist: ['loadingState'],
+  whitelist: ['loadingReducer'],
 };
 
 const showFavoritesPersistConfig = {
   key: 'showFavorites',
   storage: storage,
-  whitelist: ['showFavoritesState'],
+  whitelist: ['popupReducer'],
 };
 
 const showFormPersistConfig = {
   key: 'showForm',
   storage: storage,
-  whitelist: ['showFormState'],
+  whitelist: ['popupReducer'],
 };
 
 const showPetDetailPersistConfig = {
   key: 'showPetDetail',
   storage: storage,
-  whitelist: ['showPetDetailState'],
+  whitelist: ['popupReducer'],
 };
 
 const selectedPetPersistConfig = {
   key: 'selectedPet',
   storage: storage,
-  whitelist: ['selectedPetState'],
+  whitelist: ['petsReducer'],
 };
 
 const favoritesItemsPersistConfig = {
   key: 'favoritesItems',
   storage: storage,
-  whitelist: ['favoritesItemsState'],
+  whitelist: ['favoritesReducer'],
 };
 
 const isFavoritesEmptyPersistConfig = {
   key: 'isFavoritesEmpty',
   storage: storage,
-  whitelist: ['isFavoritesEmptyState'],
+  whitelist: ['favoritesReducer'],
 };
 
 const lastIdPersistConfig = {
   key: 'lastId',
   storage: storage,
-  whitelist: ['lastIdState'],
+  whitelist: ['favoritesReducer'],
 };
 
 const visiblePetsPersistConfig = {
   key: 'visiblePets',
   storage: storage,
-  whitelist: ['visiblePetsState'],
+  whitelist: ['petsReducer'],
 };
 
 const formSelectedPetPersistConfig = {
   key: 'formSelectedPet',
   storage: storage,
-  whitelist: ['formSelectedPetState'],
+  whitelist: ['petsReducer'],
 };
 const pricesPersistConfig = {
   key: 'prices',
   storage: storage,
-  whitelist: ['prices'],
+  whitelist: ['pricesReducer'],
+};
+
+const inputUserEmailPersistConfig = {
+  key: 'inputUserEmail',
+  storage: storage,
+  whitelist: ['formReducer'],
 };
 
 const rootReducer = combineReducers({
@@ -106,6 +113,7 @@ const rootReducer = combineReducers({
   lastId: persistReducer(lastIdPersistConfig, favoritesReducer),
   visiblePets: persistReducer(visiblePetsPersistConfig, petsReducer),
   prices: persistReducer(pricesPersistConfig, pricesReducer),
+  inputUserEmail: persistReducer(inputUserEmailPersistConfig, formReducer),
 });
 
 export const store = configureStore({
