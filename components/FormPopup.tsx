@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useEffect, Fragment } from 'react';
 import { v4 as uuidv4 } from 'uuid';
@@ -11,8 +11,8 @@ import * as Yup from 'yup';
 import Button from './Button';
 import Link from 'next/link';
 import { submitApplication, updatePetAvailability } from '../utils/api/api';
-import { setShowForm } from '../app/GlobalRedux/Feautures/popup-slice';
 import { useAppDispatch, useAppSelector } from '../app/GlobalRedux/store';
+import { setShowForm } from '../app/GlobalRedux/Feautures/popup-slice';
 import { setInputUserEmail } from '../app/GlobalRedux/Feautures/form-slice';
 
 const validationSchema = Yup.object().shape({
@@ -42,11 +42,14 @@ export default function FormPopup({
     (state) => state.inputUserEmail.inputUserEmail
   );
 
-  useEffect(() => {
-    if (session?.user?.email) {
-      dispatch(setInputUserEmail(session.user.email));
-    }
-  }, [session, dispatch]);
+  useEffect(
+    () => {
+      if (session?.user?.email) {
+        dispatch(setInputUserEmail(session.user.email));
+      }
+    },
+    [session, dispatch]
+  );
 
   const formik = useFormik({
     initialValues: {

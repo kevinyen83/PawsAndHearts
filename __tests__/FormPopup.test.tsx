@@ -2,7 +2,6 @@ import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import FormPopup from '../components/FormPopup';
 import { submitApplication, updatePetAvailability } from '../utils/api/api';
-import { useDispatch, useSelector } from 'react-redux';
 
 // Mock useSession hook
 jest.mock('next-auth/react', () => ({
@@ -21,6 +20,7 @@ const mockedUpdatePetAvailability = updatePetAvailability as jest.MockedFunction
 jest.mock('react-redux', () => ({
   useDispatch: jest.fn(),
   useSelector: jest.fn(),
+  useStore: jest.fn(),
 }));
 
 describe('FormPopup component', () => {
@@ -42,11 +42,26 @@ describe('FormPopup component', () => {
     const dispatch = jest.fn();
     require('react-redux').useDispatch.mockReturnValue(dispatch);
 
+    // Mock Redux store
+    const store = {
+      getState: () => ({
+        showForm: { showForm: true },
+        inputUserEmail: { inputUserEmail: 'test@example.com' },
+      }),
+      subscribe: jest.fn(),
+      dispatch: jest.fn(),
+    };
+    require('react-redux').useStore.mockReturnValue(store);
+
     require('react-redux').useSelector.mockImplementation(
-      (selector: (arg0: { showForm: { showForm: boolean } }) => any) =>
-        selector({
-          showForm: { showForm: true },
-        })
+      (
+        selector: (
+          arg0: {
+            showForm: { showForm: boolean };
+            inputUserEmail: { inputUserEmail: string };
+          }
+        ) => any
+      ) => selector(store.getState())
     );
 
     const { getByLabelText, getByText } = render(
