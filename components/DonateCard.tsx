@@ -1,12 +1,5 @@
 import axios from 'axios';
-
-interface DonateCardProps {
-  price: {
-    id: string;
-    unit_amount: number;
-  };
-  index: number;
-}
+import { DonateCardProps } from '../types/donation-types';
 
 const DonateCard: React.FC<DonateCardProps> = ({ price, index }) => {
   // POST request
