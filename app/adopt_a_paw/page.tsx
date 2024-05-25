@@ -5,6 +5,7 @@ import Favorites from '../../components/Favorites';
 import FormPopup from '../../components/FormPopup';
 import PetDetailPopup from '../../components/PetDetailPopup';
 import PetItem from '../../components/PetItem';
+import MapPopup from '../../components/MapPopup';
 import '../../styles.css';
 import { Pet } from '../../types/pet-types';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -22,6 +23,7 @@ import {
   setShowFavorites,
   setShowForm,
   setShowPetDetail,
+  setShowMap,
 } from '../GlobalRedux/Feautures/popup-slice';
 import {
   setFavoritesItems,
@@ -29,6 +31,7 @@ import {
   setIsFavoritesEmpty,
 } from '../GlobalRedux/Feautures/favorites-slice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { setMapLocation } from '../GlobalRedux/Feautures/map-slice';
 
 const AdoptAPaw = () => {
   const dispatch = useAppDispatch();
@@ -48,6 +51,7 @@ const AdoptAPaw = () => {
   const showPetDetail = useAppSelector(
     (state) => state.showPetDetail.showPetDetail
   );
+  const showMap = useAppSelector((state) => state.showMap.showMap);
 
   const favoritesItems = useAppSelector(
     (state) => state.favoritesItems.favoritesItems
@@ -56,6 +60,7 @@ const AdoptAPaw = () => {
     (state) => state.isFavoritesEmpty.isFavoritesEmpty
   );
   const lastId = useAppSelector((state) => state.lastId.lastId);
+  const mapLocation = useAppSelector((state) => state.mapLocation.mapLocation);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -148,6 +153,15 @@ const AdoptAPaw = () => {
     dispatch(setFormSelectedPet(pet));
   };
 
+  const toggleMapPopup = (pet: Pet): void => {
+    const selectedPetFromPets = pets.find((p: Pet) => p.petId === pet.petId);
+    if (selectedPetFromPets) {
+      const selectedLocation = selectedPetFromPets.location;
+      dispatch(setMapLocation(selectedLocation));
+      dispatch(setShowMap(true));
+    }
+  };
+
   const categories = ['All', 'Cats', 'Dogs', 'Birds', 'Others'];
 
   return (
@@ -186,6 +200,7 @@ const AdoptAPaw = () => {
                 key={pet.petId}
                 pet={pet}
                 toggleCardDetailPopup={toggleCardDetailPopup}
+                toggleMapPopup={toggleMapPopup}
                 addToFavorites={addToFavorites}
                 toggleFormPopup={toggleFormPopup}
               />
@@ -216,6 +231,16 @@ const AdoptAPaw = () => {
             selectedPet={selectedPet}
             onReserve={() => addToFavorites(selectedPet)}
             onClose={() => dispatch(setShowPetDetail(false))}
+          />
+        )}
+
+      {/* map-popup */}
+      {showMap &&
+        mapLocation && (
+          <MapPopup
+            toggleMapPopup={toggleMapPopup}
+            mapLocation={mapLocation}
+            onClose={() => dispatch(setShowMap(false))}
           />
         )}
 

@@ -1,15 +1,7 @@
 import React from 'react';
 import { faHeart, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Pet } from '../types/pet-types';
-
-interface PetDetailPopupProps {
-  formSelectedPet: Pet | null;
-  selectedPet: Pet;
-  onClose: () => void;
-  onReserve: () => void;
-  toggleFormPopup: (pet: Pet) => void;
-}
+import { PetDetailPopupProps } from '../types/petDetail-types';
 
 const PetDetailPopup = ({
   formSelectedPet,
