@@ -135,6 +135,12 @@ const mapLocationPersistConfig = {
   whitelist: ['mapLocation'],
 };
 
+const coordinatesPersistConfig = {
+  key: 'coordinates',
+  storage: storage,
+  whitelist: ['coordinates'],
+};
+
 const rootReducer = combineReducers({
   category: persistReducer(categoryPersistConfig, categoryReducer),
   pets: persistReducer(petsPersistConfig, petsReducer),
@@ -159,6 +165,7 @@ const rootReducer = combineReducers({
   petHighlight: persistReducer(petHighlightPersistConfig, carouselReducer),
   startIndex: persistReducer(startIndexPersistConfig, carouselReducer),
   mapLocation: persistReducer(mapLocationPersistConfig, mapReducer),
+  coordinates: persistReducer(coordinatesPersistConfig, mapReducer),
 });
 
 export const store = configureStore({

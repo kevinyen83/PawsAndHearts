@@ -18,6 +18,10 @@ const MapItem = ({ coordinates }: { coordinates: Coordinates }) => {
         zoom: 9,
       });
 
+      new mapboxgl.Marker()
+        .setLngLat([coordinates.lng, coordinates.lat])
+        .addTo(map);
+
       return () => map.remove();
     }
   }, []);

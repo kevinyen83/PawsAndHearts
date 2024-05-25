@@ -6,4 +6,5 @@ export interface PetDetailPopupProps {
   onClose: () => void;
   onReserve: () => void;
   toggleFormPopup: (pet: Pet) => void;
+  toggleMapPopup: (selectedPet: Pet) => void;
 }

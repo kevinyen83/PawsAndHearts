@@ -1,9 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { MapState } from '../../../types/map-types';
+import { Coordinates, MapState } from '../../../types/map-types';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: MapState = {
   mapLocation: '',
+  coordinates: null,
 };
 
 export const mapSlice = createSlice({
@@ -13,8 +14,11 @@ export const mapSlice = createSlice({
     setMapLocation: (state, action: PayloadAction<string>) => {
       state.mapLocation = action.payload;
     },
+    setCoordinates: (state, action: PayloadAction<Coordinates>) => {
+      state.coordinates = action.payload;
+    },
   },
 });
 
-export const { setMapLocation } = mapSlice.actions;
+export const { setMapLocation, setCoordinates } = mapSlice.actions;
 export const mapReducer = mapSlice.reducer;

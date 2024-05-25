@@ -4,10 +4,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import MapItem from './MapItem';
 import axios from 'axios';
-import { Coordinates } from '../types/map-types';
+import { useAppDispatch, useAppSelector } from '../app/GlobalRedux/store';
+import { setCoordinates } from '../app/GlobalRedux/Feautures/map-slice';
 
 const MapPopup = ({ mapLocation, onClose, toggleMapPopup }: MapProps) => {
-  const [coordinates, setCoordinates] = useState<Coordinates | null>(null);
+  //   const [coordinates, setCoordinates] = useState<Coordinates | null>(null);
+  const dispatch = useAppDispatch();
+  const coordinates = useAppSelector((state) => state.coordinates.coordinates);
 
   useEffect(
     () => {
@@ -25,7 +28,7 @@ const MapPopup = ({ mapLocation, onClose, toggleMapPopup }: MapProps) => {
           const { data } = response;
           if (data.features && data.features.length > 0) {
             const [lng, lat] = data.features[0].center;
-            setCoordinates({ lng, lat });
+            dispatch(setCoordinates({ lng, lat }));
           }
         } catch (error) {
           console.error('Error fetching coordinates:', error);
@@ -46,7 +49,7 @@ const MapPopup = ({ mapLocation, onClose, toggleMapPopup }: MapProps) => {
               <div>Map</div>
             </div>
             <div className="flex text-lg justify-start mb-1">
-              <h1>{mapLocation}</h1>
+              <h1>Location: {mapLocation}</h1>
             </div>
           </div>
           <div className="flex justify-end items-start">
@@ -70,7 +73,7 @@ const MapPopup = ({ mapLocation, onClose, toggleMapPopup }: MapProps) => {
         <div className="absolute bottom-4 right-4">
           <button
             className="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-            //   onClick={() => dispatch(setShowFavorites(false))}
+            onClick={onClose}
           >
             Confirm
           </button>

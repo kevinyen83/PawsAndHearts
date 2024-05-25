@@ -1,5 +1,9 @@
 import React from 'react';
-import { faHeart, faTimes } from '@fortawesome/free-solid-svg-icons';
+import {
+  faHeart,
+  faLocationDot,
+  faTimes,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PetDetailPopupProps } from '../types/petDetail-types';
 
@@ -9,6 +13,7 @@ const PetDetailPopup = ({
   onClose,
   onReserve,
   toggleFormPopup,
+  toggleMapPopup,
 }: PetDetailPopupProps) => {
   return (
     <div
@@ -117,6 +122,16 @@ const PetDetailPopup = ({
               <FontAwesomeIcon icon={faHeart} size="lg" />
             </button>
           </div>
+          <div>
+            <button
+              className="mt-4 align-middle select-none font-bold text-center text-xs py-3 px-6 rounded-full bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
+              onClick={() => toggleMapPopup(selectedPet)}
+              data-testid="add-to-favorites-btn"
+            >
+              <FontAwesomeIcon icon={faLocationDot} size="lg" />
+            </button>
+          </div>
+          <div />
           <div className="mt-4 flex justify-end">
             <div>
               <button

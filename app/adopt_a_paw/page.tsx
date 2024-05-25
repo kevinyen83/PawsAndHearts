@@ -227,6 +227,7 @@ const AdoptAPaw = () => {
         selectedPet && (
           <PetDetailPopup
             toggleFormPopup={toggleFormPopup}
+            toggleMapPopup={toggleMapPopup}
             formSelectedPet={formSelectedPet}
             selectedPet={selectedPet}
             onReserve={() => addToFavorites(selectedPet)}

@@ -7,6 +7,7 @@ export interface MapProps {
 }
 export interface MapState {
   mapLocation: string;
+  coordinates: Coordinates | null;
 }
 
 export interface Coordinates {
