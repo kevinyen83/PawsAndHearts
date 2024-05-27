@@ -32,9 +32,11 @@ live demo [here](https://paws-and-hearts.vercel.app/)
     4-1. Display Pet Cards and detailed information  
     4-2. Ability to Add Pets to Favorites  
     4-3. Adoption Application Process
+    4-4. Map-popup (27 May 2024 New release!)
 
-5.  Paw Profile Page (9 April 2024 New release!)
-    5-1. Create new pet profile after logging into a user account  
+6.  Paw Profile Page (9 April 2024 New release!)
+    5-1. Create a new pet profile after logging into a user account
+ 
 
 ### Built With
 
@@ -48,12 +50,15 @@ live demo [here](https://paws-and-hearts.vercel.app/)
 ![AWS](https://img.shields.io/badge/AWS-%23FF9900.svg?style=for-the-badge&logo=amazon-aws&logoColor=white)
 
 1.  UI Design: Figma
-2.  Front-end web development: React.JS, TypeScript, Tailwind CSS, CSS Animations, Formik & Yup(Form validation)
+2.  Front-end web development: React.JS, Redux, TypeScript, Tailwind CSS, CSS Animations, Formik & Yup(Form validation)
 3.  Server-side rendering: Next.JS
 4.  AWS Serverless: AWS Lambda, AWS API Gateway, Node.JS, DynamoDB
-5.  Auth: AWS Cognito, NextAuth.JS, uuid
-6.  Integration testing: Jest, React Testing Library
-7.  Payment: Stripe
+5.  API: RESTful API
+6.  Auth: AWS Cognito, NextAuth.JS, uuid
+7.  Integration and E2E testing: Jest, React Testing Library, Cypress
+8.  Payment: Stripe
+9.  Map: Mapbox GL
+10. CI/CD & DevOps: Vercel, Docker
 
 ## Getting Started with Docker
 
@@ -105,7 +110,7 @@ Install npm:
     npm install
     ```
 
-### Start react app
+### Start React app
 
 1. Please execute the following command:
 
@@ -155,12 +160,14 @@ npm test
 - [x] Design & develop Landing Page
 - [x] Design & develop Adoption Page
 - [x] Integrate Jest for testing
-- [x] Creat Docker image
+- [x] Create a Docker image
 - [x] Build payment (Donation) process
 - [x] Complete RWD
 - [x] Create Docker
-- [x] Developing a content management page that allow shelters to upload and manage their animals
-- [ ] Add Integrated tests by Cypress
+- [x] Developing a content management page that allows shelters to upload and manage their animals
+- [x] Add E2E tests by Cypress
+- [x] Added Redux 
+- [x] Add new map features by Mapbox GL
 - [ ] Improve image rendering performance using <Image>
 
 ## Contact
