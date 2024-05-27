@@ -1,7 +1,7 @@
 "use client"
 
 import { useSession } from "next-auth/react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Image from "next/image"
 import Link from "next/link"
 import Button from "./Button"
@@ -9,24 +9,27 @@ import { CATEGORY_LINKS } from "../constants"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons"
 import AvatarIcon from "../assets/images/avatar.png";
+import { useAppDispatch, useAppSelector } from "../app/GlobalRedux/store";
+import { setShowDropdown, setUserEmail } from "../app/GlobalRedux/Feautures/navbar-slice";
 
 
 export default function Navbar () {
+    const dispatch = useAppDispatch();
     const { data: session } = useSession();
-    const [userEmail, setUserEmail] = useState<string | null>(null);
-    const [showDropdown, setShowDropdown] = useState<boolean>(false);
-
+    const showDropdown = useAppSelector((state) => state.showDropdown.showDropdown);
+    const userEmail = useAppSelector(
+      (state) => state.userEmail.userEmail
+    );
 
     useEffect(() => {
-        if (session) {
-            setUserEmail(session.user?.email || null);
-        } else {
-            setUserEmail(null);
+        if (session?.user?.email) {
+          dispatch(setUserEmail(session.user.email));
         }
-    }, [session]);
+      }, [session, dispatch]);
+
 
     const toggleDropdown = () => {
-        setShowDropdown(!showDropdown);
+        dispatch(setShowDropdown(!showDropdown));
     }
 
 
