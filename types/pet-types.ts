@@ -15,6 +15,7 @@ export interface Pet {
 export interface PetItemProps {
   pet: Pet;
   toggleCardDetailPopup: (pet: Pet) => void;
+  toggleMapPopup: (pet: Pet) => void;
   addToFavorites: (pet: Pet) => void;
   toggleFormPopup: (pet: Pet) => void;
 }

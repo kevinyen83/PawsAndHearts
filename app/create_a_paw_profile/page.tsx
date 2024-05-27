@@ -7,25 +7,7 @@ import { useSession } from 'next-auth/react';
 import { useFormik } from 'formik';
 import { uploadPet } from '../../utils/api/api';
 import { v4 as uuidv4 } from 'uuid';
-
-export interface PetProfileData {
-  petId: string;
-  contactEmail: string;
-  contactPhone: string;
-  organizationName: string;
-  applicantName: string;
-  name: string;
-  category: string;
-  age: string;
-  gender: string;
-  color: string;
-  size: string;
-  location: string;
-  vaccination: string;
-  availability: string;
-  image: string;
-  description: string;
-}
+import { PetProfileData } from '../../types/petProfile-types';
 
 const PawProfileForm: React.FC = () => {
   const { data: session } = useSession();

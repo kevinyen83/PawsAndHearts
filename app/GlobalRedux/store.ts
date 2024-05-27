@@ -14,112 +14,131 @@ import { pricesReducer } from './Feautures/prices-slice';
 import { formReducer } from './Feautures/form-slice';
 import { navbarReducer } from './Feautures/navbar-slice';
 import { carouselReducer } from './Feautures/carousel-slice';
+import { mapReducer } from './Feautures/map-slice';
 
 const categoryPersistConfig = {
   key: 'category',
   storage: storage,
-  whitelist: ['categoryState'],
+  whitelist: ['category'],
 };
 
 const petsPersistConfig = {
   key: 'pets',
   storage: storage,
-  whitelist: ['petsReducer'],
+  whitelist: ['pets'],
 };
 
 const loadingPersistConfig = {
   key: 'isLoading',
   storage: storage,
-  whitelist: ['loadingReducer'],
+  whitelist: ['isLoading'],
 };
 
 const showFavoritesPersistConfig = {
   key: 'showFavorites',
   storage: storage,
-  whitelist: ['popupReducer'],
+  whitelist: ['showFavorites'],
 };
 
 const showFormPersistConfig = {
   key: 'showForm',
   storage: storage,
-  whitelist: ['popupReducer'],
+  whitelist: ['showForm'],
 };
 
 const showPetDetailPersistConfig = {
   key: 'showPetDetail',
   storage: storage,
-  whitelist: ['popupReducer'],
+  whitelist: ['showPetDetail'],
+};
+
+const showMapPersistConfig = {
+  key: 'showMap',
+  storage: storage,
+  whitelist: ['showMap'],
 };
 
 const selectedPetPersistConfig = {
   key: 'selectedPet',
   storage: storage,
-  whitelist: ['petsReducer'],
+  whitelist: ['selectedPet'],
 };
 
 const favoritesItemsPersistConfig = {
   key: 'favoritesItems',
   storage: storage,
-  whitelist: ['favoritesReducer'],
+  whitelist: ['favoritesItems'],
 };
 
 const isFavoritesEmptyPersistConfig = {
   key: 'isFavoritesEmpty',
   storage: storage,
-  whitelist: ['favoritesReducer'],
+  whitelist: ['isFavoritesEmpty'],
 };
 
 const lastIdPersistConfig = {
   key: 'lastId',
   storage: storage,
-  whitelist: ['favoritesReducer'],
+  whitelist: ['lastId'],
 };
 
 const visiblePetsPersistConfig = {
   key: 'visiblePets',
   storage: storage,
-  whitelist: ['petsReducer'],
+  whitelist: ['visiblePets'],
 };
 
 const formSelectedPetPersistConfig = {
   key: 'formSelectedPet',
   storage: storage,
-  whitelist: ['petsReducer'],
+  whitelist: ['formSelectedPet'],
 };
 const pricesPersistConfig = {
   key: 'prices',
   storage: storage,
-  whitelist: ['pricesReducer'],
+  whitelist: ['prices'],
 };
 
 const inputUserEmailPersistConfig = {
   key: 'inputUserEmail',
   storage: storage,
-  whitelist: ['formReducer'],
+  whitelist: ['inputUserEmail'],
 };
 
 const userEmailPersistConfig = {
   key: 'userEmail',
   storage: storage,
-  whitelist: ['navbarReducer'],
+  whitelist: ['userEmail'],
 };
 
 const showDropdownPersistConfig = {
   key: 'showDropdown',
   storage: storage,
-  whitelist: ['navbarReducer'],
+  whitelist: ['showDropdown'],
 };
 
 const petHighlightPersistConfig = {
   key: 'petHighlight',
   storage: storage,
-  whitelist: ['carouselReducer'],
+  whitelist: ['petHighlight'],
 };
 
 const startIndexPersistConfig = {
   key: 'startIndex',
   storage: storage,
-  whitelist: ['carouselReducer'],
+  whitelist: ['startIndex'],
+};
+
+const mapLocationPersistConfig = {
+  key: 'mapLocation',
+  storage: storage,
+  whitelist: ['mapLocation'],
+};
+
+const coordinatesPersistConfig = {
+  key: 'coordinates',
+  storage: storage,
+  whitelist: ['coordinates'],
 };
 
 const rootReducer = combineReducers({
@@ -129,6 +148,7 @@ const rootReducer = combineReducers({
   showFavorites: persistReducer(showFavoritesPersistConfig, popupReducer),
   showForm: persistReducer(showFormPersistConfig, popupReducer),
   showPetDetail: persistReducer(showPetDetailPersistConfig, popupReducer),
+  showMap: persistReducer(showMapPersistConfig, popupReducer),
   selectedPet: persistReducer(selectedPetPersistConfig, petsReducer),
   formSelectedPet: persistReducer(formSelectedPetPersistConfig, petsReducer),
   favoritesItems: persistReducer(favoritesItemsPersistConfig, favoritesReducer),
@@ -144,6 +164,8 @@ const rootReducer = combineReducers({
   showDropdown: persistReducer(showDropdownPersistConfig, navbarReducer),
   petHighlight: persistReducer(petHighlightPersistConfig, carouselReducer),
   startIndex: persistReducer(startIndexPersistConfig, carouselReducer),
+  mapLocation: persistReducer(mapLocationPersistConfig, mapReducer),
+  coordinates: persistReducer(coordinatesPersistConfig, mapReducer),
 });
 
 export const store = configureStore({
