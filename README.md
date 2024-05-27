@@ -10,6 +10,9 @@ With Paws and Hearts, I aim to leverage the latest programming tools and JavaScr
 
 I'm committed to continuously optimizing the website and welcome any feedback or collaboration opportunities. Together, we can make a real difference in the lives of animals in need!
 
+**Related GitHub Repo**
+- **Paws And Hearts-Pet Profile GraphQL API**: https://github.com/kevinyen83/PawsAndHearts-AWSSAM-GraphQL-API/blob/main/README.md
+
 ## Live Demo
 
 live demo [here](https://paws-and-hearts.vercel.app/)
