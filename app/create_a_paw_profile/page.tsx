@@ -5,7 +5,7 @@ import React, { useEffect } from 'react';
 import Button from '../../components/Button';
 import { useSession } from 'next-auth/react';
 import { useFormik } from 'formik';
-import { uploadPet } from '../../utils/api/api';
+import { uploadPetByGraphql } from '../../utils/api/api-graphql';
 import { v4 as uuidv4 } from 'uuid';
 import { PetProfileData } from '../../types/petProfile-types';
 
@@ -62,7 +62,7 @@ const PawProfileForm: React.FC = () => {
             image: values.image,
             description: values.description,
           };
-          await uploadPet(petProfileData);
+          await uploadPetByGraphql(petProfileData);
           formik.resetForm();
           alert('Pet profile created successfully!');
           window.location.replace('/adopt_a_paw');
