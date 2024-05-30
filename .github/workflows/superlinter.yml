@@ -1,27 +1,32 @@
-name: Super-Linter
+name: CI Pipeline
 
-on: 
+on:
   push:
-    branches: 
+    branches:
       - main
   pull_request:
-    branches: 
+    branches:
       - main
 
 jobs:
-  super-lint:
-    name: Lint code base
+  build-and-test:
+    name: Build and Test
     runs-on: macos-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Run Super-Linter
-        uses: github/super-linter@v4.10.0
-        env:
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VALIDATE_ALL_CODEBASE: true
-          VALIDATE_JS: true
-          VALIDATE_TYPESCRIPT: true
-          VALIDATE_MARKDOWN: true
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.18.0'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the project
+        run: npm run build
+
+      - name: Run tests
+        run: npm test
