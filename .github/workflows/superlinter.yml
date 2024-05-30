@@ -26,7 +26,13 @@ jobs:
         run: npm install
 
       - name: Build the project
+        env:
+          AWS_API_KEY: ${{ secrets.AWS_API_KEY }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
         run: npm run build
 
       - name: Run tests
+        env:
+          AWS_API_KEY: ${{ secrets.AWS_API_KEY }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
         run: npm test
