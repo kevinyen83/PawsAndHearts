@@ -1,0 +1,27 @@
+name: Super-Linter
+
+on: 
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches: 
+      - main
+
+jobs:
+  super-lint:
+    name: Lint code base
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Super-Linter
+        uses: github/super-linter@v4.10.0
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VALIDATE_ALL_CODEBASE: true
+          VALIDATE_JS: true
+          VALIDATE_TYPESCRIPT: true
+          VALIDATE_MARKDOWN: true
