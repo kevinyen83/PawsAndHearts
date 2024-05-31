@@ -5,6 +5,7 @@ const nextConfig = {
     },
     env: {
       AWS_API_KEY: process.env.AWS_API_KEY,
+      STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     },
   };
   
