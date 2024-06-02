@@ -7,10 +7,14 @@ import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '../app/GlobalRedux/store';
 import { setCoordinates } from '../app/GlobalRedux/Feautures/map-slice';
 
-const MapPopup = ({ mapLocation, onClose, toggleMapPopup }: MapProps) => {
-  //   const [coordinates, setCoordinates] = useState<Coordinates | null>(null);
+const MapPopup = ({ mapLocation, onClose }: MapProps) => {
   const dispatch = useAppDispatch();
   const coordinates = useAppSelector((state) => state.coordinates.coordinates);
+  const mapboxSecretKey = process.env.MAPBOX_SECRET_KEY as string;
+
+  if (!mapboxSecretKey) {
+    throw new Error('Mapbox secret key is not defined');
+  }
 
   useEffect(
     () => {
@@ -20,8 +24,7 @@ const MapPopup = ({ mapLocation, onClose, toggleMapPopup }: MapProps) => {
             `https://api.mapbox.com/geocoding/v5/mapbox.places/${mapLocation}.json`,
             {
               params: {
-                access_token:
-                  'pk.eyJ1Ijoia2V2aW55ZW4iLCJhIjoiY2xxOWw0a2VmMTZjcTJrbnprM2VxbGJ1biJ9.qrpMnVDjbCuGiR2-dRZz4g',
+                access_token: mapboxSecretKey,
               },
             }
           );
