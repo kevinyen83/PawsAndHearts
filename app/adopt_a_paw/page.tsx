@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import dynamic from 'next/dynamic';
 import Favorites from '../../components/Favorites';
 import FormPopup from '../../components/FormPopup';
 import PetDetailPopup from '../../components/PetDetailPopup';
@@ -32,6 +33,15 @@ import {
 } from '../GlobalRedux/Feautures/favorites-slice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { setMapLocation } from '../GlobalRedux/Feautures/map-slice';
+
+const DynamicPetItem = dynamic(() => import('../../components/PetItem'), {
+  loading: () => (
+    <div className="loading-container">
+      <div className="loading-animation" />
+      <p>Loading......</p>
+    </div>
+  ),
+});
 
 const AdoptAPaw = () => {
   const dispatch = useAppDispatch();
@@ -187,24 +197,23 @@ const AdoptAPaw = () => {
         {isLoading && (
           <div className="loading-container">
             <div className="loading-animation" />
-            <p>Loading pet data...</p>
+            <p>Loading Pet Data...</p>
           </div>
         )}
 
-        {!isLoading &&
-          pets
-            .filter((pet) => category === 'All' || pet.category === category)
-            .slice(0, visiblePets)
-            .map((pet) => (
-              <PetItem
-                key={pet.petId}
-                pet={pet}
-                toggleCardDetailPopup={toggleCardDetailPopup}
-                toggleMapPopup={toggleMapPopup}
-                addToFavorites={addToFavorites}
-                toggleFormPopup={toggleFormPopup}
-              />
-            ))}
+        {pets
+          .filter((pet) => category === 'All' || pet.category === category)
+          .slice(0, visiblePets)
+          .map((pet) => (
+            <DynamicPetItem
+              key={pet.petId}
+              pet={pet}
+              toggleCardDetailPopup={toggleCardDetailPopup}
+              toggleMapPopup={toggleMapPopup}
+              addToFavorites={addToFavorites}
+              toggleFormPopup={toggleFormPopup}
+            />
+          ))}
       </div>
 
       {/* show more */}
