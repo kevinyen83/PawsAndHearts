@@ -2,8 +2,9 @@
 
 import axios from 'axios';
 import React, { useEffect } from 'react';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import DonateCard from '../../components/DonateCard';
-import '../../styles.css';
 import { useAppDispatch, useAppSelector } from '../GlobalRedux/store';
 import { setPrices } from '../GlobalRedux/Feautures/prices-slice';
 import { setIsLoading } from '../GlobalRedux/Feautures/loading-slice';
@@ -45,10 +46,12 @@ const DonatePage: React.FC = () => {
       </div>
       {isLoading ? (
         <div className="flex justify-center">
-          <div className="loading-container">
-            <div className="loading-animation" />
-            <p>Loading plan data...</p>
-          </div>
+          <Backdrop
+            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={isLoading}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
         </div>
       ) : (
         <div className="flex flex-wrap justify-center gap-8 items-center mx-auto">
