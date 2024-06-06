@@ -5,9 +5,9 @@ import dynamic from 'next/dynamic';
 import Favorites from '../../components/Favorites';
 import FormPopup from '../../components/FormPopup';
 import PetDetailPopup from '../../components/PetDetailPopup';
-import PetItem from '../../components/PetItem';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import MapPopup from '../../components/MapPopup';
-import '../../styles.css';
 import { Pet } from '../../types/pet-types';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { fetchPets } from '../../utils/api/api';
@@ -33,15 +33,6 @@ import {
 } from '../GlobalRedux/Feautures/favorites-slice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { setMapLocation } from '../GlobalRedux/Feautures/map-slice';
-
-const DynamicPetItem = dynamic(() => import('../../components/PetItem'), {
-  loading: () => (
-    <div className="loading-container">
-      <div className="loading-animation" />
-      <p>Loading......</p>
-    </div>
-  ),
-});
 
 const AdoptAPaw = () => {
   const dispatch = useAppDispatch();
@@ -71,6 +62,17 @@ const AdoptAPaw = () => {
   );
   const lastId = useAppSelector((state) => state.lastId.lastId);
   const mapLocation = useAppSelector((state) => state.mapLocation.mapLocation);
+
+  const DynamicPetItem = dynamic(() => import('../../components/PetItem'), {
+    loading: () => (
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={isLoading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    ),
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -195,10 +197,12 @@ const AdoptAPaw = () => {
       {/* main-area */}
       <div className="flex flex-wrap gap-4 pt-6 justify-center">
         {isLoading && (
-          <div className="loading-container">
-            <div className="loading-animation" />
-            <p>Loading Pet Data...</p>
-          </div>
+          <Backdrop
+            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={isLoading}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
         )}
 
         {pets

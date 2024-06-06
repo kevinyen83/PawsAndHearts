@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { MapProps } from '../types/map-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 import MapItem from './MapItem';
 import axios from 'axios';
 import { useAppDispatch, useAppSelector } from '../app/GlobalRedux/store';
@@ -10,6 +12,7 @@ import { setCoordinates } from '../app/GlobalRedux/Feautures/map-slice';
 const MapPopup = ({ mapLocation, onClose }: MapProps) => {
   const dispatch = useAppDispatch();
   const coordinates = useAppSelector((state) => state.coordinates.coordinates);
+  const isLoading = useAppSelector((state) => state.isLoading.isLoading);
   const mapboxSecretKey = process.env.MAPBOX_SECRET_KEY as string;
 
   if (!mapboxSecretKey) {
@@ -69,7 +72,12 @@ const MapPopup = ({ mapLocation, onClose }: MapProps) => {
           {coordinates ? (
             <MapItem coordinates={coordinates} />
           ) : (
-            'Loading map...'
+            <Backdrop
+              sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+              open={isLoading}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
           )}
         </div>
 
