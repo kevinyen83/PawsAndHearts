@@ -6,12 +6,12 @@ import Favorites from '../../components/Favorites';
 import FormPopup from '../../components/FormPopup';
 import PetDetailPopup from '../../components/PetDetailPopup';
 import MapPopup from '../../components/MapPopup';
-import { createStructuredSelector, createSelector } from 'reselect';
+import { combinedSelector } from '../GlobalRedux/combin-selector';
 import '../../styles.css';
 import { Pet } from '../../types/pet-types';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { fetchPets } from '../../utils/api/api';
-import { useAppDispatch, useAppSelector } from '../GlobalRedux/store';
+import { useAppDispatch } from '../GlobalRedux/store';
 import { setCategoryState } from '../GlobalRedux/Feautures/category-slice';
 import {
   setPetsState,
@@ -44,47 +44,24 @@ const DynamicPetItem = dynamic(() => import('../../components/PetItem'), {
   ),
 });
 
-const combinedSelector = createStructuredSelector({
-  pets: createSelector((state) => state, (state) => state.pets.pets),
-  selectedPet: createSelector(
-    (state) => state,
-    (state) => state.pets.selectedPet
-  ),
-});
-//Todo: Move to outside
-
 const AdoptAPaw = () => {
   const dispatch = useAppDispatch();
-  const { pets, selectedPet } = useSelector(combinedSelector);
-
-  //   const pets = useAppSelector((state) => state.pets.pets);
-  console.log(pets);
-  console.log(selectedPet);
-
-  //   const selectedPet = useAppSelector((state) => state.pets.selectedPet);
-  const formSelectedPet = useAppSelector((state) => state.pets.formSelectedPet);
-  const visiblePets = useAppSelector((state) => state.pets.visiblePets);
-
-  const category = useAppSelector((state) => state.category.category);
-  const isLoading = useAppSelector((state) => state.isLoading.isLoading);
-
-  const showFavorites = useAppSelector(
-    (state) => state.showFavorites.showFavorites
-  );
-  const showForm = useAppSelector((state) => state.showForm.showForm);
-  const showPetDetail = useAppSelector(
-    (state) => state.showPetDetail.showPetDetail
-  );
-  const showMap = useAppSelector((state) => state.showMap.showMap);
-
-  const favoritesItems = useAppSelector(
-    (state) => state.favoritesItems.favoritesItems
-  );
-  const isFavoritesEmpty = useAppSelector(
-    (state) => state.isFavoritesEmpty.isFavoritesEmpty
-  );
-  const lastId = useAppSelector((state) => state.lastId.lastId);
-  const mapLocation = useAppSelector((state) => state.mapLocation.mapLocation);
+  const {
+    pets,
+    selectedPet,
+    formSelectedPet,
+    visiblePets,
+    category,
+    isLoading,
+    showFavorites,
+    showForm,
+    showPetDetail,
+    showMap,
+    favoritesItems,
+    isFavoritesEmpty,
+    lastId,
+    mapLocation,
+  } = useSelector(combinedSelector);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -216,9 +193,12 @@ const AdoptAPaw = () => {
         )}
 
         {pets
-          .filter((pet) => category === 'All' || pet.category === category)
+          .filter(
+            (pet: { category: any }) =>
+              category === 'All' || pet.category === category
+          )
           .slice(0, visiblePets)
-          .map((pet) => (
+          .map((pet: Pet) => (
             <DynamicPetItem
               key={pet.petId}
               pet={pet}
@@ -233,8 +213,9 @@ const AdoptAPaw = () => {
       {/* show more */}
       {pets &&
         visiblePets <
-          pets.filter((pet) => category === 'All' || pet.category === category)
-            .length && (
+          pets.filter(
+            (pet: Pet) => category === 'All' || pet.category === category
+          ).length && (
           <div className="flex justify-center m-14">
             <button
               className="p-t align-middle font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
