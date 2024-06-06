@@ -5,8 +5,8 @@ import dynamic from 'next/dynamic';
 import Favorites from '../../components/Favorites';
 import FormPopup from '../../components/FormPopup';
 import PetDetailPopup from '../../components/PetDetailPopup';
-import PetItem from '../../components/PetItem';
 import MapPopup from '../../components/MapPopup';
+import { createStructuredSelector, createSelector } from 'reselect';
 import '../../styles.css';
 import { Pet } from '../../types/pet-types';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
@@ -33,6 +33,7 @@ import {
 } from '../GlobalRedux/Feautures/favorites-slice';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { setMapLocation } from '../GlobalRedux/Feautures/map-slice';
+import { useSelector } from 'react-redux';
 
 const DynamicPetItem = dynamic(() => import('../../components/PetItem'), {
   loading: () => (
@@ -43,11 +44,24 @@ const DynamicPetItem = dynamic(() => import('../../components/PetItem'), {
   ),
 });
 
+const combinedSelector = createStructuredSelector({
+  pets: createSelector((state) => state, (state) => state.pets.pets),
+  selectedPet: createSelector(
+    (state) => state,
+    (state) => state.pets.selectedPet
+  ),
+});
+//Todo: Move to outside
+
 const AdoptAPaw = () => {
   const dispatch = useAppDispatch();
+  const { pets, selectedPet } = useSelector(combinedSelector);
 
-  const pets = useAppSelector((state) => state.pets.pets);
-  const selectedPet = useAppSelector((state) => state.pets.selectedPet);
+  //   const pets = useAppSelector((state) => state.pets.pets);
+  console.log(pets);
+  console.log(selectedPet);
+
+  //   const selectedPet = useAppSelector((state) => state.pets.selectedPet);
   const formSelectedPet = useAppSelector((state) => state.pets.formSelectedPet);
   const visiblePets = useAppSelector((state) => state.pets.visiblePets);
 
