@@ -14,7 +14,7 @@ import { setImageFile } from '../GlobalRedux/Feautures/imageFile-slice';
 const PawProfileForm: React.FC = () => {
   const { data: session } = useSession();
   const dispatch = useAppDispatch();
-const imageFile = useAppSelector((state) => state.imageFile.imageFile)
+  const imageFile = useAppSelector((state) => state.imageFile.imageFile);
 
   useEffect(
     () => {
@@ -86,12 +86,22 @@ const imageFile = useAppSelector((state) => state.imageFile.imageFile)
     },
   });
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      dispatch(setImageFile(file));
-    }
-  };
+      const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (imageFile) {
+            if (!imageFile.type.startsWith('image/')) {
+              alert('Please upload a valid image file.');
+              return;
+            }
+            if (imageFile.size > 5 * 1024 * 1024) {
+              alert('Image size should not exceed 5MB.');
+              return;
+            }
+        const file = event.target.files?.[0];
+        if (file) {
+          dispatch(setImageFile(file));
+        }
+      };
+  }
 
   return (
     <>
