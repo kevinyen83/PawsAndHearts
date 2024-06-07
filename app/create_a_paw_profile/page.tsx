@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Button from '../../components/Button';
 import { useSession } from 'next-auth/react';
 import { useFormik } from 'formik';
