@@ -4,7 +4,7 @@ const awsAPIKey = process.env.AWS_API_KEY as string;
 
 export async function uploadPetByGraphql(petProfileData: PetProfileData) {
   const url =
-    'https://g1v4l2ms77.execute-api.ap-southeast-2.amazonaws.com/Prod/pet';
+    'https://b6cragoxk9.execute-api.ap-southeast-2.amazonaws.com/Prod/pet';
 
   const query = `
     mutation CreatePet($petProfileData: PetInput!) {

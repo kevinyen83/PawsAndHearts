@@ -8,10 +8,13 @@ import { useFormik } from 'formik';
 import { uploadPetByGraphql } from '../../utils/api/api-graphql';
 import { v4 as uuidv4 } from 'uuid';
 import { PetProfileData } from '../../types/petProfile-types';
+import { useAppDispatch, useAppSelector } from '../GlobalRedux/store';
+import { setImageFile } from '../GlobalRedux/Feautures/imageFile-slice';
 
 const PawProfileForm: React.FC = () => {
   const { data: session } = useSession();
-  const [imageFile, setImageFile] = useState<File | null>(null);
+  const dispatch = useAppDispatch();
+const imageFile = useAppSelector((state) => state.imageFile.imageFile)
 
   useEffect(
     () => {
@@ -86,7 +89,7 @@ const PawProfileForm: React.FC = () => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setImageFile(file);
+      dispatch(setImageFile(file));
     }
   };
 

@@ -15,6 +15,7 @@ import { formReducer } from './Feautures/form-slice';
 import { navbarReducer } from './Feautures/navbar-slice';
 import { carouselReducer } from './Feautures/carousel-slice';
 import { mapReducer } from './Feautures/map-slice';
+import { imageFileReducer } from './Feautures/imageFile-slice';
 
 const categoryPersistConfig = {
   key: 'category',
@@ -141,6 +142,12 @@ const coordinatesPersistConfig = {
   whitelist: ['coordinates'],
 };
 
+const imageFilePersistConfig = {
+  key: 'imageFile',
+  storage: storage,
+  whitelist: ['imageFile'],
+};
+
 const rootReducer = combineReducers({
   category: persistReducer(categoryPersistConfig, categoryReducer),
   pets: persistReducer(petsPersistConfig, petsReducer),
@@ -166,6 +173,7 @@ const rootReducer = combineReducers({
   startIndex: persistReducer(startIndexPersistConfig, carouselReducer),
   mapLocation: persistReducer(mapLocationPersistConfig, mapReducer),
   coordinates: persistReducer(coordinatesPersistConfig, mapReducer),
+  imageFile: persistReducer(imageFilePersistConfig, imageFileReducer),
 });
 
 export const store = configureStore({
