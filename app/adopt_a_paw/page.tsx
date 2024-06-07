@@ -8,10 +8,10 @@ import PetDetailPopup from '../../components/PetDetailPopup';
 import MapPopup from '../../components/MapPopup';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
-import { combinedSelector } from '../GlobalRedux/combin-selector';
 import { Pet } from '../../types/pet-types';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { fetchPets } from '../../utils/api/api';
+import { combinedSelector } from '../GlobalRedux/combin-selector';
 import { useAppDispatch } from '../GlobalRedux/store';
 import { setCategoryState } from '../GlobalRedux/Feautures/category-slice';
 import {
