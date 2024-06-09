@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import Image from 'next/image';
 import { useAppDispatch, useAppSelector } from '../app/GlobalRedux/store';
 import {
   setPetHighlight,
@@ -69,11 +70,14 @@ export default function PetCarousel() {
             >
               <div className="w-full p-6">
                 <div className="relative h-56 overflow-hidden rounded-t-xl">
-                  <img
+                  <Image
                     className="object-cover w-full h-full rounded-t-xl"
                     src={pet.image}
                     alt={pet.name}
+                    width={500}
+                    height={500}
                     data-testid="cart-item-image"
+                    priority
                   />
                 </div>
                 <div className="p-6">

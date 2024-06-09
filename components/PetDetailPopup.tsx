@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import {
   faHeart,
   faLocationDot,
@@ -30,11 +31,13 @@ const PetDetailPopup = ({
           </button>
         </div>
         <div className="relative h-56 text-white bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40 overflow-hidden">
-          <img
+          <Image
             className="rounded-t-lg w-full h-full object-cover"
-            data-cy="pet-detail-popup-image"
             src={selectedPet.image}
             alt={selectedPet.name}
+            width={500}
+            height={500}
+            data-cy="pet-detail-popup-image"
             data-testid="pet-detail-popup-image"
           />
         </div>

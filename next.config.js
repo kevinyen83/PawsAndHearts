@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
+
+const allowedS3Domains = process.env.ALLOWED_S3_DOMAINS
+  ? process.env.ALLOWED_S3_DOMAINS.split(',')
+  : ['pet-profile-image.s3.ap-southeast-2.amazonaws.com'];
+
 const nextConfig = {
     images: { 
-      domains: ["images.ctfassets.net"]
+      domains: [...allowedS3Domains, 'www.shutterstock.com', 'https://myrightbird.com']
     },
     env: {
       AWS_API_KEY: process.env.AWS_API_KEY,

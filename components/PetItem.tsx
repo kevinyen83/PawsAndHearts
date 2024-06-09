@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { PetItemProps } from '../types/pet-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faLocationDot } from '@fortawesome/free-solid-svg-icons';
@@ -18,12 +19,15 @@ const PetItem = ({
     >
       <div className="w-full p-3">
         <div className="relative h-44 overflow-hidden text-white rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
-          <img
+          <Image
             className="rounded-lg"
-            data-cy="pet-item-image"
             src={pet.image}
             alt={pet.name}
+            width={500}
+            height={500}
+            data-cy="pet-item-image"
             data-testid="item-image"
+            priority
           />
         </div>
 

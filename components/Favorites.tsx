@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import Image from 'next/image';
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { FavoritesProps } from '../types/favorites-types';
@@ -23,10 +24,12 @@ export default function Favorites({
     >
       <div className="flex items-center">
         <div className="rounded-full overflow-hidden w-12 h-12 mr-4">
-          <img
+          <Image
             className="w-full h-full object-cover"
             src={selectedPet.image}
             alt={selectedPet.name}
+            width={500}
+            height={500}
             data-testid="favorites-side-item-img"
           />
         </div>
