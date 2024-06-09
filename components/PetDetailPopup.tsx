@@ -39,6 +39,7 @@ const PetDetailPopup = ({
             height={500}
             data-cy="pet-detail-popup-image"
             data-testid="pet-detail-popup-image"
+            priority
           />
         </div>
         <h2

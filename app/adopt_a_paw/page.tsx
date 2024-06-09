@@ -1,26 +1,22 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import dynamic from 'next/dynamic';
+import Filter from '../../components/Filter';
+import Main from '../../components/Main';
 import Favorites from '../../components/Favorites';
 import FormPopup from '../../components/FormPopup';
 import PetDetailPopup from '../../components/PetDetailPopup';
 import MapPopup from '../../components/MapPopup';
-import Backdrop from '@mui/material/Backdrop';
+import dynamic from 'next/dynamic';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Pet } from '../../types/pet-types';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import { fetchPets } from '../../utils/api/api';
 import { combinedSelector } from '../GlobalRedux/combin-selector';
 import { useAppDispatch } from '../GlobalRedux/store';
-import { setCategoryState } from '../GlobalRedux/Feautures/category-slice';
 import {
-  setPetsState,
   setSelectedPet,
   setFormSelectedPet,
-  setVisiblePets,
 } from '../GlobalRedux/Feautures/pets-slice';
-import { setIsLoading } from '../GlobalRedux/Feautures/loading-slice';
 import {
   setShowFavorites,
   setShowForm,
@@ -32,9 +28,17 @@ import {
   setLastId,
   setIsFavoritesEmpty,
 } from '../GlobalRedux/Feautures/favorites-slice';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { setMapLocation } from '../GlobalRedux/Feautures/map-slice';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useSelector } from 'react-redux';
+
+const DynamicMain = dynamic(() => import('../../components/Main'), {
+  loading: () => (
+    <div className="my-10">
+      <CircularProgress size={60} color="info" />,
+    </div>
+  ),
+});
 
 const AdoptAPaw = () => {
   const dispatch = useAppDispatch();
@@ -42,52 +46,24 @@ const AdoptAPaw = () => {
     pets,
     selectedPet,
     formSelectedPet,
-    visiblePets,
-    category,
-    isLoading,
     showFavorites,
     showForm,
     showPetDetail,
     showMap,
     favoritesItems,
-    isFavoritesEmpty,
     lastId,
     mapLocation,
   } = useSelector(combinedSelector);
 
-  const DynamicPetItem = dynamic(() => import('../../components/PetItem'), {
-    loading: () => (
-      <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={isLoading}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-    ),
-  });
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        dispatch(setIsLoading(true));
-        const data = await fetchPets();
-        dispatch(setPetsState(data));
-      } catch (error) {
-        console.error('Error fetching pets:', error);
-      } finally {
-        dispatch(setIsLoading(false));
+  useEffect(
+    () => {
+      const storedFavoritesItems = sessionStorage.getItem('favoritesItems');
+      if (storedFavoritesItems) {
+        dispatch(setFavoritesItems(JSON.parse(storedFavoritesItems)));
       }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const storedFavoritesItems = sessionStorage.getItem('favoritesItems');
-    if (storedFavoritesItems) {
-      dispatch(setFavoritesItems(JSON.parse(storedFavoritesItems)));
-    }
-  }, []);
+    },
+    [dispatch]
+  );
 
   useEffect(
     () => {
@@ -95,11 +71,6 @@ const AdoptAPaw = () => {
     },
     [favoritesItems]
   );
-
-  const handleShowMoreClick = (): void => {
-    const newVisiblePets = visiblePets + 16;
-    dispatch(setVisiblePets(newVisiblePets));
-  };
 
   const addToFavorites = (pet: Pet): void => {
     const petAlreadyInFavorites = favoritesItems.some(
@@ -140,14 +111,8 @@ const AdoptAPaw = () => {
         alert('Pets data is still loading. Please try again later.');
         return;
       }
-      const selectedPetFromPets = pets.find((p: Pet) => p.petId === pet.petId);
       dispatch(setShowForm(true));
-
-      if (selectedPetFromPets) {
-        dispatch(setFormSelectedPet(selectedPetFromPets));
-      } else {
-        console.error('Selected pet not found in pets array');
-      }
+      dispatch(setFormSelectedPet(pet));
     }
   };
 
@@ -158,80 +123,20 @@ const AdoptAPaw = () => {
   };
 
   const toggleMapPopup = (pet: Pet): void => {
-    const selectedPetFromPets = pets.find((p: Pet) => p.petId === pet.petId);
-    if (selectedPetFromPets) {
-      const selectedLocation = selectedPetFromPets.location;
-      dispatch(setMapLocation(selectedLocation));
-      dispatch(setShowMap(true));
-    }
+    dispatch(setMapLocation(pet.location));
+    dispatch(setShowMap(true));
   };
-
-  const categories = ['All', 'Cats', 'Dogs', 'Birds', 'Others'];
 
   return (
     <div className="relative flex flex-col items-center justify-center bg-slate-50">
-      {/* filter */}
       <div className="p-20" />
-      <div className="flex flex-wrap justify-center sm:justify-start space-x-4">
-        {categories.map((category) => (
-          <button
-            key={category}
-            data-cy="adotp-page-filter-btn"
-            onClick={() => dispatch(setCategoryState(category))}
-            type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            {category}
-          </button>
-        ))}
-      </div>
-
-      {/* main-area */}
-      <div className="flex flex-wrap gap-4 pt-6 justify-center">
-        {isLoading && (
-          <Backdrop
-            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-            open={isLoading}
-          >
-            <CircularProgress color="inherit" />
-          </Backdrop>
-        )}
-
-        {pets
-          .filter(
-            (pet: { category: any }) =>
-              category === 'All' || pet.category === category
-          )
-          .slice(0, visiblePets)
-          .map((pet: Pet) => (
-            <DynamicPetItem
-              key={pet.petId}
-              pet={pet}
-              toggleCardDetailPopup={toggleCardDetailPopup}
-              toggleMapPopup={toggleMapPopup}
-              addToFavorites={addToFavorites}
-              toggleFormPopup={toggleFormPopup}
-            />
-          ))}
-      </div>
-
-      {/* show more */}
-      {pets &&
-        visiblePets <
-          pets.filter(
-            (pet: Pet) => category === 'All' || pet.category === category
-          ).length && (
-          <div className="flex justify-center m-14">
-            <button
-              className="p-t align-middle font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none"
-              onClick={handleShowMoreClick}
-            >
-              Show More
-            </button>
-          </div>
-        )}
-
-      {/* pet-detail-popup */}
+      <Filter />
+      <DynamicMain
+        toggleCardDetailPopup={toggleCardDetailPopup}
+        toggleMapPopup={toggleMapPopup}
+        addToFavorites={addToFavorites}
+        toggleFormPopup={toggleFormPopup}
+      />
       {showPetDetail &&
         selectedPet && (
           <PetDetailPopup
@@ -243,8 +148,6 @@ const AdoptAPaw = () => {
             onClose={() => dispatch(setShowPetDetail(false))}
           />
         )}
-
-      {/* map-popup */}
       {showMap &&
         mapLocation && (
           <MapPopup
@@ -253,8 +156,6 @@ const AdoptAPaw = () => {
             onClose={() => dispatch(setShowMap(false))}
           />
         )}
-
-      {/* Favorites */}
       <div
         className="fixed right-6 bottom-6 bg-gray-900 text-red-500 rounded-full w-16 h-16 flex items-center justify-center cursor-pointer  hover:shadow-lgfocus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85]"
         onClick={() => dispatch(setShowFavorites(true))}
@@ -270,8 +171,6 @@ const AdoptAPaw = () => {
           toggleCardDetailPopup={toggleCardDetailPopup}
         />
       )}
-
-      {/* form-popup */}
       {showForm && (
         <FormPopup
           pets={pets}

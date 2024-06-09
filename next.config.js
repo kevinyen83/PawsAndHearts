@@ -6,7 +6,7 @@ const allowedS3Domains = process.env.ALLOWED_S3_DOMAINS
 
 const nextConfig = {
     images: { 
-      domains: [...allowedS3Domains, 'www.shutterstock.com', 'https://myrightbird.com']
+      domains: [...allowedS3Domains, 'www.shutterstock.com', 'myrightbird.com']
     },
     env: {
       AWS_API_KEY: process.env.AWS_API_KEY,
