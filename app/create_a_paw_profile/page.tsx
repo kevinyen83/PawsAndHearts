@@ -10,6 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { PetProfileData } from '../../types/petProfile-types';
 import { useAppDispatch, useAppSelector } from '../GlobalRedux/store';
 import { setImageFile } from '../GlobalRedux/Feautures/imageFile-slice';
+import { toast } from 'sonner';
 
 const PawProfileForm: React.FC = () => {
   const { data: session } = useSession();
@@ -72,13 +73,13 @@ const PawProfileForm: React.FC = () => {
               };
               await uploadPetByGraphql(petProfileData);
               formik.resetForm();
-              alert('Pet profile created successfully!');
+              toast.success('Pet profile created successfully!')
               window.location.replace('/adopt_a_paw');
             };
             reader.readAsDataURL(imageFile);
           }
         } else {
-          alert('Please fill in all required fields.');
+          toast.error('Please fill in all required fields.')
         }
       } catch (error) {
         console.error(error);
@@ -89,11 +90,11 @@ const PawProfileForm: React.FC = () => {
       const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (imageFile) {
             if (!imageFile.type.startsWith('image/')) {
-              alert('Please upload a valid image file.');
+              toast.error('Please upload a valid image file.')
               return;
             }
             if (imageFile.size > 5 * 1024 * 1024) {
-              alert('Image size should not exceed 5MB.');
+              toast.error('Image size should not exceed 5MB.')
               return;
             }
         const file = event.target.files?.[0];

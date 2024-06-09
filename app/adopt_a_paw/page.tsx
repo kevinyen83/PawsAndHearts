@@ -2,13 +2,13 @@
 
 import React, { useEffect } from 'react';
 import Filter from '../../components/Filter';
-import Main from '../../components/Main';
 import Favorites from '../../components/Favorites';
 import FormPopup from '../../components/FormPopup';
 import PetDetailPopup from '../../components/PetDetailPopup';
 import MapPopup from '../../components/MapPopup';
 import dynamic from 'next/dynamic';
 import CircularProgress from '@mui/material/CircularProgress';
+import { toast } from 'sonner';
 import { Pet } from '../../types/pet-types';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { combinedSelector } from '../GlobalRedux/combin-selector';
@@ -89,9 +89,9 @@ const AdoptAPaw = () => {
         'favoritesItems',
         JSON.stringify([...favoritesItems, newFavoritesItems])
       );
-      alert('Added to Favorites!');
+      toast.success('Added to Favorites!');
     } else {
-      alert('You already added this pet to Favorites.');
+      toast.error('You already added this pet to Favorites.');
     }
   };
 
@@ -105,10 +105,10 @@ const AdoptAPaw = () => {
 
   const toggleFormPopup = (pet: Pet): void => {
     if (pet.availability === 'No') {
-      alert('This pet is not available!');
+      toast.error('This pet is not available!');
     } else {
       if (pets.length === 0) {
-        alert('Pets data is still loading. Please try again later.');
+        toast.error('Pets data is still loading. Please try again later.');
         return;
       }
       dispatch(setShowForm(true));

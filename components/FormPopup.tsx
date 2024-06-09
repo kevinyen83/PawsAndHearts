@@ -14,6 +14,7 @@ import { submitApplication, updatePetAvailability } from '../utils/api/api';
 import { useAppDispatch, useAppSelector } from '../app/GlobalRedux/store';
 import { setShowForm } from '../app/GlobalRedux/Feautures/popup-slice';
 import { setInputUserEmail } from '../app/GlobalRedux/Feautures/form-slice';
+import { toast } from 'sonner';
 
 const validationSchema = Yup.object().shape({
   fullName: Yup.string().required('Full Name is required'),
@@ -42,14 +43,12 @@ export default function FormPopup({
     (state) => state.inputUserEmail.inputUserEmail
   );
 
-  useEffect(
-    () => {
+    useEffect(() => {
       if (session?.user?.email) {
         dispatch(setInputUserEmail(session.user.email));
       }
-    },
-    [session, dispatch]
-  );
+      formik.setFieldValue('email', inputUserEmail);
+    }, [session, inputUserEmail, dispatch]);
 
   const formik = useFormik({
     initialValues: {
@@ -68,9 +67,19 @@ export default function FormPopup({
 
   const onSubmit = async () => {
     try {
-      await formik.validateForm();
+      const errors = await formik.validateForm();
+      formik.setTouched({
+        fullName: true,
+        age: true,
+        email: true,
+        phone: true,
+        address: true,
+        city: true,
+        state: true,
+        postCode: true,
+      });
 
-      if (formik.isValid) {
+      if (Object.keys(errors).length === 0) {
         const applicationId = uuidv4();
         const pet = formSelectedPet;
 
@@ -92,17 +101,17 @@ export default function FormPopup({
           petId: pet.petId,
           petName: pet.name,
         };
-
         await submitApplication(formData);
         await updatePetAvailability(pet.petId);
 
         dispatch(setShowForm(false));
         formik.resetForm();
-
-        alert('Application placed successfully!');
+        toast.success('Application placed successfully!');
         window.location.reload();
       } else {
-        alert('Please fill in all required fields and validate your Email.');
+        toast.error(
+          'Please fill in all required fields and validate your Email.'
+        );
       }
     } catch (error) {
       console.error(error);

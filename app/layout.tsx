@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import AuthProvider from '../components/AuthProvider';
 import ReduxProvider from '../app/GlobalRedux/redux-provider';
+import { Toaster } from 'sonner';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
           <body>
             <Navbar />
             <main className="relative overflow-hidden mx-auto">{children}</main>
+            <Toaster richColors position="top-right" />
             <Footer />
           </body>
         </html>
