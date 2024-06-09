@@ -4,7 +4,7 @@ const awsAPIKey = process.env.AWS_API_KEY as string;
 
 export async function uploadPetByGraphql(petProfileData: PetProfileData) {
   const url =
-    'https://g1v4l2ms77.execute-api.ap-southeast-2.amazonaws.com/Prod/pet';
+    'https://b6cragoxk9.execute-api.ap-southeast-2.amazonaws.com/Prod/pet';
 
   const query = `
     mutation CreatePet($petProfileData: PetInput!) {
@@ -58,6 +58,7 @@ export async function uploadPetByGraphql(petProfileData: PetProfileData) {
     });
 
     const responseBody = await response.json();
+    console.log('Response Body:', responseBody);
 
     if (!response.ok) {
       console.error(
@@ -69,14 +70,19 @@ export async function uploadPetByGraphql(petProfileData: PetProfileData) {
       throw new Error('Failed to upload pet data');
     }
 
-    const nestedBody = JSON.parse(responseBody.body);
+    const data =
+      responseBody.data ||
+      (responseBody.body && JSON.parse(responseBody.body).data);
 
-    const data = nestedBody.data;
+    if (!data) {
+      throw new Error('Response data is undefined');
+    }
+
     if (data.errors) {
       throw new Error('Failed to upload pet data: ' + data.errors[0].message);
     }
 
-    if (!data || !data.createPetProfile) {
+    if (!data.createPetProfile) {
       throw new Error('createPetProfile not defined in response');
     }
 

@@ -55,7 +55,7 @@ live demo [here](https://paws-and-hearts.vercel.app/)
 1.  UI Design: Figma
 2.  Front-end web development: React.JS, Redux, TypeScript, Tailwind CSS, CSS Animations, Formik & Yup(Form validation)
 3.  Server-side rendering: Next.JS
-4.  AWS Serverless: AWS Lambda, AWS API Gateway, Node.JS, DynamoDB
+4.  AWS Serverless: AWS Lambda, AWS API Gateway, Node.JS, DynamoDB, S3
 5.  API: RESTful API, GraphQL
 6.  Auth: AWS Cognito, NextAuth.JS, uuid
 7.  Integration and E2E testing: Jest, React Testing Library, Cypress

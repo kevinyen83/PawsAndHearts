@@ -8,9 +8,13 @@ import { useFormik } from 'formik';
 import { uploadPetByGraphql } from '../../utils/api/api-graphql';
 import { v4 as uuidv4 } from 'uuid';
 import { PetProfileData } from '../../types/petProfile-types';
+import { useAppDispatch, useAppSelector } from '../GlobalRedux/store';
+import { setImageFile } from '../GlobalRedux/Feautures/imageFile-slice';
 
 const PawProfileForm: React.FC = () => {
   const { data: session } = useSession();
+  const dispatch = useAppDispatch();
+  const imageFile = useAppSelector((state) => state.imageFile.imageFile);
 
   useEffect(
     () => {
@@ -44,28 +48,35 @@ const PawProfileForm: React.FC = () => {
       const petId = uuidv4();
       try {
         if (formik.isValid) {
-          const petProfileData: PetProfileData = {
-            organizationName: values.organizationName,
-            applicantName: values.applicantName,
-            contactEmail: values.contactEmail,
-            contactPhone: values.contactPhone,
-            petId: petId,
-            name: values.name,
-            category: values.category,
-            age: values.age,
-            color: values.color,
-            gender: values.gender,
-            size: values.size,
-            location: values.location,
-            vaccination: values.vaccination,
-            availability: values.availability,
-            image: values.image,
-            description: values.description,
-          };
-          await uploadPetByGraphql(petProfileData);
-          formik.resetForm();
-          alert('Pet profile created successfully!');
-          window.location.replace('/adopt_a_paw');
+          if (imageFile) {
+            const reader = new FileReader();
+            reader.onloadend = async () => {
+              const base64mage = reader.result as string;
+              const petProfileData: PetProfileData = {
+                organizationName: values.organizationName,
+                applicantName: values.applicantName,
+                contactEmail: values.contactEmail,
+                contactPhone: values.contactPhone,
+                petId: petId,
+                name: values.name,
+                category: values.category,
+                age: values.age,
+                color: values.color,
+                gender: values.gender,
+                size: values.size,
+                location: values.location,
+                vaccination: values.vaccination,
+                availability: values.availability,
+                image: base64mage,
+                description: values.description,
+              };
+              await uploadPetByGraphql(petProfileData);
+              formik.resetForm();
+              alert('Pet profile created successfully!');
+              window.location.replace('/adopt_a_paw');
+            };
+            reader.readAsDataURL(imageFile);
+          }
         } else {
           alert('Please fill in all required fields.');
         }
@@ -74,6 +85,23 @@ const PawProfileForm: React.FC = () => {
       }
     },
   });
+
+      const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        if (imageFile) {
+            if (!imageFile.type.startsWith('image/')) {
+              alert('Please upload a valid image file.');
+              return;
+            }
+            if (imageFile.size > 5 * 1024 * 1024) {
+              alert('Image size should not exceed 5MB.');
+              return;
+            }
+        const file = event.target.files?.[0];
+        if (file) {
+          dispatch(setImageFile(file));
+        }
+      };
+  }
 
   return (
     <>
@@ -382,12 +410,11 @@ const PawProfileForm: React.FC = () => {
 
           <div className="relative z-0 w-full mb-5 group">
             <input
-              type="text"
+              type="file"
               name="image"
               id="image"
-              className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-              value={formik.values.image}
-              onChange={formik.handleChange}
+              className="block py-2.5 px-0 w-full mt-3 text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-black dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+              onChange={handleImageChange}
               placeholder=" "
               required
             />
@@ -395,7 +422,7 @@ const PawProfileForm: React.FC = () => {
               htmlFor="image"
               className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
             >
-              Image URL
+              Image
             </label>
           </div>
 
