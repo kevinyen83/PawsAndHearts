@@ -17,7 +17,7 @@ interface FormData {
 export async function fetchPets() {
   try {
     const response = await fetch(
-      'https://8lpzuux0q6.execute-api.ap-southeast-2.amazonaws.com/prod/pets'
+      'https://j6dti4s0jh.execute-api.ap-southeast-2.amazonaws.com/prod/pets'
     );
     if (!response.ok) {
       throw new Error('Failed to fetch pets');

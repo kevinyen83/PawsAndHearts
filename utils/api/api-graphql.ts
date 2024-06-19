@@ -1,10 +1,10 @@
 import { PetProfileData } from '../../types/petProfile-types';
 
 const awsAPIKey = process.env.AWS_API_KEY as string;
+const awsAPIGatewayPet = process.env.AWS_API_GATEWAY_INVOKE_URL_PET as string;
 
 export async function uploadPetByGraphql(petProfileData: PetProfileData) {
-  const url =
-    'https://b6cragoxk9.execute-api.ap-southeast-2.amazonaws.com/Prod/pet';
+  const url = awsAPIGatewayPet;
 
   const query = `
     mutation CreatePet($petProfileData: PetInput!) {
@@ -73,6 +73,8 @@ export async function uploadPetByGraphql(petProfileData: PetProfileData) {
     const data =
       responseBody.data ||
       (responseBody.body && JSON.parse(responseBody.body).data);
+
+    console.log(data);
 
     if (!data) {
       throw new Error('Response data is undefined');

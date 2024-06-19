@@ -10,6 +10,7 @@ const nextConfig = {
     },
     env: {
       AWS_API_KEY: process.env.AWS_API_KEY,
+      AWS_API_GATEWAY_INVOKE_URL_PET: process.env.AWS_API_GATEWAY_INVOKE_URL_PET,
       STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
       MAPBOX_SECRET_KEY: process.env.MAPBOX_SECRET_KEY
     },

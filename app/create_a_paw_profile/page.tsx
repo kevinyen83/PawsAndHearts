@@ -46,10 +46,14 @@ const PawProfileForm: React.FC = () => {
       description: '',
     },
     onSubmit: async (values) => {
+    console.log('Form values:', values);
       const petId = uuidv4();
       try {
-        if (formik.isValid) {
+        if (Object.keys(formik.errors).length === 0) {
+            console.log('Form is valid');
+            console.log('ImageFile: ', imageFile)
           if (imageFile) {
+            console.log('Image file is set');
             const reader = new FileReader();
             reader.onloadend = async () => {
               const base64mage = reader.result as string;
@@ -71,6 +75,7 @@ const PawProfileForm: React.FC = () => {
                 image: base64mage,
                 description: values.description,
               };
+              console.log('Uploading pet profile data:', petProfileData);
               await uploadPetByGraphql(petProfileData);
               formik.resetForm();
               toast.success('Pet profile created successfully!')
@@ -79,6 +84,7 @@ const PawProfileForm: React.FC = () => {
             reader.readAsDataURL(imageFile);
           }
         } else {
+            console.log('Form is not valid');
           toast.error('Please fill in all required fields.')
         }
       } catch (error) {
@@ -87,22 +93,28 @@ const PawProfileForm: React.FC = () => {
     },
   });
 
-      const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        if (imageFile) {
-            if (!imageFile.type.startsWith('image/')) {
-              toast.error('Please upload a valid image file.')
-              return;
-            }
-            if (imageFile.size > 5 * 1024 * 1024) {
-              toast.error('Image size should not exceed 5MB.')
-              return;
-            }
+    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        console.log('handleImageChange: trigger.');
+
         const file = event.target.files?.[0];
-        if (file) {
-          dispatch(setImageFile(file));
+        if (!file) {
+            console.error('No file selected.');
+            return;
         }
-      };
-  }
+
+        if (!file.type.startsWith('image/')) {
+            toast.error('Please upload a valid image file.');
+            return;
+        }
+
+        if (file.size > 5 * 1024 * 1024) {
+            toast.error('Image size should not exceed 5MB.');
+            return;
+        }
+
+        dispatch(setImageFile(file));
+        console.log('handleImageChange: File selected:', file);
+    };
 
   return (
     <>
