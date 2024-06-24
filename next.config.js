@@ -2,7 +2,7 @@
 
 const allowedS3Domains = process.env.ALLOWED_S3_DOMAINS
   ? process.env.ALLOWED_S3_DOMAINS.split(',')
-  : ['pet-profile-image.s3.ap-southeast-2.amazonaws.com'];
+  : ['pet-profile-image.s3.ap-southeast-2.amazonaws.com', 'pet-profile-image.s3.amazonaws.com'];
 
 const nextConfig = {
     images: { 
