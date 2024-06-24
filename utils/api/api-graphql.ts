@@ -3,6 +3,76 @@ import { PetProfileData } from '../../types/petProfile-types';
 const awsAPIKey = process.env.AWS_API_KEY as string;
 const awsAPIGatewayPet = process.env.AWS_API_GATEWAY_INVOKE_URL_PET as string;
 
+export async function fetchPets() {
+  const url = awsAPIGatewayPet;
+
+  const query = `query GetPets {
+    pets {
+      petId
+      organizationName
+      applicantName
+      contactEmail
+      contactPhone
+      name
+      category
+      age
+      color
+      gender
+      size
+      location
+      vaccination
+      availability
+      image
+      description
+    }
+  }`;
+
+  const variables = {};
+
+  if (!awsAPIKey) {
+    throw new Error(
+      'API key is not defined. Please set AWS_API_KEY in your .env file.'
+    );
+  }
+
+  const requestBody = {
+    body: {
+      query,
+      variables,
+    },
+  };
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': awsAPIKey,
+      },
+      body: JSON.stringify(requestBody),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Response text:', errorText);
+      throw new Error(`Failed to fetch pets: ${response.statusText}`);
+    }
+
+    const result = await response.json();
+
+    if (result.errors) {
+      throw new Error(result.errors[0].message);
+    }
+
+    const parsedBody = JSON.parse(result.body);
+    return parsedBody.data.pets;
+  } catch (error) {
+    console.error('Error fetching pets:', error);
+    throw error;
+  }
+}
+
 export async function uploadPetByGraphql(petProfileData: PetProfileData) {
   const url = awsAPIGatewayPet;
 

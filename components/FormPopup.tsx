@@ -10,7 +10,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Button from './Button';
 import Link from 'next/link';
-import { submitApplication, updatePetAvailability } from '../utils/api/api';
+import { submitApplication, updatePetAvailability } from '../utils/api/api-restful';
 import { useAppDispatch, useAppSelector } from '../app/GlobalRedux/store';
 import { setShowForm } from '../app/GlobalRedux/Feautures/popup-slice';
 import { setInputUserEmail } from '../app/GlobalRedux/Feautures/form-slice';

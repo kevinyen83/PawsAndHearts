@@ -7,7 +7,7 @@ import {
   setVisiblePets,
 } from '../app/GlobalRedux/Feautures/pets-slice';
 import { setIsLoading } from '../app/GlobalRedux/Feautures/loading-slice';
-import { fetchPets } from '../utils/api/api';
+import { fetchPets } from '../utils/api/api-graphql';
 import { Pet } from '../types/pet-types';
 import { MainProps } from '../types/main-types';
 

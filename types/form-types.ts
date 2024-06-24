@@ -9,3 +9,17 @@ export interface FormPopupProps {
 export interface FormState {
   inputUserEmail: string;
 }
+
+export interface FormData {
+  fullName: string;
+  age: string;
+  email: string;
+  phone: string;
+  address: string;
+  city: string;
+  state: string;
+  postCode: string;
+  applicationId: string;
+  petId: string;
+  petName: string;
+}
