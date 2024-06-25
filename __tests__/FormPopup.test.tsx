@@ -1,15 +1,14 @@
 import React from 'react';
 import { render, fireEvent, waitFor } from '@testing-library/react';
 import FormPopup from '../components/FormPopup';
-import { submitApplication, updatePetAvailability } from '../utils/api/api';
+import { submitApplication } from '../utils/api/api-restful';
+import { updatePetAvailability } from '../utils/api/api-graphql';
 
-// Mock useSession hook
 jest.mock('next-auth/react', () => ({
   useSession: jest.fn(),
 }));
 
-// Mock fetch function
-jest.mock('../utils/api/api');
+jest.mock('../utils/api/api-graphql');
 const mockedSubmitApplication = submitApplication as jest.MockedFunction<
   typeof submitApplication
 >;
@@ -26,8 +25,6 @@ jest.mock('react-redux', () => ({
 describe('FormPopup component', () => {
   test('Form submission', async () => {
     const toggleFormPopup = jest.fn();
-
-    // Mock session data
     const mockSession = {
       data: {
         user: {
@@ -37,12 +34,10 @@ describe('FormPopup component', () => {
       },
     };
 
-    // Mock useSession hook to return the mock session data
     require('next-auth/react').useSession.mockReturnValue(mockSession);
     const dispatch = jest.fn();
     require('react-redux').useDispatch.mockReturnValue(dispatch);
 
-    // Mock Redux store
     const store = {
       getState: () => ({
         showForm: { showForm: true },

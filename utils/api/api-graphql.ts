@@ -164,3 +164,80 @@ export async function uploadPetByGraphql(petProfileData: PetProfileData) {
     throw error;
   }
 }
+
+export async function updatePetAvailability(petId: string): Promise<void> {
+  const url = awsAPIGatewayPet;
+
+  const query = `
+      mutation UpdateAvailability($input: UpdateAvailabilityInput!) {
+        updateAvailability(input: $input) {
+          pet {
+            petId
+            availability
+          }
+        }
+      }
+    `;
+
+  const variables = { input: { petId } };
+
+  if (!awsAPIKey) {
+    throw new Error(
+      'API key is not defined. Please set AWS_API_KEY in your .env file.'
+    );
+  }
+
+  const requestBody = {
+    body: {
+      query,
+      variables,
+    },
+  };
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': awsAPIKey,
+      },
+      body: JSON.stringify(requestBody),
+    });
+
+    const responseBody = await response.json();
+    console.log('Response Body:', responseBody);
+
+    if (!response.ok) {
+      console.error(
+        'Update failed:',
+        response.status,
+        response.statusText,
+        responseBody
+      );
+      throw new Error('Failed to update pet availability');
+    }
+
+    const data =
+      responseBody.data ||
+      (responseBody.body && JSON.parse(responseBody.body).data);
+
+    if (!data) {
+      throw new Error('Response data is undefined');
+    }
+
+    if (data.errors) {
+      throw new Error(
+        'Failed to update pet availability: ' + data.errors[0].message
+      );
+    }
+
+    console.log(
+      'Pet availability updated successfully:',
+      data.updateAvailability.pet
+    );
+  } catch (error) {
+    console.error('Error updating pet availability:', error);
+    throw error;
+  }
+}

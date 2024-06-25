@@ -2,10 +2,10 @@ import React from 'react';
 import '@testing-library/jest-dom';
 import { render, fireEvent, waitFor, screen } from '@testing-library/react';
 import AdoptAPaw from '../app/adopt_a_paw/page';
-import { fetchPets } from '../utils/api/api';
+import { fetchPets } from '../utils/api/api-graphql';
 import ReduxProvider from '../app/GlobalRedux/redux-provider';
 
-jest.mock('../utils/api/api');
+jest.mock('../utils/api/api-graphql');
 const mockedFetchPet = fetchPets as jest.MockedFunction<typeof fetchPets>;
 
 beforeAll(() => {
@@ -90,18 +90,15 @@ describe('AdoptAPaw component', () => {
       <AdoptAPaw />
     );
 
-    // Find the first card
     await waitFor(() => {
       const addToFavoritesButtons = getAllByTestId('add-to-favorites-btn');
       const addToFavoritesButton = addToFavoritesButtons[0];
       const triggerFavoritesSideMenu = getByTestId('favorites-trigger-btn');
 
-      // Click on the 'Add to Favorites' button
       fireEvent.click(addToFavoritesButton);
       fireEvent.click(triggerFavoritesSideMenu);
     });
 
-    // Wait for the Favorites popup to appear and check the cols
     await waitFor(() => {
       expect(getByTestId('favorites-side-header')).toBeInTheDocument();
       expect(getByTestId('favorites-side-item-img')).toBeInTheDocument();
