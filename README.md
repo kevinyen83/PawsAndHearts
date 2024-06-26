@@ -2,8 +2,6 @@
 
 ![Alt text](https://github.com/kevinyen83/PawsAndHearts/blob/main/screenshots/adoption.png)
 
-
-
 Paws and Hearts is an exciting new side project that combines my passion for animals with my skills in full-stack development. Having volunteered at a Sydney animal shelter, I understand the importance of creating a seamless and user-friendly experience for both potential adopters and shelter staff.
 
 With Paws and Hearts, I aim to leverage the latest programming tools and JavaScript frameworks to revolutionize the animal adoption process. From streamlining application procedures to securely managing user data, this project is all about making the adoption journey as smooth and enjoyable as possible.
@@ -11,11 +9,16 @@ With Paws and Hearts, I aim to leverage the latest programming tools and JavaScr
 I'm committed to continuously optimizing the website and welcome any feedback or collaboration opportunities. Together, we can make a real difference in the lives of animals in need!
 
 **Related GitHub Repo**
+
 - **Paws And Hearts: Pet Profile GraphQL API**: https://github.com/kevinyen83/PawsAndHearts-Python-GraphQL-AWSSAM-API
 
 ## Live Demo
 
 live demo [here](https://paws-and-hearts.vercel.app/)
+
+### App Structure
+
+![Alt text](https://github.com/kevinyen83/PawsAndHearts/blob/main/screenshots/appStructure.png)
 
 ### Core Features
 
@@ -37,9 +40,8 @@ live demo [here](https://paws-and-hearts.vercel.app/)
     4-3. Adoption Application Process
     4-4. Map-popup (27 May 2024 New release!)
 
-6.  Paw Profile Page (9 April 2024 New release!)
+5.  Paw Profile Page (9 April 2024 New release!)
     5-1. Create a new pet profile after logging into a user account
- 
 
 ### Built With
 
@@ -81,8 +83,7 @@ https://www.docker.com/get-started/
     docker run -p 3000:3000 kevinyen83/paws-and-hearts:latest
     ```
 3.  Access the Application
-After running the Docker container, you can access the application in your web browser by navigating to http://localhost:3000.
-
+    After running the Docker container, you can access the application in your web browser by navigating to http://localhost:3000.
 
 ## Getting Started with GitHub
 
@@ -94,9 +95,9 @@ Please follow these steps:
 
 Install npm:
 
-  ```sh
-  npm install -g npm
-  ```
+```sh
+npm install -g npm
+```
 
 ### Installation
 
@@ -115,13 +116,13 @@ Install npm:
 
 ### Start React app
 
-1. Please execute the following command:
+1.  Please execute the following command:
 
 ```sh
 npm run dev
 ```
-2. Please open http://localhost:3000 with your browser.
 
+2.  Please open http://localhost:3000 with your browser.
 
 ### SignIn
 
@@ -169,7 +170,7 @@ npm test
 - [x] Create Docker
 - [x] Developing a content management page that allows shelters to upload and manage their animals
 - [x] Add E2E tests by Cypress
-- [x] Added Redux 
+- [x] Added Redux
 - [x] Add new map features by Mapbox GL
 - [ ] Improve image rendering performance using <Image>
 
