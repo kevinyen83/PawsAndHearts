@@ -9,9 +9,14 @@ jest.mock('next-auth/react', () => ({
 }));
 
 jest.mock('../utils/api/api-graphql');
+jest.mock('../utils/api/api-restful', () => ({
+  submitApplication: jest.fn(),
+}));
+
 const mockedSubmitApplication = submitApplication as jest.MockedFunction<
   typeof submitApplication
 >;
+
 const mockedUpdatePetAvailability = updatePetAvailability as jest.MockedFunction<
   typeof updatePetAvailability
 >;
