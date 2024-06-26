@@ -16,7 +16,7 @@ I'm committed to continuously optimizing the website and welcome any feedback or
 
 live demo [here](https://paws-and-hearts.vercel.app/)
 
-### App Structure
+## App Structure
 
 ![Alt text](https://github.com/kevinyen83/PawsAndHearts/blob/main/screenshots/appStructure.png)
 
@@ -172,7 +172,7 @@ npm test
 - [x] Add E2E tests by Cypress
 - [x] Added Redux
 - [x] Add new map features by Mapbox GL
-- [ ] Improve image rendering performance using <Image>
+- [x] Improve image rendering performance using <Image>
 
 ## Contact
 
