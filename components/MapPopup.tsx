@@ -48,7 +48,7 @@ const MapPopup = ({ mapLocation, onClose }: MapProps) => {
 
   return (
     <div className="flex items-center justify-center bg-black bg-opacity-50 fixed top-0 left-0 right-0 bottom-0 z-50">
-      <div className="bg-white w-[70%] h-[90%] p-6 rounded-lg shadow-lg relative">
+      <div className="bg-white w-[70%] h-[90%] min-w-96 p-6 rounded-lg shadow-lg relative">
         <div className="flex justify-between">
           <div>
             <div className="text-3xl mb-3">

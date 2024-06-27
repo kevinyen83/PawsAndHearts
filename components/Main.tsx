@@ -48,7 +48,7 @@ const Main = ({
 
   return (
     <>
-      <div className="flex flex-wrap gap-4 pt-6 justify-center">
+      <div className="flex flex-wrap gap-4 pt-6 pb-12 justify-center">
         {pets
           .filter(
             (pet: { category: any }) =>
