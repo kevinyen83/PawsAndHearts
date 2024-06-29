@@ -20,7 +20,7 @@ export default function Hero() {
                   data-cy="hero-makeAFriend-btn"
                   className="btn_pink rounded"
                 >
-                  Make a friend
+                  Make a Friend
                 </button>
               </Link>
             </div>
