@@ -43,7 +43,6 @@ live demo [here](https://paws-and-hearts.vercel.app/)
 5.  Paw Profile Page (9 April 2024 New release!)
     5-1. Create a new pet profile after logging into a user account
 
-
 ### Built With
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
@@ -72,6 +71,9 @@ live demo [here](https://paws-and-hearts.vercel.app/)
 
 ![Alt text](https://github.com/kevinyen83/PawsAndHearts/blob/main/screenshots/performanceBefore.png)
 
+### After
+
+![Alt text](https://github.com/kevinyen83/PawsAndHearts/blob/main/screenshots/performanceAfter.png)
 
 ## Getting Started with Docker
 
