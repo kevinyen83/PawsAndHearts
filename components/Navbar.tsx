@@ -8,7 +8,8 @@ import Button from "./Button"
 import { CATEGORY_LINKS } from "../constants"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons"
-import AvatarIcon from "../assets/images/avatar.png";
+import AvatarIcon from "../assets/images/avatar.webp";
+import LogoIcon from "../public/logo.webp";
 import { useAppDispatch, useAppSelector } from "../app/GlobalRedux/store";
 import { setShowDropdown, setUserEmail } from "../app/GlobalRedux/Feautures/navbar-slice";
 
@@ -38,7 +39,7 @@ export default function Navbar () {
         <div className="flex flex-row h-full justify-start gap-12 lg:flex items-center">
             <div>
                 <Link href="/">
-                    <Image src="/logo.png" alt="logo" width={60} height={19} />
+                    <Image src={LogoIcon} alt="logo" width={60} height={19} />
                 </Link>
             </div>
             {CATEGORY_LINKS.map((link) => (

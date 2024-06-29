@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import dog_img from '../assets/images/img-dog.png';
+import dog_img from '../assets/images/img-dog.webp';
 
 const Donation = () => {
   return (

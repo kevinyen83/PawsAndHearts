@@ -1,15 +1,14 @@
 import React from 'react';
 import Image from 'next/image';
-import catAndDog_img from '../assets/images/img-catAndDog.png';
+import catAndDog_img_webp from '../assets/images/img-catAndDog.webp';
 
 export default function About() {
   return (
     <div className="flex h-screen orange-block bg-gray-100 min-w-screen-sm">
-      {/* Left Section */}
       <div className="hidden md:flex md:w-1/2 items-center justify-center">
         <div className="w-full flex items-center justify-center">
           <Image
-            src={catAndDog_img}
+            src={catAndDog_img_webp}
             alt="Dog and Cat"
             className="object-contain z-20"
             width={500}
@@ -18,7 +17,6 @@ export default function About() {
         </div>
       </div>
 
-      {/* Right Section */}
       <div className="flex items-center justify-center z-20 sm:w-full">
         <div className="lg:p-20 sm:p-0">
           <div className="bg-white rounded-lg shadow-xl p-8">
