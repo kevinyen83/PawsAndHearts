@@ -67,10 +67,6 @@ live demo [here](https://paws-and-hearts.vercel.app/)
 
 ## Performance
 
-### Beofre
-
-![Alt text](https://github.com/kevinyen83/PawsAndHearts/blob/main/screenshots/performanceBefore.png)
-
 ### After
 
 ![Alt text](https://github.com/kevinyen83/PawsAndHearts/blob/main/screenshots/performanceAfter.png)
